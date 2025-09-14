@@ -1,0 +1,7 @@
+CREATE TABLE DRUGS (
+                       ID NUMBER PRIMARY KEY,
+                       NAME NVARCHAR2(100) NOT NULL,
+                       PRICE NUMBER(10, 2) NOT NULL
+);
+
+CREATE SEQUENCE DRUG_SEQ START WITH 1 INCREMENT BY 1;
