@@ -1,0 +1,67 @@
+package hospital.model.service;
+
+import hospital.model.entity.User;
+import hospital.model.repository.UserRepository;
+import lombok.Getter;
+
+
+import java.util.List;
+
+public class UserService implements Service<User, Integer> {
+
+    @Getter
+    public static UserService service = new UserService();
+
+    private UserService() {
+    }
+
+    @Override
+    public void save(User user) throws Exception {
+        try (UserRepository userRepository = new UserRepository()) {
+            if (userRepository.findByUsername(user.getUsername().name()) == null) {
+                userRepository.save(user);
+            }
+        }
+    }
+
+    @Override
+    public void edit(User user) throws Exception {
+        try (UserRepository userRepository = new UserRepository()) {
+            if (userRepository.findByUsername(user.getUsername().name()) == null) {
+                userRepository.edit(user);
+            }
+        }
+    }
+
+    @Override
+    public void delete(Integer id) throws Exception {
+        try (UserRepository userRepository = new UserRepository()) {
+            userRepository.delete(id);
+        }
+    }
+
+    @Override
+    public List<User> findAll() throws Exception {
+        try (UserRepository userRepository = new UserRepository()) {
+            return userRepository.findAll();
+        }
+    }
+
+    @Override
+    public User findById(Integer id) throws Exception {
+        try (UserRepository userRepository = new UserRepository()) {
+            return userRepository.findById(id);
+        }
+    }
+    public User findByUsername(String username) throws Exception {
+        try (UserRepository userRepository = new UserRepository()) {
+           return userRepository.findByUsername(username);
+        }
+    }
+
+    public User findByUsernameAndPassword(String username, String password) throws Exception {
+        try (UserRepository userRepository = new UserRepository()) {
+            return userRepository.findByUsernameAndPassword(username, password);
+        }
+    }
+}
