@@ -1,12 +1,3 @@
-CREATE TABLE DRUGS
-(
-    ID    NUMBER PRIMARY KEY,
-    NAME  NVARCHAR2(100) NOT NULL,
-    PRICE NUMBER(10, 2) NOT NULL
-);
-
-CREATE SEQUENCE DRUG_SEQ START WITH 1 INCREMENT BY 1;
---
 
 create table medicals
 (
@@ -119,3 +110,19 @@ create table employees
 
 create sequence person_seq start with 1 increment by 1;
 --
+create table drug (
+                       id number primary key,
+                       stock_id number,
+                       name nvarchar2(100) not null,
+                       price number,
+                       quantity number not null,
+                       constraint fk_drug_drug_stock foreign key (stock_id) references drugs_stock (id)
+);
+create sequence drug_seq start with 1 increment by 1;
+
+create table drugs_stock (
+                             id number primary key,
+                             drug_count number default 0,
+                             last_update timestamp default systimestamp
+);
+create sequence drugs_stock_seq start with 1 increment by 1;

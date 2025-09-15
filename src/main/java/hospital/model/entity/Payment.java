@@ -2,6 +2,7 @@ package hospital.model.entity;
 
 import com.google.gson.Gson;
 import hospital.model.entity.enums.PayType;
+import hospital.model.entity.enums.VisitPrice;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,15 +15,9 @@ import lombok.experimental.SuperBuilder;
 
 public class Payment {
     private int id;
+    private VisitPrice visitPrice;
     private PayType payType;
-    private Payable payable;
 
-    public double getTotalPrice ( ) {
-        if (payable != null) {
-            return payable.getPrice();
-        }
-        return 0.0;
-    }
 
     @Override
     public String toString() {
