@@ -1,11 +1,4 @@
-CREATE TABLE DRUGS
-(
-    ID    NUMBER PRIMARY KEY,
-    NAME  NVARCHAR2(100) NOT NULL,
-    PRICE NUMBER(10, 2) NOT NULL
-);
 
-CREATE SEQUENCE DRUG_SEQ START WITH 1 INCREMENT BY 1;
 --
 
 create table medicals
@@ -119,3 +112,8 @@ create table employees
 
 create sequence person_seq start with 1 increment by 1;
 --
+create table payments
+(
+    id   number primary key
+);
+create sequence payment_seq start with 1 increment by 1;
