@@ -6,7 +6,7 @@ CREATE TABLE DRUGS
 );
 
 CREATE SEQUENCE DRUG_SEQ START WITH 1 INCREMENT BY 1;
-
+--
 
 create table medicals
 (
@@ -18,7 +18,7 @@ create table medicals
 );
 
 create sequence medical_seq start with 1 increment by 1;
-
+--
 
 create table time_shifts
 (
@@ -31,7 +31,7 @@ create table time_shifts
 );
 
 create sequence time_shift_seq start with 1 increment by 1;
-
+--
 
 create table visits
 (
@@ -46,7 +46,7 @@ create table visits
 );
 
 create sequence visit_seq start with 1 increment by 1;
-
+--
 
 create table prescriptions
 (
@@ -64,8 +64,53 @@ create table prescriptions
 );
 
 create sequence prescription_seq start with 1 increment by 1;
+--
 
+create table  users
+(
+    id              number primary key,
+    name           nvarchar2(20) not null,
+    family         nvarchar2(20) not null,
+    birth_date     date          not null,
+    role           nvarchar2(20) default 'customer',
+    status         number(1)     default 1,
+    username       nvarchar2(20) not null,
+    password       nvarchar2(20) not null,
+    nickname       nvarchar2(20) not null,
+    locked         number(1)     default 1,
+    register_date  date          not null
+);
+create sequence person_seq start with 1 increment by 1;
+--
 
+create table patients
+(
+    id              number primary key,
+    user_id         number,
+    visit_id        number,
+    prescription_id number,
+    constraint fk_patients_user FOREIGN KEY (user_id) references users (id),
+    constraint fk_patients_visit FOREIGN KEY (visit_id) references visits (id),
+    constraint fk_patients_prescription FOREIGN KEY (prescription_id) references prescriptions (id)
+);
+create sequence person_seq start with 1 increment by 1;
+--
 
+create table doctors
+(
+    id         number primary key,
+    specialty  nvarchar2(20) not null
+);
+create sequence person_seq start with 1 increment by 1;
+--
 
-
+create table employees
+(
+    membername    nvarchar2(20) not null,
+    id            number primary key,
+    user_id       number,
+    start_date      date          not null,
+    end_date        date          not null,
+    constraint fk_patients_user FOREIGN KEY (user_id) references users (id)
+);
+create sequence person_seq start with 1 increment by 1;
