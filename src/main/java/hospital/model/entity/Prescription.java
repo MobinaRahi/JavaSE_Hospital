@@ -15,11 +15,9 @@ import java.util.List;
 
 public class Prescription {
     private int id;
-    private Patient patient;
     private Visit visit;
     private Payment payment;
     private List<Drug> drugList;
-    private Employee employee;
 
     public String toString() {
         Gson gson = new Gson();

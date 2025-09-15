@@ -27,12 +27,10 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
     public void save(Prescription prescription) throws Exception {
         prescription.setId(ConnectionProvider.getProvider().getNextId("prescription_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into prescriptions (id,patient_id,visit_id,payment_id,employee_id)values (prescription_seq.nextval,?,?,?,?)"
+                "insert into prescriptions (id,visit_id,payment_id)values (prescription_seq.nextval,?,?)"
         );
-        preparedStatement.setInt(1, prescription.getPatient().getId());
-        preparedStatement.setInt(2, prescription.getVisit().getId());
-        preparedStatement.setInt(3, prescription.getPayment().getId());
-        preparedStatement.setInt(4, prescription.getEmployee().getId());
+        preparedStatement.setInt(1, prescription.getVisit().getId());
+        preparedStatement.setInt(2, prescription.getPayment().getId());
         preparedStatement.execute();
         log.info("Prescription has been saved successfully");
     }
@@ -40,13 +38,11 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
     @Override
     public void edit(Prescription prescription) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update prescriptions set patient_id=?,visit_id=?,payment_id=?,employee_id=? where id=?"
+                "update prescriptions set visit_id=?,payment_id=? where id=?"
         );
-        preparedStatement.setInt(1, prescription.getPatient().getId());
-        preparedStatement.setInt(2, prescription.getVisit().getId());
-        preparedStatement.setInt(3, prescription.getPayment().getId());
-        preparedStatement.setInt(4, prescription.getEmployee().getId());
-        preparedStatement.setInt(5, prescription.getId());
+        preparedStatement.setInt(1, prescription.getVisit().getId());
+        preparedStatement.setInt(2, prescription.getPayment().getId());
+        preparedStatement.setInt(3, prescription.getId());
         preparedStatement.execute();
         log.info("Prescription has been edited successfully");
     }

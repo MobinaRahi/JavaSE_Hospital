@@ -26,17 +26,18 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
     public void save(Doctor doctor) throws Exception {
         doctor.setId(ConnectionProvider.getProvider().getNextId("doctor_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into doctor (id,specialty,price) values (?, ? ,?)"
+                "insert into doctors (id,specialty,price) values (?, ? ,?)"
         );
         preparedStatement.setInt(1, doctor.getId());
         preparedStatement.setString(2,doctor.getSpecialty().name());
         preparedStatement.setDouble(3, doctor.getPrice());
+        preparedStatement.execute();
     }
 
     @Override
     public void edit(Doctor doctor) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update doctor set specialty=?, price=? where id=?"
+                "update doctors set specialty=?, price=? where id=?"
         );
         preparedStatement.setString(1, doctor.getSpecialty().name());
         preparedStatement.setDouble(2, doctor.getPrice());
@@ -47,7 +48,7 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from doctor where id=?"
+                "delete from doctors where id=?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
@@ -57,7 +58,7 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
     public List<Doctor> findAll() throws Exception {
         List<Doctor> doctorList = new ArrayList<>();
         preparedStatement = connection.prepareStatement(
-                "select * from doctor"
+                "select * from doctors"
         );
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
@@ -71,7 +72,7 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
     public Doctor findById(Integer id) throws Exception {
         Doctor doctor = null;
         preparedStatement = connection.prepareStatement(
-                "select * from doctor where id=?"
+                "select * from doctors where id=?"
         );
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
