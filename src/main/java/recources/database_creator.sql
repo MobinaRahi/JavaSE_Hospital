@@ -118,11 +118,11 @@ create sequence payment_seq start with 1 increment by 1;
 --
 
 CREATE TABLE drugs (
-                       id NUMBER PRIMARY KEY,
-                       stock_id NUMBER,
-                       name NVARCHAR2(100) NOT NULL,
-                       price NUMBER(10,2),
-                       quantity NUMBER NOT NULL,
+                       id number primary key,
+                       stock_id number,
+                       name nvarchar2(100) not null,
+                       price number,
+                       quantity number not null,
                        constraint fk_drug_drug_stock foreign key (stock_id) references drugs_stock (id)
 );
 create sequence drug_seq start with 1 increment by 1;
