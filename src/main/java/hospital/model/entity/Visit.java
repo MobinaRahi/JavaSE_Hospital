@@ -15,8 +15,8 @@ import java.util.List;
 
 public class Visit {
     private int id;
-    //    private Doctor doctor;
-//    private Patient patient;
+    private Doctor doctor;
+    private Patient patient;
     private List<TimeShift> timeShiftList;
     private Payment payment;
 

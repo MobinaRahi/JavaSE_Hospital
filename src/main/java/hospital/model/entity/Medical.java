@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 
 @SuperBuilder
 @NoArgsConstructor
@@ -16,7 +18,7 @@ public class Medical {
     private int id;
     private String title;
     private String description;
-//    private List<Doctor> doctorList;
+    private List<Doctor> doctorList;
     private float duration;
     private int payment;
 

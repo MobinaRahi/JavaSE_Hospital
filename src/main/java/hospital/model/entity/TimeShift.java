@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 public class TimeShift {
     private int id;
-    //    private Doctor doctor;
+    private Doctor doctor;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
