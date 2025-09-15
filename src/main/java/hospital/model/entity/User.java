@@ -2,6 +2,7 @@ package hospital.model.entity;
 
 import com.google.gson.Gson;
 import hospital.model.entity.enums.Role;
+import hospital.model.entity.enums.UserName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +24,7 @@ public class User {
     private LocalDate birthDate;
     private Role role;
     private Boolean status;
-    private String username;
+    private UserName username;
     private String password;
     private String nickname;
     private Boolean locked;
