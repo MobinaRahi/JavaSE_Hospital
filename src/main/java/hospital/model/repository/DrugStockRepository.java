@@ -24,7 +24,7 @@ public class DrugStockRepository implements Repository<DrugStock, Integer>,AutoC
         drugStock.setId(ConnectionProvider.getProvider().getNextId("DRUG_STOCK_SEQ"));
 
         preparedStatement = connection.prepareStatement(
-                "INSERT INTO DRUGS_STOCK (ID, DRUG_COUNT) VALUES (?, ?)"
+                "insert into drugs_stock (id, drug_count) values (?, ?)"
         );
         preparedStatement.setInt(1, drugStock.getId());
         preparedStatement.setInt(2, drugStock.getDrugCount());
@@ -36,7 +36,7 @@ public class DrugStockRepository implements Repository<DrugStock, Integer>,AutoC
     @Override
     public void edit (DrugStock drugStock) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "UPDATE DRUGS_STOCK SET DRUG_COUNT = ?, WHERE ID = ?"
+                "update drugs_stock set drug_count = ?, where id = ?"
         );
 
         preparedStatement.setInt(1, drugStock.getDrugCount());
@@ -49,7 +49,7 @@ public class DrugStockRepository implements Repository<DrugStock, Integer>,AutoC
     public void delete (Integer id) throws Exception {
 
         preparedStatement = connection.prepareStatement(
-                "DELETE FROM DRUGS_STOCK WHERE ID = ?"
+                "delete from drugs_stock where id = ?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -60,7 +60,7 @@ public class DrugStockRepository implements Repository<DrugStock, Integer>,AutoC
     @Override
     public List<DrugStock> findAll ( ) throws Exception {
         List<DrugStock> drugStockList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("SELECT * FROM DRUGS_STOCK ORDER BY DRUG_COUNT");
+        preparedStatement = connection.prepareStatement("select * from druugs_stock order by drug_count");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             DrugStock drugStock=drugStockMapper .drugStockMapper(resultSet);
@@ -72,7 +72,7 @@ public class DrugStockRepository implements Repository<DrugStock, Integer>,AutoC
     @Override
     public DrugStock findById (Integer id) throws Exception {
         DrugStock drugStock = null;
-        preparedStatement = connection.prepareStatement("SELECT * FROM DRUGS_STOCK WHERE ID = ?");
+        preparedStatement = connection.prepareStatement("select * from drugs_stock where id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {

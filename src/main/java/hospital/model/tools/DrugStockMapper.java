@@ -8,8 +8,8 @@ import java.sql.ResultSet;
     public DrugStock drugStockMapper(ResultSet resultSet) throws Exception {
         return DrugStock
                 .builder()
-                .id(resultSet.getInt("STOCK_ID"))
-                .drugCount(resultSet.getInt("DRUG_COUNT"))
+                .id(resultSet.getInt("id"))
+                .drugCount(resultSet.getInt("drug_count"))
                 .build();
     }
 }

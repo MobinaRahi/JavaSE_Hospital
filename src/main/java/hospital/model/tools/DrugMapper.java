@@ -9,11 +9,11 @@ public class DrugMapper {
     public Drug drugMapper(ResultSet resultSet) throws Exception {
             return Drug
                     .builder()
-                    .id(resultSet.getInt("DRUG_ID"))
-                    .drugStock(DrugStockService.getService().findById(resultSet.getInt("STOCK_ID")))
-                    .name(resultSet.getString("NAME"))
-                    .price(resultSet.getDouble("PRICE"))
-                    .quantity(resultSet.getInt("QUANTITY"))
+                    .id(resultSet.getInt("id"))
+                    .drugStock(DrugStockService.getService().findById(resultSet.getInt("stock_id")))
+                    .name(resultSet.getString("name"))
+                    .price(resultSet.getDouble("price"))
+                    .quantity(resultSet.getInt("quantity"))
                     .build();
         }
 }
