@@ -114,7 +114,6 @@ create sequence visit_seq start with 1 increment by 1;
 --
 
 
-
 create table prescriptions
 (
     id          number primary key,
@@ -127,7 +126,6 @@ create table prescriptions
 
 create sequence prescription_seq start with 1 increment by 1;
 --
-
 
 
 CREATE TABLE drugs
