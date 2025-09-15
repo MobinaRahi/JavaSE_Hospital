@@ -4,9 +4,10 @@ create table medicals
 (
     id          number primary key,
     title       nvarchar2(20) not null,
-    description nvarchar2(20) not null,
+    description nvarchar2(200) not null,
     duration    number not null,
-    payment     number not null
+    payment_id  number,
+    constraint fk_medical_payment FOREIGN KEY (payment_id) references payments (id)
 );
 
 create sequence medical_seq start with 1 increment by 1;
