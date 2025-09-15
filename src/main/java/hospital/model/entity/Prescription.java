@@ -13,17 +13,17 @@ import java.util.List;
 @Setter
 @Getter
 
-public class Visit {
+public class Prescription {
     private int id;
-    //    private Doctor doctor;
 //    private Patient patient;
-    private List<TimeShift> timeShiftList;
-    private Prescription prescription;
+    private Visit visit;
     private Payment payment;
+    private List<Drug> drugList;
+//    private Employee employee;
 
     public String toString() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
-
 }
+
