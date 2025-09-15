@@ -23,11 +23,13 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     public void save (Drug drug) throws Exception {
         drug.setId(ConnectionProvider.getProvider().getNextId("DRUG_SEQ"));
         preparedStatement = connection.prepareStatement(
-                "INSERT INTO DRUGS (ID, NAME, PRICE) VALUES (?, ?, ?)"
+                "insert into drugs (id, stock_id, name, price, quantity) values (?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, drug.getId());
-        preparedStatement.setString(2, drug.getName());
-        preparedStatement.setDouble(3, drug.getPrice());
+        preparedStatement.setInt(2, drug.getDrugStock().getId());
+        preparedStatement.setString(3, drug.getName());
+        preparedStatement.setDouble(4, drug.getPrice());
+        preparedStatement.setInt(5, drug.getQuantity());
         preparedStatement.execute();
     }
 
@@ -35,11 +37,12 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     @Override
     public void edit (Drug drug) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "UPDATE DRUGS SET NAME = ?, PRICE = ? WHERE ID = ?"
+                "update drugs set name = ?, price = ?, quantity = ?, where id = ?"
         );
         preparedStatement.setString(1, drug.getName());
         preparedStatement.setDouble(2, drug.getPrice());
-        preparedStatement.setInt(3, drug.getId());
+        preparedStatement.setInt(4, drug.getQuantity());
+        preparedStatement.setInt(5, drug.getId());
         preparedStatement.execute();
     }
 
@@ -48,7 +51,7 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     @Override
     public void delete (Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "DELETE FROM DRUGS WHERE ID = ?"
+                "delete from drugs where id = ?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -58,7 +61,7 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     @Override
     public List<Drug> findAll ( ) throws Exception {
         List<Drug> drugList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("SELECT * FROM DRUGS ORDER BY NAME");
+        preparedStatement = connection.prepareStatement("select * from drugs order by name,price");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Drug drug= drugMapper.drugMapper(resultSet);
@@ -70,7 +73,7 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     @Override
     public Drug findById (Integer id) throws Exception {
         Drug drug = null;
-        preparedStatement = connection.prepareStatement("SELECT * FROM DRUGS WHERE ID = ?");
+        preparedStatement = connection.prepareStatement("select * from drugs where id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
@@ -84,7 +87,7 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
         List<Drug> drugList = new ArrayList<>();
 
         preparedStatement = connection.prepareStatement(
-                "SELECT * FROM DRUGS WHERE NAME LIKE ? AND PRICE LIKE ?"
+                "select * from drugs where name like ? and price like ?"
         );
         preparedStatement.setString(1, name + "%");
         preparedStatement.setDouble(2, Double.parseDouble(price + "%"));
@@ -92,6 +95,22 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
 
         while (resultSet.next()) {
             drugList.add(drugMapper.drugMapper(resultSet));
+        }
+        return drugList;
+    }
+
+    public List<Drug> findByStockId(int stockId) throws Exception {
+        List<Drug> drugList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement(
+                "select * from drugs where stock_id=?"
+        );
+        preparedStatement.setInt(1, stockId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Drug drug = drugMapper.drugMapper(resultSet);
+            drugList.add(drug);
         }
         return drugList;
     }

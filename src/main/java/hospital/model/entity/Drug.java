@@ -15,11 +15,16 @@ public class Drug {
     private int id;
     private String name;
     private double price;
+    private int quantity;
+    private DrugStock drugStock;
+
 
     @Override
     public String toString() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
+
+
 }
 
