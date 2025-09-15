@@ -80,6 +80,7 @@ create table  users
     locked         number(1)     default 1,
     register_date  date          not null
 );
+
 create sequence person_seq start with 1 increment by 1;
 --
 
@@ -93,6 +94,7 @@ create table patients
     constraint fk_patients_visit FOREIGN KEY (visit_id) references visits (id),
     constraint fk_patients_prescription FOREIGN KEY (prescription_id) references prescriptions (id)
 );
+
 create sequence person_seq start with 1 increment by 1;
 --
 
@@ -101,6 +103,7 @@ create table doctors
     id         number primary key,
     specialty  nvarchar2(20) not null
 );
+
 create sequence person_seq start with 1 increment by 1;
 --
 
@@ -113,4 +116,5 @@ create table employees
     end_date        date          not null,
     constraint fk_patients_user FOREIGN KEY (user_id) references users (id)
 );
+
 create sequence person_seq start with 1 increment by 1;
