@@ -7,6 +7,7 @@ import hospital.model.entity.enums.UserName;
 import java.sql.ResultSet;
 
 public class UserMapper {
+
     public User userMapper(ResultSet resultSet) throws Exception {
         return User
                 .builder()

@@ -30,6 +30,7 @@ public class User {
     private Boolean locked;
     private LocalDate registerDate;
 
+
     @Override
     public String toString() {
         Gson gson = new Gson();

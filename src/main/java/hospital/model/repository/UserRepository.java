@@ -4,12 +4,14 @@ package hospital.model.repository;
 import hospital.model.entity.User;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.UserMapper;
+import lombok.extern.log4j.Log4j2;
 
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 public class UserRepository implements Repository<User, Integer>, AutoCloseable{
 
     private final Connection connection;
@@ -19,7 +21,6 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable{
     public UserRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getOracleConnection();
     }
-
 
     @Override
     public void save(User user) throws Exception {
