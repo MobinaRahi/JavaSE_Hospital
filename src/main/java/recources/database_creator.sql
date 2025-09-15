@@ -112,8 +112,29 @@ create table employees
 
 create sequence person_seq start with 1 increment by 1;
 --
+
 create table payments
 (
     id   number primary key
 );
 create sequence payment_seq start with 1 increment by 1;
+--
+
+CREATE TABLE drugs (
+                       id NUMBER PRIMARY KEY,
+                       stock_id NUMBER,
+                       name NVARCHAR2(100) NOT NULL,
+                       price NUMBER(10,2),
+                       quantity NUMBER NOT NULL,
+                       constraint fk_drug_drug_stock foreign key (stock_id) references drugs_stock (id)
+);
+create sequence drug_seq start with 1 increment by 1;
+--
+
+
+create table drugs_stock (
+                             id number primary key,
+                             drug_count number default 0,
+                             last_update timestamp default systimestamp
+);
+create sequence drug_stock_seq start with 1 increment by 1;
