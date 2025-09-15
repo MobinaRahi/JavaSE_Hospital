@@ -135,3 +135,4 @@ create table drugs_stock (
                              last_update timestamp default systimestamp
 );
 create sequence drug_stock_seq start with 1 increment by 1;
+--
