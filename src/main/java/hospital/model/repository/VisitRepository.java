@@ -1,5 +1,6 @@
 package hospital.model.repository;
 
+import hospital.model.entity.Payable;
 import hospital.model.entity.Visit;
 import hospital.model.tools.ConnectionProvider;
 import lombok.extern.log4j.Log4j2;
@@ -11,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Log4j2
-public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseable{
+public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseable, Payable {
     private final Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -67,5 +68,10 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
     @Override
     public void close() throws Exception {
 
+    }
+
+    @Override
+    public double getPrice() {
+        return 0;
     }
 }
