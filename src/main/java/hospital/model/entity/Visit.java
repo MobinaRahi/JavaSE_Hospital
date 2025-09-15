@@ -18,7 +18,6 @@ public class Visit {
     //    private Doctor doctor;
 //    private Patient patient;
     private List<TimeShift> timeShiftList;
-    private Prescription prescription;
     private Payment payment;
 
     public String toString() {

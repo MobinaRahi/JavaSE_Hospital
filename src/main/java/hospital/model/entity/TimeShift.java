@@ -18,7 +18,6 @@ public class TimeShift {
     //    private Doctor doctor;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private String description;
 
     public String toString() {
         Gson gson = new Gson();
