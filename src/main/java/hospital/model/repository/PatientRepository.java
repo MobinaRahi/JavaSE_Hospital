@@ -40,9 +40,12 @@ public class PatientRepository implements Repository<Patient, Integer>, AutoClos
     @Override
     public void edit(Patient patient) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from Patient where id=?"
+                "update patient set user_id, visit_id=? ,prescription_id=? where id=?"
         );
-        preparedStatement.setInt(1, patient.getId());
+        preparedStatement.setInt(2, patient.getUser().getId());
+        preparedStatement.setInt(2, patient.getVisit().getId());
+        preparedStatement.setInt(2, patient.getPrescription().getId());
+        preparedStatement.setInt(3, patient.getId());
         preparedStatement.execute();
     }
 

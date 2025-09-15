@@ -119,11 +119,8 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable{
 
     @Override
     public void close() throws Exception {
-
         preparedStatement.close();
         connection.close();
-
-
     }
 }
 
