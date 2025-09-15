@@ -1,6 +1,3 @@
-
---
-
 create table medicals
 (
     id          number primary key,
@@ -74,7 +71,7 @@ create table  users
     register_date  date          not null
 );
 
-create sequence person_seq start with 1 increment by 1;
+create sequence user_seq start with 1 increment by 1;
 --
 
 create table patients
@@ -88,7 +85,7 @@ create table patients
     constraint fk_patients_prescription FOREIGN KEY (prescription_id) references prescriptions (id)
 );
 
-create sequence person_seq start with 1 increment by 1;
+create sequence patients_seq start with 1 increment by 1;
 --
 
 create table doctors
@@ -97,7 +94,7 @@ create table doctors
     specialty  nvarchar2(20) not null
 );
 
-create sequence person_seq start with 1 increment by 1;
+create sequence doctor_seq start with 1 increment by 1;
 --
 
 create table employees
@@ -110,7 +107,7 @@ create table employees
     constraint fk_patients_user FOREIGN KEY (user_id) references users (id)
 );
 
-create sequence person_seq start with 1 increment by 1;
+create sequence employee_seq start with 1 increment by 1;
 --
 create table payments
 (
