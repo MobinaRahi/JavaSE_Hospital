@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Log4j2
-public class VisitRepository implements Repository<Visit, Integer> {
+public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseable{
     private final Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -62,5 +62,10 @@ public class VisitRepository implements Repository<Visit, Integer> {
     @Override
     public Visit findById(Integer id) throws Exception {
         return null;
+    }
+
+    @Override
+    public void close() throws Exception {
+
     }
 }

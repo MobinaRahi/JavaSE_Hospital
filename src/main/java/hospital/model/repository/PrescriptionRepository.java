@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Log4j2
-public class PrescriptionRepository implements Repository<Prescription, Integer> {
+public class PrescriptionRepository implements Repository<Prescription, Integer>,AutoCloseable {
 
     private final Connection connection;
     private PreparedStatement preparedStatement;
@@ -68,5 +68,10 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
     @Override
     public Prescription findById(Integer id) throws Exception {
         return null;
+    }
+
+    @Override
+    public void close() throws Exception {
+
     }
 }
