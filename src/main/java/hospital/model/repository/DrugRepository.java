@@ -23,11 +23,13 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     public void save (Drug drug) throws Exception {
         drug.setId(ConnectionProvider.getProvider().getNextId("DRUG_SEQ"));
         preparedStatement = connection.prepareStatement(
-                "INSERT INTO DRUGS (ID, NAME, PRICE) VALUES (?, ?, ?)"
+                "INSERT INTO DRUGS (ID, STOCK_ID, NAME, PRICE, QUANTITY) VALUES (?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, drug.getId());
-        preparedStatement.setString(2, drug.getName());
-        preparedStatement.setDouble(3, drug.getPrice());
+        preparedStatement.setInt(2, drug.getDrugStock().getId());
+        preparedStatement.setString(3, drug.getName());
+        preparedStatement.setDouble(4, drug.getPrice());
+        preparedStatement.setInt(5, drug.getQuantity());
         preparedStatement.execute();
     }
 
@@ -35,11 +37,12 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     @Override
     public void edit (Drug drug) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "UPDATE DRUGS SET NAME = ?, PRICE = ? WHERE ID = ?"
+                "UPDATE DRUGS SET NAME = ?, PRICE = ?, QUANTITY = ?, WHERE ID = ?"
         );
         preparedStatement.setString(1, drug.getName());
         preparedStatement.setDouble(2, drug.getPrice());
-        preparedStatement.setInt(3, drug.getId());
+        preparedStatement.setInt(4, drug.getQuantity());
+        preparedStatement.setInt(5, drug.getId());
         preparedStatement.execute();
     }
 
@@ -58,7 +61,7 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     @Override
     public List<Drug> findAll ( ) throws Exception {
         List<Drug> drugList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("SELECT * FROM DRUGS ORDER BY NAME");
+        preparedStatement = connection.prepareStatement("SELECT * FROM DRUGS ORDER BY NAME,PRICE");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Drug drug= drugMapper.drugMapper(resultSet);
@@ -92,6 +95,22 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
 
         while (resultSet.next()) {
             drugList.add(drugMapper.drugMapper(resultSet));
+        }
+        return drugList;
+    }
+
+    public List<Drug> findByStockId(int stockId) throws Exception {
+        List<Drug> drugList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement(
+                "SELECT * FROM DRUGS WHERE STOCK_ID=?"
+        );
+        preparedStatement.setInt(1, stockId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Drug drug = drugMapper.drugMapper(resultSet);
+            drugList.add(drug);
         }
         return drugList;
     }

@@ -9,6 +9,10 @@ public class DrugService implements Service<Drug, Integer> {
     @Getter
     private static DrugService service = new DrugService();
 
+    private DrugService(){
+
+    }
+
     @Override
     public void save (Drug drug) throws Exception {
         try (DrugRepository drugRepository = new DrugRepository()) {
@@ -47,6 +51,12 @@ public class DrugService implements Service<Drug, Integer> {
     public List<Drug> findByNameAndPrice(String name, Double price) throws Exception {
         try (DrugRepository drugRepository = new DrugRepository()) {
             return drugRepository.findByNameAndPrice(name, price);
+        }
+    }
+
+    public List<Drug> findByStockId(Integer stockId) throws Exception {
+        try (DrugRepository skillRepository = new DrugRepository()) {
+            return skillRepository.findByStockId(stockId);
         }
     }
 }
