@@ -7,6 +7,7 @@ import hospital.model.entity.enums.VisitPrice;
 import hospital.model.service.DoctorService;
 import hospital.model.service.MedicalService;
 import hospital.model.service.PaymentService;
+import hospital.model.tools.MedicalMapper;
 
 import java.time.LocalDate;
 
@@ -32,15 +33,34 @@ public class MedicalTest {
 //
 //        PaymentService.getService().save(payment);
 
-        Medical medical =
-                Medical
-                        .builder()
-                        .title("test")
-                        .description("test")
-                        .duration(120)
-                        .payment(PaymentService.getService().findById(3))
-                        .build();
-        MedicalService.getService().save(medical);
+//        Medical medical =
+//                Medical
+//                        .builder()
+//                        .id(3)
+//                        .title("test")
+//                        .description("test")
+//                        .duration(160)
+//                        .payment(PaymentService.getService().findById(3))
+//                        .build();
+
+
+//        Service test pass
+
+//        test passed
+//        MedicalService.getService().save(medical);
+
+//        test passed
+//        MedicalService.getService().edit(medical);
+
+//        test passed
+//        MedicalService.getService().delete(3);
+
+//        test passed
+//        System.out.println(MedicalService.getService().findAll());
+
+//        test passed
+//        System.out.println(MedicalService.getService().findById(5));
+
 
     }
 }
