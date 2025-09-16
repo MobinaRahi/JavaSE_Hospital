@@ -21,6 +21,7 @@ public class Payment implements Transaction {
     private PayType payType;
     private LocalDate payDate;
     private int price;
+    private Doctor doctor;
 
 
 
