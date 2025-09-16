@@ -3,18 +3,21 @@ package hospital.model.repository;
 import hospital.model.entity.Payable;
 import hospital.model.entity.Visit;
 import hospital.model.tools.ConnectionProvider;
+import hospital.model.tools.VisitMapper;
 import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
 public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseable, Payable {
     private final Connection connection;
     private PreparedStatement preparedStatement;
+    private final VisitMapper visitMapper=new VisitMapper();
 
     public VisitRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getOracleConnection();
@@ -57,17 +60,36 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
 
     @Override
     public List<Visit> findAll() throws Exception {
-        return Collections.emptyList();
+        List<Visit> visits = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from visits"
+        );
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Visit visit = visitMapper.visitmapper(resultSet);
+            visits.add(visit);
+        }
+        return visits;
     }
 
     @Override
     public Visit findById(Integer id) throws Exception {
-        return null;
+        Visit visit = null;
+        preparedStatement = connection.prepareStatement(
+                "select * from visits where id=?"
+        );
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            visit = visitMapper.visitmapper(resultSet);
+        }
+        return visit;
     }
 
     @Override
     public void close() throws Exception {
-
+        preparedStatement.close();
+        connection.close();
     }
 
     @Override

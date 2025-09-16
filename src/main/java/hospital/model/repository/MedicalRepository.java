@@ -2,19 +2,22 @@ package hospital.model.repository;
 
 import hospital.model.entity.Medical;
 import hospital.model.tools.ConnectionProvider;
+import hospital.model.tools.MedicalMapper;
 import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public class MedicalRepository implements Repository<Medical, Integer>,AutoCloseable {
+public class MedicalRepository implements Repository<Medical, Integer>, AutoCloseable {
 
     private final Connection connection;
     private PreparedStatement preparedStatement;
+    private final MedicalMapper medicalMapper = new MedicalMapper();
 
     public MedicalRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getOracleConnection();
@@ -28,7 +31,7 @@ public class MedicalRepository implements Repository<Medical, Integer>,AutoClose
         );
         preparedStatement.setString(1, medical.getTitle());
         preparedStatement.setString(2, medical.getDescription());
-        preparedStatement.setInt(3,medical.getPayment().getId());
+        preparedStatement.setInt(3, medical.getPayment().getId());
         preparedStatement.execute();
         log.info("Medical save success.");
     }
@@ -40,8 +43,8 @@ public class MedicalRepository implements Repository<Medical, Integer>,AutoClose
         );
         preparedStatement.setString(1, medical.getTitle());
         preparedStatement.setString(2, medical.getDescription());
-        preparedStatement.setInt(3,medical.getPayment().getId());
-        preparedStatement.setInt(4,medical.getId());
+        preparedStatement.setInt(3, medical.getPayment().getId());
+        preparedStatement.setInt(4, medical.getId());
         preparedStatement.execute();
         log.info("Medical edit success.");
     }
@@ -58,16 +61,36 @@ public class MedicalRepository implements Repository<Medical, Integer>,AutoClose
 
     @Override
     public List<Medical> findAll() throws Exception {
-        return Collections.emptyList();
+        List<Medical> medicalList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from medicals"
+        );
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Medical medical = medicalMapper.medicalMapper(resultSet);
+            medicalList.add(medical);
+        }
+        return medicalList;
     }
 
     @Override
     public Medical findById(Integer id) throws Exception {
-        return null;
+        Medical medical = null;
+        preparedStatement = connection.prepareStatement(
+                "select * from medicals where id=?"
+        );
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            medical = medicalMapper.medicalMapper(resultSet);
+        }
+        return medical;
+
     }
 
     @Override
     public void close() throws Exception {
-
+        preparedStatement.close();
+        connection.close();
     }
 }

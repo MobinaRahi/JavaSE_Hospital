@@ -1,22 +1,24 @@
 package hospital.model.repository;
 
-import hospital.model.entity.Medical;
 import hospital.model.entity.Payable;
 import hospital.model.entity.Prescription;
 import hospital.model.tools.ConnectionProvider;
+import hospital.model.tools.PrescriptionMapper;
 import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public class PrescriptionRepository implements Repository<Prescription, Integer>,AutoCloseable , Payable {
+public class PrescriptionRepository implements Repository<Prescription, Integer>, AutoCloseable, Payable {
 
     private final Connection connection;
     private PreparedStatement preparedStatement;
+    PrescriptionMapper prescriptionMapper = new PrescriptionMapper();
 
     public PrescriptionRepository() throws SQLException {
         connection = ConnectionProvider.getProvider().getOracleConnection();
@@ -59,17 +61,36 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
 
     @Override
     public List<Prescription> findAll() throws Exception {
-        return Collections.emptyList();
+        List<Prescription> prescriptionList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from prescriptions"
+        );
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Prescription prescription = prescriptionMapper.prescriptionMapper(resultSet);
+            prescriptionList.add(prescription);
+        }
+        return prescriptionList;
     }
 
     @Override
     public Prescription findById(Integer id) throws Exception {
-        return null;
+        Prescription prescription = null;
+        preparedStatement = connection.prepareStatement(
+                "select * from prescriptions where id=?"
+        );
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            prescription = prescriptionMapper.prescriptionMapper(resultSet);
+        }
+        return prescription;
     }
 
     @Override
     public void close() throws Exception {
-
+        preparedStatement.close();
+        connection.close();
     }
 
     @Override
