@@ -25,7 +25,7 @@ public class VisitService implements Service<Visit,Integer>{
     @Override
     public void edit(Visit visit) throws Exception {
         try (VisitRepository visitRepository = new VisitRepository()) {
-            visitRepository.save(visit);
+            visitRepository.edit(visit);
         }
     }
 
