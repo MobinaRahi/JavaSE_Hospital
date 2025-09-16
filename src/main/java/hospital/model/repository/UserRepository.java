@@ -26,7 +26,7 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable{
     public void save(User user) throws Exception {
         user.setId(ConnectionProvider.getProvider().getNextId("user_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into Users (id,name,family,birth_date,role,status,username,password,nick_name, locked,register_date)  values (?,?,?,?,?,?,?,?,?,?,?)"
+                "insert into Users (id,name,family,birth_date,role,status,username,password,nickname, locked,register_date)  values (?,?,?,?,?,?,?,?,?,?,?)"
         );
         preparedStatement.setInt(1, user.getId());
         preparedStatement.setString(2, user.getName());
@@ -34,7 +34,7 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable{
         preparedStatement.setDate(4, Date.valueOf(user.getBirthDate()));
         preparedStatement.setString(5, user.getRole().name());
         preparedStatement.setBoolean(6, user.getStatus());
-        preparedStatement.setString(7, user.getUsername().name());
+        preparedStatement.setString(7, user.getUsername());
         preparedStatement.setString(8, user.getPassword());
         preparedStatement.setString(9, user.getNickname());
         preparedStatement.setBoolean(10, user.getLocked());
@@ -52,7 +52,7 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable{
         preparedStatement.setDate(3, Date.valueOf(user.getBirthDate()));
         preparedStatement.setString(4, user.getRole().name());
         preparedStatement.setBoolean(5, user.getStatus());
-        preparedStatement.setString(6, user.getUsername().name());
+        preparedStatement.setString(6, user.getUsername());
         preparedStatement.setString(7, user.getPassword());
         preparedStatement.setString(8, user.getNickname());
         preparedStatement.setBoolean(9, user.getLocked());

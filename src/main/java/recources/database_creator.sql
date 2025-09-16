@@ -4,7 +4,7 @@ create table users
     name          nvarchar2(20) not null,
     family        nvarchar2(20) not null,
     birth_date    date          not null,
-    role          nvarchar2(20) default 'customer',
+    role          nvarchar2(20) default 'PATIENT',
     status        number(1)     default 1,
     username      nvarchar2(20) not null UNIQUE ,
     password      nvarchar2(20) not null,

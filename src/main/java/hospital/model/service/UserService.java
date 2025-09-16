@@ -18,7 +18,7 @@ public class UserService implements Service<User, Integer> {
     @Override
     public void save(User user) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
-            if (userRepository.findByUsername(user.getUsername().name()) == null) {
+            if (userRepository.findByUsername(user.getUsername()) == null) {
                 userRepository.save(user);
             }
         }
@@ -27,7 +27,7 @@ public class UserService implements Service<User, Integer> {
     @Override
     public void edit(User user) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
-            if (userRepository.findByUsername(user.getUsername().name()) == null) {
+            if (userRepository.findByUsername(user.getUsername()) == null) {
                 userRepository.edit(user);
             }
         }
