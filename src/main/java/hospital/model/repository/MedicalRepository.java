@@ -31,7 +31,8 @@ public class MedicalRepository implements Repository<Medical, Integer>, AutoClos
         );
         preparedStatement.setString(1, medical.getTitle());
         preparedStatement.setString(2, medical.getDescription());
-        preparedStatement.setInt(3, medical.getPayment().getId());
+        preparedStatement.setFloat(3,medical.getDuration());
+        preparedStatement.setInt(4, medical.getPayment().getId());
         preparedStatement.execute();
         log.info("Medical save success.");
     }

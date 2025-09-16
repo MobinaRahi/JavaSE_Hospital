@@ -10,7 +10,7 @@ public class PaymentMapper {
                 .builder()
                 .id(resultSet.getInt("id"))
                 .payType(PayType.valueOf(resultSet.getString("pay_type")))
-                .payDate(resultSet.getDate("pey_date").toLocalDate())
+                .payDate(resultSet.getDate("pay_date").toLocalDate())
                 .price(resultSet.getInt("price"))
                 .build();
     }
