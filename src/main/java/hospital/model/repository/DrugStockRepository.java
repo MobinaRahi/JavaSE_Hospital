@@ -21,7 +21,7 @@ public class DrugStockRepository implements Repository<DrugStock, Integer>,AutoC
 
     @Override
     public void save (DrugStock drugStock) throws Exception {
-        drugStock.setId(ConnectionProvider.getProvider().getNextId("DRUG_STOCK_SEQ"));
+        drugStock.setId(ConnectionProvider.getProvider().getNextId("drug_stock_seq"));
 
         preparedStatement = connection.prepareStatement(
                 "insert into drugs_stock (id, drug_count) values (?, ?)"

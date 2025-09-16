@@ -21,7 +21,7 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     }
     @Override
     public void save (Drug drug) throws Exception {
-        drug.setId(ConnectionProvider.getProvider().getNextId("DRUG_SEQ"));
+        drug.setId(ConnectionProvider.getProvider().getNextId("drug_seq"));
         preparedStatement = connection.prepareStatement(
                 "insert into drugs (id, stock_id, name, price, quantity) values (?, ?, ?, ?, ?)"
         );
