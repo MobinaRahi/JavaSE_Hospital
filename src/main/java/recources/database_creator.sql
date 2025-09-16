@@ -4,7 +4,7 @@ create table medicals
     title       nvarchar2(20) not null,
     description nvarchar2(20) not null,
     duration    number not null,
-    payment     number not null
+    payment_id     number not null
 );
 
 create sequence medical_seq start with 1 increment by 1;
@@ -70,7 +70,6 @@ create table  users
     locked         number(1)     default 1,
     register_date  date          not null
 );
-
 create sequence user_seq start with 1 increment by 1;
 --
 
