@@ -26,7 +26,7 @@ public class TimeShiftService implements Service<TimeShift, Integer> {
     @Override
     public void edit(TimeShift timeShift) throws Exception {
         try (TimeShiftRepository timeShiftRepository = new TimeShiftRepository()) {
-            timeShiftRepository.save(timeShift);
+            timeShiftRepository.edit(timeShift);
         }
     }
 
