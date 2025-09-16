@@ -26,7 +26,7 @@ public class PrescriptionService implements Service<Prescription,Integer>{
     public void edit(Prescription prescription) throws Exception {
 
     try(PrescriptionRepository prescriptionRepository = new PrescriptionRepository()) {
-      prescriptionRepository.save(prescription);
+      prescriptionRepository.edit(prescription);
     }
 
     }
