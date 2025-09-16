@@ -104,7 +104,7 @@ create table employees
     user_id       number,
     start_date      date          not null,
     end_date        date          not null,
-    constraint fk_patients_user FOREIGN KEY (user_id) references users (id)
+    constraint fk_patient_user FOREIGN KEY (user_id) references users (id)
 );
 
 create sequence employee_seq start with 1 increment by 1;
@@ -120,7 +120,7 @@ create table payments
 create sequence payment_seq start with 1 increment by 1;
 --
 
-CREATE TABLE drugs (
+create table drugs (
                        id number primary key,
                        stock_id number,
                        name nvarchar2(100) not null,
