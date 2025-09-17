@@ -79,6 +79,7 @@ create table medicals
     title       nvarchar2(20) not null,
     description nvarchar2(20) not null,
     duration    number        not null,
+    doctor_id   number        not null,
     payment_id  number        not null,
     constraint fk_medical_payment FOREIGN KEY (payment_id) references payments (id)
 );
@@ -91,6 +92,7 @@ create table time_shifts
 (
     id              number primary key,
     doctor_id       number,
+    medical_id      number,
     start_date_time date not null,
     end_date_time   date not null,
     constraint fk_time_shift_doctor FOREIGN KEY (doctor_id) references doctors (id)
