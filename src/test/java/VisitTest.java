@@ -1,10 +1,6 @@
-import hospital.model.entity.Patient;
-import hospital.model.entity.User;
-import hospital.model.entity.Visit;
-import hospital.model.entity.enums.Role;
-import hospital.model.service.*;
 
-import java.time.LocalDate;
+import hospital.model.entity.Visit;
+import hospital.model.service.*;
 
 public class VisitTest {
     public static void main(String[] args) throws Exception {
@@ -49,8 +45,9 @@ public class VisitTest {
 //                        .payDate(LocalDate.now())
 //                        .doctor(DoctorService.getService().findById(2))
 //                        .price(DoctorService.getService().findById(2).getPrice())
+//                        .patient(PatientService.getService().findById(2))
 //                        .build();
-//
+
 //        PaymentService.getService().save(payment);
 
         Visit visit=
@@ -61,11 +58,11 @@ public class VisitTest {
                         .patient(PatientService.getService().findById(2))
                         .payment(PaymentService.getService().findById(3))
                         .build();
-
+        VisitService.getService().save(visit);
 //        Service test pass
 
 //        test passed
-//        VisitService.getService().save(visit);
+//
 
 //        test passed
 //        VisitService.getService().edit(visit);

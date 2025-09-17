@@ -46,7 +46,9 @@ create table payments
     id       number primary key,
     pay_type nvarchar2(20) default 'CASH',
     pay_date date   not null,
-    price    number not null
+    price    number not null,
+    doctor_id number,
+    patient_id number
 );
 create sequence payment_seq start with 1 increment by 1;
 --

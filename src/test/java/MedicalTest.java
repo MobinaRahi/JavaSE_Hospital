@@ -29,6 +29,7 @@ public class MedicalTest {
 //                        .payDate(LocalDate.now())
 //                        .doctor(DoctorService.getService().findById(2))
 //                        .price(DoctorService.getService().findById(2).getPrice())
+//                          .patient(PaymentService.getService().findById(2).getPatient())
 //                        .build();
 //
 //        PaymentService.getService().save(payment);

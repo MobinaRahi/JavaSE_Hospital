@@ -2,8 +2,6 @@ package hospital.model.entity;
 
 import com.google.gson.Gson;
 import hospital.model.entity.enums.PayType;
-import hospital.model.entity.enums.VisitPrice;
-import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +20,7 @@ public class Payment implements Transaction {
     private LocalDate payDate;
     private int price;
     private Doctor doctor;
+    private Patient patient;
 
 
 

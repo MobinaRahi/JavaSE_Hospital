@@ -1,6 +1,7 @@
 package hospital.model.service;
 
-import hospital.model.entity.Doctor;
+
+import hospital.model.entity.Patient;
 import hospital.model.entity.Payment;
 import hospital.model.repository.PaymentRepository;
 import lombok.Getter;
@@ -44,9 +45,9 @@ public class PaymentService implements Service<Payment,Integer> {
         }
     }
 
-    public List<Payment> findByDoctor ( Doctor doctor ) throws Exception {
+    public List<Payment> findByPatient (Patient patient) throws Exception {
         try (PaymentRepository paymentRepository = new PaymentRepository()) {
-            return paymentRepository.findByDoctor(doctor);
+            return paymentRepository.findByPatient(patient);
         }
     }
 

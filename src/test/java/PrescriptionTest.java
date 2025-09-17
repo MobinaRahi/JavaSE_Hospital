@@ -1,6 +1,7 @@
+
 import hospital.model.entity.Prescription;
-import hospital.model.entity.Visit;
 import hospital.model.service.*;
+
 
 public class PrescriptionTest {
     public static void main(String[] args) throws Exception {
@@ -11,6 +12,7 @@ public class PrescriptionTest {
 //                        .payDate(LocalDate.now())
 //                        .doctor(DoctorService.getService().findById(2))
 //                        .price(DoctorService.getService().findById(2).getPrice())
+//                        .patient(PaymentService.getService().findById(2).getPatient())
 //                        .build();
 //
 //        PaymentService.getService().save(payment);
