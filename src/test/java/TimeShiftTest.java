@@ -1,5 +1,6 @@
 import hospital.model.entity.TimeShift;
 import hospital.model.service.DoctorService;
+import hospital.model.service.MedicalService;
 import hospital.model.service.TimeShiftService;
 
 import java.time.LocalDateTime;
@@ -20,8 +21,9 @@ public class TimeShiftTest {
         TimeShift timeShift =
                 TimeShift
                         .builder()
-                        .id(2)
-                        .doctor(DoctorService.getService().findById(2))
+//                        .id(2)
+                        .doctor(DoctorService.getService().findById(21))
+                        .medical(MedicalService.getService().findById(26))
                         .startDateTime(LocalDateTime.of(2004, Month.JANUARY, 1, 11, 30, 0))
                         .endDateTime(LocalDateTime.of(2004, Month.JANUARY, 2, 11, 30, 0))
                         .build();
@@ -42,6 +44,13 @@ public class TimeShiftTest {
 
 //        test passed
 //        System.out.println(TimeShiftService.getService().findById(9));
+
+//        test passed
+//        System.out.println(TimeShiftService.getService().findTimeShiftByDoctorId(2));
+
+//        test passed
+//        System.out.println(TimeShiftService.getService().findTimeShiftByMedicalId(24));
+
 
     }
 }

@@ -40,6 +40,7 @@ public class MedicalTest {
 //                        .title("test")
 //                        .description("test")
 //                        .duration(160)
+//                        .doctor(DoctorService.service.findById(22))
 //                        .payment(PaymentService.getService().findById(3))
 //                        .build();
 
@@ -60,6 +61,10 @@ public class MedicalTest {
 
 //        test passed
 //        System.out.println(MedicalService.getService().findById(5));
+
+//        test passed
+//        System.out.println(MedicalService.getService().findMedicalByDoctorId(22));
+
 
 
     }

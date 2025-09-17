@@ -1,6 +1,7 @@
 package hospital.model.entity;
 
 import com.google.gson.Gson;
+import hospital.model.service.DoctorService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +19,7 @@ public class Medical {
     private int id;
     private String title;
     private String description;
-    private List<Doctor> doctorList;
+    private Doctor doctor;
     private float duration;
     private Payment payment;
 

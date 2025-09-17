@@ -25,11 +25,12 @@ public class TimeShiftRepository implements Repository<TimeShift, Integer>, Auto
     public void save(TimeShift timeShift) throws Exception {
         timeShift.setId(ConnectionProvider.getProvider().getNextId("time_shift_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into time_Shifts (id,doctor_id,start_date_time,end_date_time)values(time_shift_seq.nextval,?,?,?) "
+                "insert into time_Shifts (id,doctor_id,medical_id,start_date_time,end_date_time)values(time_shift_seq.nextval,?,?,?,?) "
         );
         preparedStatement.setInt(1, timeShift.getDoctor().getId());
-        preparedStatement.setTimestamp(2, Timestamp.valueOf(timeShift.getStartDateTime()));
-        preparedStatement.setTimestamp(3, Timestamp.valueOf(timeShift.getEndDateTime()));
+        preparedStatement.setInt(2, timeShift.getMedical().getId());
+        preparedStatement.setTimestamp(3, Timestamp.valueOf(timeShift.getStartDateTime()));
+        preparedStatement.setTimestamp(4, Timestamp.valueOf(timeShift.getEndDateTime()));
         preparedStatement.execute();
         log.info("TimeShift save success.");
     }
@@ -37,12 +38,13 @@ public class TimeShiftRepository implements Repository<TimeShift, Integer>, Auto
     @Override
     public void edit(TimeShift timeShift) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update time_Shifts set doctor_id=? ,start_date_time=? ,end_date_time=? where id=?"
+                "update time_Shifts set doctor_id=?,medical_id=?,start_date_time=? ,end_date_time=? where id=?"
         );
         preparedStatement.setInt(1, timeShift.getDoctor().getId());
-        preparedStatement.setTimestamp(2, Timestamp.valueOf(timeShift.getStartDateTime()));
-        preparedStatement.setTimestamp(3, Timestamp.valueOf(timeShift.getEndDateTime()));
-        preparedStatement.setInt(4, timeShift.getId());
+        preparedStatement.setInt(2, timeShift.getMedical().getId());
+        preparedStatement.setTimestamp(3, Timestamp.valueOf(timeShift.getStartDateTime()));
+        preparedStatement.setTimestamp(4, Timestamp.valueOf(timeShift.getEndDateTime()));
+        preparedStatement.setInt(5, timeShift.getId());
         preparedStatement.execute();
         log.info("TimeShift edit success.");
     }
@@ -78,6 +80,32 @@ public class TimeShiftRepository implements Repository<TimeShift, Integer>, Auto
                 "select * from time_Shifts where id=?"
         );
         preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            timeShift = timeShiftMapper.timeShiftMapper(resultSet);
+        }
+        return timeShift;
+    }
+
+    public TimeShift findTimeShiftByDoctorId(int doctorId) throws Exception {
+        TimeShift timeShift = null;
+        preparedStatement = connection.prepareStatement(
+                "select * from time_Shifts where doctor_id=?"
+        );
+        preparedStatement.setInt(1, doctorId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            timeShift = timeShiftMapper.timeShiftMapper(resultSet);
+        }
+        return timeShift;
+    }
+
+    public TimeShift findTimeShiftByMedicalId(int medicalId) throws Exception {
+        TimeShift timeShift = null;
+        preparedStatement = connection.prepareStatement(
+                "select * from time_Shifts where medical_id=?"
+        );
+        preparedStatement.setInt(1, medicalId);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             timeShift = timeShiftMapper.timeShiftMapper(resultSet);

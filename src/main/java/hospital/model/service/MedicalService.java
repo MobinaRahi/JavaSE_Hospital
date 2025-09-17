@@ -49,4 +49,10 @@ public class MedicalService implements Service<Medical, Integer> {
             return medicalRepository.findById(id);
         }
     }
+
+    public Medical findMedicalByDoctorId(Integer id) throws Exception {
+        try (MedicalRepository medicalRepository = new MedicalRepository()) {
+            return medicalRepository.findMedicalByDoctorId(id);
+        }
+    }
 }

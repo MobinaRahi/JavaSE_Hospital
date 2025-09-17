@@ -27,4 +27,6 @@ public class Doctor {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
+
+
 }

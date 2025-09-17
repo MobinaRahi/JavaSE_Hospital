@@ -27,12 +27,13 @@ public class MedicalRepository implements Repository<Medical, Integer>, AutoClos
     public void save(Medical medical) throws Exception {
         medical.setId(ConnectionProvider.getProvider().getNextId("medical_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into medicals (id,title,description,duration,payment_id) values(medical_seq.nextval,?,?,?,?)"
+                "insert into medicals (id,title,description,duration,doctor_id,payment_id) values(medical_seq.nextval,?,?,?,?,?)"
         );
         preparedStatement.setString(1, medical.getTitle());
         preparedStatement.setString(2, medical.getDescription());
         preparedStatement.setFloat(3,medical.getDuration());
-        preparedStatement.setInt(4, medical.getPayment().getId());
+        preparedStatement.setInt(4,medical.getDoctor().getId());
+        preparedStatement.setInt(5, medical.getPayment().getId());
         preparedStatement.execute();
         log.info("Medical save success.");
     }
@@ -40,13 +41,14 @@ public class MedicalRepository implements Repository<Medical, Integer>, AutoClos
     @Override
     public void edit(Medical medical) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update medicals set title=?,description=?,duration=?,payment_id=? where id=?"
+                "update medicals set title=?,description=?,duration=?,doctor_id=?,payment_id=? where id=?"
         );
         preparedStatement.setString(1, medical.getTitle());
         preparedStatement.setString(2, medical.getDescription());
         preparedStatement.setFloat(3,medical.getDuration());
-        preparedStatement.setInt(4, medical.getPayment().getId());
-        preparedStatement.setInt(5, medical.getId());
+        preparedStatement.setInt(4,medical.getDoctor().getId());
+        preparedStatement.setInt(5, medical.getPayment().getId());
+        preparedStatement.setInt(6, medical.getId());
         preparedStatement.execute();
         log.info("Medical edit success.");
         System.out.println("Medical edit success.");
@@ -88,7 +90,19 @@ public class MedicalRepository implements Repository<Medical, Integer>, AutoClos
             medical = medicalMapper.medicalMapper(resultSet);
         }
         return medical;
+    }
 
+    public Medical findMedicalByDoctorId(Integer id) throws Exception {
+        Medical medical = null;
+        preparedStatement = connection.prepareStatement(
+                "select * from medicals where doctor_id=?"
+        );
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            medical = medicalMapper.medicalMapper(resultSet);
+        }
+        return medical;
     }
 
     @Override

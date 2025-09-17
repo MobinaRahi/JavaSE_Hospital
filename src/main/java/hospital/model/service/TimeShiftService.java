@@ -50,4 +50,16 @@ public class TimeShiftService implements Service<TimeShift, Integer> {
             return timeShiftRepository.findById(id);
         }
     }
+
+    public TimeShift findTimeShiftByDoctorId(int doctorId) throws Exception {
+        try (TimeShiftRepository timeShiftRepository = new TimeShiftRepository()) {
+            return timeShiftRepository.findTimeShiftByDoctorId(doctorId);
+        }
+    }
+
+    public TimeShift findTimeShiftByMedicalId(int medicalId) throws Exception {
+        try (TimeShiftRepository timeShiftRepository = new TimeShiftRepository()) {
+            return timeShiftRepository.findTimeShiftByMedicalId(medicalId);
+        }
+    }
 }
