@@ -19,7 +19,7 @@ public class Payment{
     private int id;
     private PayType payType;
     private LocalDateTime payDateTime;
-    private int price;
+    private float price;
     private Payable payable;
 
 

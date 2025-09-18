@@ -1,6 +1,4 @@
 package hospital.model.service;
-
-import hospital.model.entity.Drug;
 import hospital.model.entity.DrugStock;
 import hospital.model.repository.DrugStockRepository;
 import lombok.Getter;

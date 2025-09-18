@@ -1,4 +1,5 @@
 package hospital.model.repository;
+import hospital.model.entity.Drug;
 import hospital.model.entity.DrugStock;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.DrugStockMapper;
@@ -24,10 +25,11 @@ public class DrugStockRepository implements Repository<DrugStock, Integer>,AutoC
         drugStock.setId(ConnectionProvider.getProvider().getNextId("drug_stock_seq"));
 
         preparedStatement = connection.prepareStatement(
-                "insert into drugs_stock (id, drug_count) values (?, ?)"
+                "insert into drugs_stock (id,drug_id, drug_count) values (?, ?,?)"
         );
         preparedStatement.setInt(1, drugStock.getId());
-        preparedStatement.setInt(2, drugStock.getDrugCount());
+        preparedStatement.setInt(2, drugStock.getDrug().getId());
+        preparedStatement.setInt(3, drugStock.getDrugCount());
         preparedStatement.execute();
 
     }
@@ -36,11 +38,11 @@ public class DrugStockRepository implements Repository<DrugStock, Integer>,AutoC
     @Override
     public void edit (DrugStock drugStock) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update drugs_stock set drug_count = ?, where id = ?"
+                "update drugs_stock set drug_id=?,drug_count = ? where id = ?"
         );
-
-        preparedStatement.setInt(1, drugStock.getDrugCount());
-        preparedStatement.setInt(2, drugStock.getId());
+        preparedStatement.setInt(1,drugStock.getDrug().getId());
+        preparedStatement.setInt(2, drugStock.getDrugCount());
+        preparedStatement.setInt(3, drugStock.getId());
         preparedStatement.execute();
 
     }

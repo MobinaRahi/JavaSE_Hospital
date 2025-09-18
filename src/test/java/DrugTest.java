@@ -1,7 +1,5 @@
 import hospital.model.entity.Drug;
-import hospital.model.entity.DrugStock;
 import hospital.model.service.DrugService;
-import hospital.model.service.DrugStockService;
 
 public class DrugTest {
     public static void main(String[] args) throws Exception {
@@ -19,7 +17,6 @@ public class DrugTest {
                 .name("test")
                 .price(120)
                 .quantity(10)
-                .drugStock(DrugStockService.getService().findById(1))
                 .build();
                 DrugService.getService().save(drug);
 

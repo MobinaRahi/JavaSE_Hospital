@@ -54,9 +54,5 @@ public class DrugService implements Service<Drug, Integer> {
         }
     }
 
-    public List<Drug> findByStockId(Integer stockId) throws Exception {
-        try (DrugRepository skillRepository = new DrugRepository()) {
-            return skillRepository.findByStockId(stockId);
-        }
-    }
+
 }

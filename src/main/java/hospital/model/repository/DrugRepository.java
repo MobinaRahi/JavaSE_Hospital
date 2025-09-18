@@ -23,13 +23,12 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     public void save (Drug drug) throws Exception {
         drug.setId(ConnectionProvider.getProvider().getNextId("drug_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into drugs (id, stock_id, name, price, quantity) values (?, ?, ?, ?, ?)"
+                "insert into drugs (id, name, price, quantity) values (?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, drug.getId());
-        preparedStatement.setInt(2, drug.getDrugStock().getId());
-        preparedStatement.setString(3, drug.getName());
-        preparedStatement.setDouble(4, drug.getPrice());
-        preparedStatement.setInt(5, drug.getQuantity());
+        preparedStatement.setString(2, drug.getName());
+        preparedStatement.setDouble(3, drug.getPrice());
+        preparedStatement.setInt(4, drug.getQuantity());
         preparedStatement.execute();
     }
 
@@ -99,21 +98,6 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
         return drugList;
     }
 
-    public List<Drug> findByStockId(int stockId) throws Exception {
-        List<Drug> drugList = new ArrayList<>();
-
-        preparedStatement = connection.prepareStatement(
-                "select * from drugs where stock_id=?"
-        );
-        preparedStatement.setInt(1, stockId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            Drug drug = drugMapper.drugMapper(resultSet);
-            drugList.add(drug);
-        }
-        return drugList;
-    }
 
 
     @Override

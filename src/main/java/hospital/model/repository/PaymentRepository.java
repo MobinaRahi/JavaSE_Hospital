@@ -2,7 +2,7 @@ package hospital.model.repository;
 
 
 
-import hospital.model.entity.Patient;
+import hospital.model.entity.Payable;
 import hospital.model.entity.Payment;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.PaymentMapper;
@@ -24,27 +24,25 @@ public class PaymentRepository implements Repository<Payment, Integer>,AutoClose
     public void save (Payment payment) throws Exception {
         payment.setId(ConnectionProvider.getProvider().getNextId("payment_seq"));
         preparedStatement = connection.prepareStatement(
-            "insert into payments (id,pay_type,pay_date,price,doctor_id,patient_id) values (?,?,?,?,?,?)"
+            "insert into payments (id,pay_type,pay_date_time,price,payable) values (?,?,?,?,?)"
     );
         preparedStatement.setInt(1, payment.getId());
         preparedStatement.setString(2,payment.getPayType().name());
-        preparedStatement.setDate(3, Date.valueOf(payment.getPayDate()));
-        preparedStatement.setInt(4, payment.getDoctor().getPrice());
-        preparedStatement.setInt(5, payment.getDoctor().getId());
-        preparedStatement.setInt(6, payment.getPatient().getId());
+        preparedStatement.setTimestamp(3,Timestamp.valueOf(payment.getPayDateTime()));
+        preparedStatement.setFloat(4,payment.getPrice());
+        preparedStatement.setObject(5,payment.getPayable());
         preparedStatement.execute();
     }
 
     @Override
     public void edit (Payment payment) throws Exception {
         preparedStatement = connection.prepareStatement(
-        "update payments set pay_type=?,pay_date=?,price=?,doctor_id=?,patient_id=? where id=?"
+        "update payments set pay_type=?,pay_date_time=?,price=?,payable=? where id=?"
    );
         preparedStatement.setString(1, payment.getPayType().name());
-        preparedStatement.setDate(2, Date.valueOf(payment.getPayDate()));
-        preparedStatement.setInt(3, payment.getDoctor().getPrice());
-        preparedStatement.setInt(4, payment.getDoctor().getId());
-        preparedStatement.setInt(5, payment.getPatient().getId());
+        preparedStatement.setTimestamp(2, Timestamp.valueOf(payment.getPayDateTime()));
+        preparedStatement.setFloat(3,payment.getPrice());
+        preparedStatement.setObject(4,payment.getPayable());
         preparedStatement.setInt(4, payment.getId());
         preparedStatement.execute();
 
@@ -62,7 +60,7 @@ public class PaymentRepository implements Repository<Payment, Integer>,AutoClose
     @Override
     public List<Payment> findAll ( ) throws Exception {
         List<Payment> paymentList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from payments order by pay_type, pay_date");
+        preparedStatement = connection.prepareStatement("select * from payments order by pay_type, pay_date_time");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Payment payment = paymentMapper.paymentMapper(resultSet);
@@ -82,17 +80,17 @@ public class PaymentRepository implements Repository<Payment, Integer>,AutoClose
         }
         return payment;
     }
-    public List<Payment> findByPatient (Patient patient) throws Exception {
-        List<Payment> paymentList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from payments where patient_id=?");
-        preparedStatement.setInt(1, patient.getId());
+    public Payment findByPayable (Payable payable) throws Exception {
+        Payment payment = null;
+        preparedStatement = connection.prepareStatement("select * from payments where payable=?");
+        preparedStatement.setObject(1, payable);
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            Payment payment = paymentMapper.paymentMapper(resultSet);
-            paymentList.add(payment);
+        if (resultSet.next()) {
+            payment = paymentMapper.paymentMapper(resultSet);
         }
-        return paymentList;
+        return payment;
     }
+
 
     @Override
     public void close ( ) throws Exception {
