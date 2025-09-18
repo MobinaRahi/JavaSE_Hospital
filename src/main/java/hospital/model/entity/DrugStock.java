@@ -34,12 +34,6 @@ public class DrugStock {
             drugCount += d.getQuantity();
         }
     }
-    public void removeDrugQuantity(Drug drug, int amount) {
-        if (drugList.contains(drug) && drug.getQuantity() >= amount) {
-            drug.setQuantity(drug.getQuantity() - amount);
-            updateDrugCount();
-        }
-    }
 
     @Override
     public String toString() {
