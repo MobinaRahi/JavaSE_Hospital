@@ -13,6 +13,7 @@ public class PrescriptionMapper {
                 .id(resultSet.getInt("id"))
                 .visit(VisitService.getService().findById(resultSet.getInt("visit_id")))
                 .payment(PaymentService.getService().findById(resultSet.getInt("payment_id")))
+                .price(resultSet.getInt("price"))
                 .build();
     }
 }

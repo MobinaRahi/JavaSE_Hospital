@@ -82,6 +82,34 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
         return doctor;
     }
 
+    public List<Doctor> findByUserId(String userId) throws Exception {
+        List<Doctor> doctorList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from users where user_id=?"
+        );
+        preparedStatement.setString(1, userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Doctor doctor = doctorMapper.doctorMapper(resultSet);
+            doctorList.add(doctor);
+        }
+        return doctorList;
+    }
+
+    public List<Doctor>  findBySpecialty(String specialty) throws Exception {
+        List<Doctor> doctorList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from doctors where specialty=?"
+        );
+        preparedStatement.setString(1, specialty);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Doctor doctor = doctorMapper.doctorMapper(resultSet);
+            doctorList.add(doctor);
+        }
+        return doctorList;
+    }
+
     @Override
     public void close() throws Exception {
         preparedStatement.close();

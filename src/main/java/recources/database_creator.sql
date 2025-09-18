@@ -56,18 +56,6 @@ create sequence payment_seq start with 1 increment by 1;
 --
 
 
-create table drugs_stock
-(
-    id          number primary key,
-    drug_id number,
-    drug_count  number    default 0,
-    last_update timestamp default systimestamp,
-    constraint fk_drug_stock_drug foreign key (drug_id) references drugs (id)
-);
-create sequence drug_stock_seq start with 1 increment by 1;
---
-
-
 create table patients
 (
     id      number primary key,
@@ -86,8 +74,8 @@ create table medicals
     description nvarchar2(20) not null,
     duration    number        not null,
     doctor_id   number        not null,
-    payment_id  number        not null,
-    constraint fk_medical_payment FOREIGN KEY (payment_id) references payments (id)
+    price       number        not null,
+    constraint fk_medical_doctor FOREIGN KEY (doctor_id) references doctors (id)
 );
 
 create sequence medical_seq start with 1 increment by 1;
@@ -114,9 +102,12 @@ create table visits
     doctor_id  number,
     patient_id number,
     payment_id number,
+    time_shift_id  number,
+    price      number not null ,
     constraint fk_visit_doctor FOREIGN KEY (doctor_id) references doctors (id),
     constraint fk_visit_patient FOREIGN KEY (patient_id) references patients (id),
-    constraint fk_visit_payment FOREIGN KEY (payment_id) references payments (id)
+    constraint fk_visit_payment FOREIGN KEY (payment_id) references payments (id),
+    constraint fk_visit_time_shift FOREIGN KEY (time_shift_id) references time_shifts (id)
 );
 
 create sequence visit_seq start with 1 increment by 1;
@@ -128,6 +119,7 @@ create table prescriptions
     id          number primary key,
     visit_id    number,
     payment_id  number,
+    price       number,
     constraint fk_prescription_visit FOREIGN KEY (visit_id) references visits (id),
     constraint fk_prescription_payment FOREIGN KEY (payment_id) references payments (id)
 );
@@ -146,4 +138,15 @@ create table drugs
 create sequence drug_seq start with 1 increment by 1;
 --
 
+
+create table drugs_stock
+(
+    id          number primary key,
+    drug_id number,
+    drug_count  number    default 0,
+    last_update timestamp default systimestamp,
+    constraint fk_drug_stock_drug foreign key (drug_id) references drugs (id)
+);
+create sequence drug_stock_seq start with 1 increment by 1;
+--
 
