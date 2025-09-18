@@ -15,7 +15,8 @@ public class MedicalMapper {
                 .title(resultSet.getString("title"))
                 .description(resultSet.getString("description"))
                 .doctor(DoctorService.getService().findById(resultSet.getInt("doctor_id")))
-                .payment(PaymentService.getService().findById(resultSet.getInt("payment_id")))
+                .duration(resultSet.getInt("duration"))
+                .price(resultSet.getInt("price"))
                 .build();
 
     }

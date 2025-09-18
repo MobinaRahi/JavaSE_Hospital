@@ -2,13 +2,11 @@ package hospital.model.entity;
 
 import com.google.gson.Gson;
 import hospital.model.entity.enums.Specialty;
-import hospital.model.entity.enums.VisitPrice;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
 
 @SuperBuilder
 @NoArgsConstructor
