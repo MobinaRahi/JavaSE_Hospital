@@ -26,11 +26,13 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
     public void save(Visit visit) throws Exception {
         visit.setId(ConnectionProvider.getProvider().getNextId("visit_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into visits (id,doctor_id,patient_id,payment_id)values(visit_seq.nextval,?,?,?)"
+                "insert into visits (id,doctor_id,patient_id,time_shift_id,payment_id,price)values(visit_seq.nextval,?,?,?,?,?)"
         );
         preparedStatement.setInt(1, visit.getDoctor().getId());
         preparedStatement.setInt(2, visit.getPatient().getId());
-        preparedStatement.setInt(3, visit.getPayment().getId());
+        preparedStatement.setInt(3, visit.getTimeShift().getId());
+        preparedStatement.setInt(4, visit.getPayment().getId());
+        preparedStatement.setDouble(5, visit.getPrice());
         preparedStatement.execute();
         log.info("Visit save success.");
     }
@@ -38,12 +40,14 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
     @Override
     public void edit(Visit visit) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update visits set doctor_id=?,patient_id=?,payment_id=? where id=?"
+                "update visits set doctor_id=?,patient_id=?,time_shift_id=?,payment_id=?,price=? where id=?"
         );
         preparedStatement.setInt(1, visit.getDoctor().getId());
         preparedStatement.setInt(2, visit.getPatient().getId());
-        preparedStatement.setInt(3, visit.getPayment().getId());
-        preparedStatement.setInt(4, visit.getId());
+        preparedStatement.setInt(3, visit.getTimeShift().getId());
+        preparedStatement.setInt(4, visit.getPayment().getId());
+        preparedStatement.setDouble(5, visit.getPrice());
+        preparedStatement.setInt(6, visit.getId());
         preparedStatement.execute();
         log.info("Visit edite success.");
     }
