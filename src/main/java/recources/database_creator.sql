@@ -116,6 +116,7 @@ create table prescriptions
     id          number primary key,
     visit_id    number,
     payment_id  number,
+    price       number,
     constraint fk_prescription_visit FOREIGN KEY (visit_id) references visits (id),
     constraint fk_prescription_payment FOREIGN KEY (payment_id) references payments (id)
 );

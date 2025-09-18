@@ -1,6 +1,5 @@
 package hospital.model.repository;
 
-import hospital.model.entity.Payable;
 import hospital.model.entity.Visit;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.VisitMapper;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseable, Payable {
+public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseable {
     private final Connection connection;
     private PreparedStatement preparedStatement;
     private final VisitMapper visitMapper=new VisitMapper();
@@ -92,8 +91,4 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
         connection.close();
     }
 
-    @Override
-    public double getPrice() {
-        return 0;
-    }
 }
