@@ -96,6 +96,20 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
         return employees;
     }
 
+    public List<Employee> findByMemberName(String memberName) throws Exception {
+        List<Employee> employees = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from employee where member_name=?"
+        );
+        preparedStatement.setString(1, memberName);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next()){
+            Employee employee = employeeMapper.employeeMapper(resultSet);
+            employees.add(employee);
+        }
+        return employees;
+    }
+
     @Override
     public void close() throws Exception {
         preparedStatement.close();
