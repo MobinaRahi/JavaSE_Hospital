@@ -48,4 +48,10 @@ public class PatientService implements Service<Patient , Integer> {
             return patientRepository.findById(id);
         }
     }
+
+    public List<Patient> findByUserId(Integer userId) throws Exception {
+        try (PatientRepository patientRepository = new PatientRepository()) {
+            return patientRepository.findByUserId(userId);
+        }
+    }
 }
