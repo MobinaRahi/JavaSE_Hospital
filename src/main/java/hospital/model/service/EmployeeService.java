@@ -50,4 +50,10 @@ public class EmployeeService implements Service<Employee, Integer> {
             return employeeRepository.findById(id);
         }
     }
+
+    public List<Employee> findByUserId(Integer userId) throws Exception {
+        try(EmployeeRepository employeeRepository = new EmployeeRepository()) {
+            return employeeRepository.findByUserId(userId);
+        }
+    }
 }

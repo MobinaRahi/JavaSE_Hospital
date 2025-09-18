@@ -82,6 +82,20 @@ public class PatientRepository implements Repository<Patient, Integer>, AutoClos
         return patient;
     }
 
+    public List<Patient> findByUserId(Integer userId) throws Exception {
+        List<Patient> patientList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from Patients where user_id=?"
+        );
+        preparedStatement.setInt(1, userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Patient patient = patientMapper.patientMapper(resultSet);
+            patientList.add(patient);
+        }
+        return patientList;
+    }
+
     @Override
     public void close() throws Exception {
         preparedStatement.close();
