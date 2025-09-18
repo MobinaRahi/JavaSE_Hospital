@@ -1,6 +1,5 @@
 package hospital.model.repository;
 
-import hospital.model.entity.Payable;
 import hospital.model.entity.Prescription;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.PrescriptionMapper;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public class PrescriptionRepository implements Repository<Prescription, Integer>, AutoCloseable, Payable {
+public class PrescriptionRepository implements Repository<Prescription, Integer>, AutoCloseable{
 
     private final Connection connection;
     private PreparedStatement preparedStatement;
@@ -29,10 +28,11 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
     public void save(Prescription prescription) throws Exception {
         prescription.setId(ConnectionProvider.getProvider().getNextId("prescription_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into prescriptions (id,visit_id,payment_id)values (prescription_seq.nextval,?,?)"
+                "insert into prescriptions (id,visit_id,payment_id,price)values (prescription_seq.nextval,?,?,?)"
         );
         preparedStatement.setInt(1, prescription.getVisit().getId());
         preparedStatement.setInt(2, prescription.getPayment().getId());
+        preparedStatement.setDouble(3, prescription.getPrice());
         preparedStatement.execute();
         log.info("Prescription has been saved successfully");
     }
@@ -40,11 +40,12 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
     @Override
     public void edit(Prescription prescription) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update prescriptions set visit_id=?,payment_id=? where id=?"
+                "update prescriptions set visit_id=?,payment_id=?,price=? where id=?"
         );
         preparedStatement.setInt(1, prescription.getVisit().getId());
         preparedStatement.setInt(2, prescription.getPayment().getId());
-        preparedStatement.setInt(3, prescription.getId());
+        preparedStatement.setDouble(3, prescription.getPrice());
+        preparedStatement.setInt(4, prescription.getId());
         preparedStatement.execute();
         log.info("Prescription has been edited successfully");
     }
@@ -93,8 +94,4 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
         connection.close();
     }
 
-    @Override
-    public double getPrice() {
-        return 0;
-    }
 }
