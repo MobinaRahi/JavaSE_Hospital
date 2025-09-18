@@ -13,10 +13,9 @@ import lombok.experimental.SuperBuilder;
 
 
 public class Patient {
-private int id;
-private User user;
-private Visit visit;
-private Prescription prescription;
+    private int id;
+    private User user;
+
 
     @Override
     public String toString() {

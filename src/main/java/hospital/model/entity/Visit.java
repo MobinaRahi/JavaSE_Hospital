@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.util.List;
 
 @SuperBuilder
@@ -13,12 +14,13 @@ import java.util.List;
 @Setter
 @Getter
 
-public class Visit {
+public class Visit implements Payable{
     private int id;
     private Doctor doctor;
     private Patient patient;
-    private List<TimeShift> timeShiftList;
+    private TimeShift timeShift;
     private Payment payment;
+    private float price;
 
     public String toString() {
         Gson gson = new Gson();

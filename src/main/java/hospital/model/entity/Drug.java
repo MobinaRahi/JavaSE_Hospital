@@ -16,7 +16,7 @@ public class Drug {
     private String name;
     private double price;
     private int quantity;
-    private DrugStock drugStock;
+//    private DrugStock drugStock;
 
 
     @Override

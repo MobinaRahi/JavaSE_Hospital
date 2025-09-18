@@ -21,7 +21,7 @@ public class Medical {
     private String description;
     private Doctor doctor;
     private float duration;
-    private Payment payment;
+    private float price;
 
     public String toString() {
         Gson gson = new Gson();

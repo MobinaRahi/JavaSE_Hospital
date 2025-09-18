@@ -16,24 +16,8 @@ import java.util.List;
 
 public class DrugStock {
     private int id;
-    private List<Drug> drugList;
+    private Drug drug;
     private int drugCount;
-
-    public void addDrug (Drug drug) {
-        if (drugList == null) {
-            drugList = new ArrayList<>();
-        }
-        drugList.add(drug);
-        drug.setDrugStock(this);
-        updateDrugCount();
-    }
-
-    private void updateDrugCount ( ) {
-        drugCount = 0;
-        for (Drug d : drugList) {
-            drugCount += d.getQuantity();
-        }
-    }
 
     @Override
     public String toString() {

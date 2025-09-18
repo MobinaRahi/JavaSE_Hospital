@@ -18,8 +18,6 @@ import java.util.List;
 public class Doctor {
     private int id;
     private Specialty specialty;
-    private List<Medical>  medicalList;
-    private List<TimeShift> timeShiftList;
     private int price;
 
     @Override
