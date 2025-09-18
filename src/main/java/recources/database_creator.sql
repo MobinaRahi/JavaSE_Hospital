@@ -19,8 +19,10 @@ create sequence user_seq start with 1 increment by 1;
 create table doctors
 (
     id        number primary key,
+    user_id    number,
     specialty nvarchar2(20) not null,
-    price     number
+    price     number,
+    constraint fk_doctor_user FOREIGN KEY (user_id) references users (id)
 );
 
 create sequence doctor_seq start with 1 increment by 1;
@@ -29,7 +31,7 @@ create sequence doctor_seq start with 1 increment by 1;
 
 create table employees
 (
-    membername nvarchar2(20) not null,
+    member_name nvarchar2(20) not null,
     id         number primary key,
     user_id    number,
     start_date date          not null,
@@ -45,10 +47,10 @@ create table payments
 (
     id       number primary key,
     pay_type nvarchar2(20) default 'CASH',
-    pay_date date   not null,
+    pay_date_time date   not null,
     price    number not null,
-    doctor_id number,
-    patient_id number
+    payable number not null
+
 );
 create sequence payment_seq start with 1 increment by 1;
 --
@@ -57,8 +59,10 @@ create sequence payment_seq start with 1 increment by 1;
 create table drugs_stock
 (
     id          number primary key,
+    drug_id number,
     drug_count  number    default 0,
-    last_update timestamp default systimestamp
+    last_update timestamp default systimestamp,
+    constraint fk_drug_stock_drug foreign key (drug_id) references drugs (id)
 );
 create sequence drug_stock_seq start with 1 increment by 1;
 --
@@ -135,11 +139,9 @@ create sequence prescription_seq start with 1 increment by 1;
 create table drugs
 (
     id       number primary key,
-    stock_id number,
     name     nvarchar2(100) not null,
     price    number,
-    quantity number         not null,
-    constraint fk_drug_drug_stock foreign key (stock_id) references drugs_stock (id)
+    quantity number         not null
 );
 create sequence drug_seq start with 1 increment by 1;
 --
