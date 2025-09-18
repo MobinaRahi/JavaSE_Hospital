@@ -56,18 +56,6 @@ create sequence payment_seq start with 1 increment by 1;
 --
 
 
-create table drugs_stock
-(
-    id          number primary key,
-    drug_id number,
-    drug_count  number    default 0,
-    last_update timestamp default systimestamp,
-    constraint fk_drug_stock_drug foreign key (drug_id) references drugs (id)
-);
-create sequence drug_stock_seq start with 1 increment by 1;
---
-
-
 create table patients
 (
     id      number primary key,
@@ -86,8 +74,8 @@ create table medicals
     description nvarchar2(20) not null,
     duration    number        not null,
     doctor_id   number        not null,
-    payment_id  number        not null,
-    constraint fk_medical_payment FOREIGN KEY (payment_id) references payments (id)
+    price       number        not null,
+    constraint fk_medical_doctor FOREIGN KEY (doctor_id) references doctors (id)
 );
 
 create sequence medical_seq start with 1 increment by 1;
@@ -146,4 +134,15 @@ create table drugs
 create sequence drug_seq start with 1 increment by 1;
 --
 
+
+create table drugs_stock
+(
+    id          number primary key,
+    drug_id number,
+    drug_count  number    default 0,
+    last_update timestamp default systimestamp,
+    constraint fk_drug_stock_drug foreign key (drug_id) references drugs (id)
+);
+create sequence drug_stock_seq start with 1 increment by 1;
+--
 
