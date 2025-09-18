@@ -6,6 +6,7 @@ import hospital.model.entity.enums.Specialty;
 import hospital.model.entity.enums.VisitPrice;
 import hospital.model.service.DoctorService;
 import hospital.model.service.MedicalService;
+import hospital.model.service.PatientService;
 import hospital.model.service.PaymentService;
 import hospital.model.tools.MedicalMapper;
 
@@ -16,23 +17,23 @@ public class MedicalTest {
 //        Doctor doctor =
 //                Doctor
 //                        .builder()
-//                        .specialty(Specialty.dentist)
+//                        .specialty(Specialty.dermatologist)
 //                        .price(VisitPrice.VISIT2.getPrice())
 //                        .build();
 //
 //        DoctorService.getService().save(doctor);
 
-//        Payment payment=
-//                Payment
-//                        .builder()
-//                        .payType(PayType.CARD)
-//                        .payDate(LocalDate.now())
-//                        .doctor(DoctorService.getService().findById(2))
-//                        .price(DoctorService.getService().findById(2).getPrice())
-//                          .patient(PaymentService.getService().findById(2).getPatient())
-//                        .build();
-//
-//        PaymentService.getService().save(payment);
+        Payment payment=
+                Payment
+                        .builder()
+                        .payType(PayType.CASH)
+                        .payDate(LocalDate.now())
+                        .price(DoctorService.getService().findById(2).getPrice())
+                        .doctor(DoctorService.getService().findById(2))
+                          .patient(PatientService.getService().findById(2))
+                        .build();
+
+        PaymentService.getService().save(payment);
 
 //        Medical medical =
 //                Medical
