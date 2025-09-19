@@ -132,9 +132,12 @@ public class Main {
 
 //        DoctorService.getService().findAll().forEach(System.out::println);
 
-        String name = "test";
-        String family = "test";
-        System.out.println(DoctorService.getService().findByNameAndFamily(name, family));
+//        String name = "test";
+//        String family = "test";
+//        System.out.println(DoctorService.getService().findByNameAndFamily(name, family));
+//        System.out.println(DoctorService.getService().findBySpecialty("dermatologist"));
+
+
 
 
     }
