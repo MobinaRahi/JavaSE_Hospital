@@ -26,11 +26,13 @@ public class CashDesk {
             }
         }
 
+
         @Override
         public String toString() {
             Gson gson = new Gson();
             return gson.toJson(this);
         }
+
     }
 
 
