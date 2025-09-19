@@ -168,7 +168,6 @@ CREATE SEQUENCE bank_seq START WITH 1 INCREMENT BY 1;
 
 create table prescriptions_drugs
 (
-    id               number primary key,
     prescription_id  number not null,
     drug_id          number not null,
     constraint fk_prescriptions_drug_prescription foreign key (prescription_id) references prescriptions (id),

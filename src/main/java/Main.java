@@ -1,4 +1,5 @@
 import hospital.model.entity.*;
+import hospital.model.repository.PrescriptionRepository;
 import hospital.model.service.*;
 
 import java.time.LocalDateTime;
@@ -214,19 +215,20 @@ public class Main {
 //        DrugService.getService().save(drug3);
 //        DrugService.getService().save(drug4);
 
-        List<Drug>drugList=new ArrayList<>();
-        drugList.add(drug1);
-        drugList.add(drug2);
-        drugList.add(drug3);
-        drugList.add(drug4);
+        System.out.println(drug4);
 
+//
+//        Prescription prescription=
+//                Prescription
+//                        .builder()
+//                        .visit(VisitService.getService().findById(3))
+//                        .price(12500)
+//                        .build();
+//
+//        PrescriptionService.getService().save(prescription);
 
-        Prescription prescription=
-                Prescription
-                        .builder()
-                        .visit(VisitService.getService().findById(3))
-                        .price(12500)
-                        .build();
+//       PrescriptionService.prescriptionsDrugs(drugList,1);
+
 
 
 

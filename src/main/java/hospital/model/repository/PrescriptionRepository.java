@@ -1,5 +1,6 @@
 package hospital.model.repository;
 
+import hospital.model.entity.Drug;
 import hospital.model.entity.Prescription;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.PrescriptionMapper;
@@ -86,6 +87,7 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
         }
         return prescription;
     }
+
 
     @Override
     public void close() throws Exception {
