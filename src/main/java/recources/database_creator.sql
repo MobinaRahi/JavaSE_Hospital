@@ -101,12 +101,10 @@ create table visits
     id         number primary key,
     doctor_id  number,
     patient_id number,
-    payment_id number,
     time_shift_id  number,
     price      number not null ,
     constraint fk_visit_doctor FOREIGN KEY (doctor_id) references doctors (id),
     constraint fk_visit_patient FOREIGN KEY (patient_id) references patients (id),
-    constraint fk_visit_payment FOREIGN KEY (payment_id) references payments (id),
     constraint fk_visit_time_shift FOREIGN KEY (time_shift_id) references time_shifts (id)
 );
 
