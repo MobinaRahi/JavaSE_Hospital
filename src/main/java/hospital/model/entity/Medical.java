@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -20,7 +21,7 @@ public class Medical {
     private String title;
     private String description;
     private Doctor doctor;
-    private float duration;
+    private LocalTime duration;
     private float price;
 
     public String toString() {

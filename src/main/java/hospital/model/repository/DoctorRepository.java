@@ -122,6 +122,8 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
     }
 
 
+
+
     @Override
     public void close() throws Exception {
         if (preparedStatement != null && !preparedStatement.isClosed()) {

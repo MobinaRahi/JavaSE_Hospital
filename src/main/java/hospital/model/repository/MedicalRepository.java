@@ -5,10 +5,7 @@ import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.MedicalMapper;
 import lombok.extern.log4j.Log4j2;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class MedicalRepository implements Repository<Medical, Integer>, AutoClos
         preparedStatement.setInt(1, medical.getId());
         preparedStatement.setString(2, medical.getTitle());
         preparedStatement.setString(3, medical.getDescription());
-        preparedStatement.setFloat(4,medical.getDuration());
+        preparedStatement.setTime(4, Time.valueOf(medical.getDuration()));
         preparedStatement.setInt(5,medical.getDoctor().getId());
         preparedStatement.setFloat(6, medical.getPrice());
         preparedStatement.execute();
@@ -47,7 +44,7 @@ public class MedicalRepository implements Repository<Medical, Integer>, AutoClos
         );
         preparedStatement.setString(1, medical.getTitle());
         preparedStatement.setString(2, medical.getDescription());
-        preparedStatement.setFloat(3,medical.getDuration());
+        preparedStatement.setTime(3, Time.valueOf(medical.getDuration()));
         preparedStatement.setInt(4,medical.getDoctor().getId());
         preparedStatement.setFloat(5, medical.getPrice());
         preparedStatement.setInt(6, medical.getId());

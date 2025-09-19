@@ -71,7 +71,7 @@ create table medicals
     id          number primary key,
     title       nvarchar2(20) not null,
     description nvarchar2(20) not null,
-    duration    number        not null,
+    duration    date         not null,
     doctor_id   number        not null,
     price       number        not null,
     constraint fk_medical_doctor FOREIGN KEY (doctor_id) references doctors (id)
