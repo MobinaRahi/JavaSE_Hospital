@@ -210,12 +210,18 @@ public class Main {
                         .quantity(100)
                         .build();
 
-//        DrugService.getService().save(drug1);
-//        DrugService.getService().save(drug2);
-//        DrugService.getService().save(drug3);
-//        DrugService.getService().save(drug4);
+        DrugService.getService().save(drug1);
+        DrugService.getService().save(drug2);
+        DrugService.getService().save(drug3);
+        DrugService.getService().save(drug4);
 
-        System.out.println(drug4);
+        List<Drug>drugList=new ArrayList<>();
+        drugList.add(drug1);
+        drugList.add(drug2);
+        drugList.add(drug3);
+        drugList.add(drug4);
+
+
 
 //
 //        Prescription prescription=
@@ -227,7 +233,7 @@ public class Main {
 //
 //        PrescriptionService.getService().save(prescription);
 
-//       PrescriptionService.prescriptionsDrugs(drugList,1);
+       PrescriptionService.prescriptionsDrugs(drugList,1);
 
 
 

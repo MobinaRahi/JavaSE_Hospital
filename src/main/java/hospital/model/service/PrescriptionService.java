@@ -65,9 +65,8 @@ public class PrescriptionService implements Service<Prescription, Integer> {
     }
 
     public static void prescriptionsDrugs(List<Drug>drugList,int prescription_id) throws SQLException {
-        
+        Connection connection = ConnectionProvider.getProvider().getOracleConnection();
         for (Drug drug : drugList) {
-            Connection connection = ConnectionProvider.getProvider().getOracleConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "insert into prescriptions_drugs (prescription_id,drug_id)values (?,?)"
             );
