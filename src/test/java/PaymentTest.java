@@ -1,5 +1,16 @@
+import hospital.model.entity.Payable;
+import hospital.model.entity.Payment;
+import hospital.model.entity.enums.PayFor;
+import hospital.model.entity.enums.PayType;
+import hospital.model.service.DoctorService;
+import hospital.model.service.PaymentService;
+import hospital.model.service.VisitService;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class PaymentTest {
-    public static void main (String[] args) {
+    public static void main (String[] args) throws Exception {
 //        Doctor doctor =
 //                Doctor
 //                        .builder()
@@ -34,17 +45,17 @@ public class PaymentTest {
 //
 //        PatientService.getService().save(patient);
 
-//        Payment payment=
-//                Payment
-//                        .builder()
-//                        .payType(PayType.CASH)
-//                        .payDate(LocalDate.now())
-//                        .doctor(DoctorService.getService().findById(2))
-//                        .price(DoctorService.getService().findById(2).getPrice())
-//                        .patient(PatientService.getService().findById(2))
-//                        .build();
+        Payment payment=
+                Payment
+                        .builder()
+                        .payType(PayType.CASH)
+                        .payDateTime(LocalDateTime.now())
+                        .price(1500)
+                        .payFor(PayFor.Visit)
+                        .payable(VisitService.getService().findById(3))
+                        .build();
 
-//        PaymentService.getService().save(payment);
+        PaymentService.getService().save(payment);
 
         //        Service test pass
 

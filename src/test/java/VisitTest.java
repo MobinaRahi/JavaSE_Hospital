@@ -54,19 +54,20 @@ public class VisitTest {
 
 //        PaymentService.getService().save(payment);
 
-//        Visit visit=
-//                Visit
-//                        .builder()
-//                        .id(4)
-//                        .doctor(DoctorService.getService().findById(4))
-//                        .patient(PatientService.getService().findById(1))
-//                        .timeShift(TimeShiftService.getService().findById(2))
-//                        .build();
+        Visit visit=
+                Visit
+                        .builder()
+                        .id(4)
+                        .doctor(DoctorService.getService().findById(4))
+                        .patient(PatientService.getService().findById(1))
+                        .timeShift(TimeShiftService.getService().findById(1))
+                        .price(1500)
+                        .build();
 
 //        Service test pass
 
 //        test passed
-//        VisitService.getService().save(visit);
+        VisitService.getService().save(visit);
 
 //        test passed
 //        VisitService.getService().edit(visit);
