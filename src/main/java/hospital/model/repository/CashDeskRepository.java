@@ -1,5 +1,6 @@
 package hospital.model.repository;
 
+import hospital.model.entity.Bank;
 import hospital.model.entity.CashDesk;
 import hospital.model.tools.CashDeskMapper;
 import hospital.model.tools.ConnectionProvider;
@@ -22,11 +23,11 @@ public class CashDeskRepository implements Repository<CashDesk, Integer>,AutoClo
     public void save (CashDesk cashDesk) throws Exception {
         cashDesk.setId(ConnectionProvider.getProvider().getNextId("cashDesk_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into cashDesks (id, cashBalance,bankBalance ) values (?, ?, ?)"
+                "insert into cash_Desks (id, bank_id,payType ) values (?, ?, ?)"
         );
         preparedStatement.setInt(1, cashDesk.getId());
-        preparedStatement.setFloat(2, cashDesk.getCashBalance());
-        preparedStatement.setFloat(2, cashDesk.getBankBalance());
+        preparedStatement.setInt(3,cashDesk.getBank().getId() );
+        preparedStatement.setString(2,cashDesk.getPayType().name());
         preparedStatement.execute();
     }
 
@@ -34,11 +35,11 @@ public class CashDeskRepository implements Repository<CashDesk, Integer>,AutoClo
     @Override
     public void edit (CashDesk cashDesk) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update cashDesks set id = ?, cashBalance = ?, qubankBalanceantity = ?"
+                "update cash_Desks set id = ?,"
         );
         preparedStatement.setInt(1, cashDesk.getId());
-        preparedStatement.setFloat(2, cashDesk.getCashBalance());
-        preparedStatement.setFloat(3, cashDesk.getCashBalance());
+        preparedStatement.setInt(3,cashDesk.getBank().getId() );
+        preparedStatement.setString(2,cashDesk.getPayType().name());
         preparedStatement.execute();
     }
 
@@ -47,7 +48,7 @@ public class CashDeskRepository implements Repository<CashDesk, Integer>,AutoClo
     @Override
     public void delete (Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from cashDecks where id = ?"
+                "delete from cash_Decks where id = ?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -57,7 +58,7 @@ public class CashDeskRepository implements Repository<CashDesk, Integer>,AutoClo
     @Override
     public List<CashDesk> findAll ( ) throws Exception {
         List<CashDesk> cashDeskArrayList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from cashDecks order by id,cashBalance");
+        preparedStatement = connection.prepareStatement("select * from cash_Decks order by id,bank_id");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             CashDesk cashDesk= cashDeskMapper.cashDeskMapper(resultSet);
@@ -69,7 +70,7 @@ public class CashDeskRepository implements Repository<CashDesk, Integer>,AutoClo
     @Override
     public CashDesk findById (Integer id) throws Exception {
         CashDesk cashDesk = null;
-        preparedStatement = connection.prepareStatement("select * from cashDesks where id = ?");
+        preparedStatement = connection.prepareStatement("select * from cash_Desks where id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
