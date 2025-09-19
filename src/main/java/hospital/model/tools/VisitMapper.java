@@ -16,7 +16,6 @@ public class VisitMapper {
                 .doctor(DoctorService.getService().findById(resultSet.getInt("doctor_id")))
                 .patient(PatientService.getService().findById(resultSet.getInt("patient_id")))
                 .timeShift(TimeShiftService.getService().findById(resultSet.getInt("time_shift_id")))
-                .payment(PaymentService.getService().findById(resultSet.getInt("payment_id")))
                 .price(resultSet.getInt("price"))
                 .build();
     }
