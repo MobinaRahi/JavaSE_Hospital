@@ -1,50 +1,62 @@
-import hospital.model.entity.Doctor;
-import hospital.model.entity.Medical;
-import hospital.model.entity.Payment;
+import hospital.model.entity.*;
 import hospital.model.entity.enums.PayType;
+import hospital.model.entity.enums.Role;
 import hospital.model.entity.enums.Specialty;
 import hospital.model.entity.enums.VisitPrice;
-import hospital.model.service.DoctorService;
-import hospital.model.service.MedicalService;
-import hospital.model.service.PatientService;
-import hospital.model.service.PaymentService;
+import hospital.model.service.*;
 import hospital.model.tools.MedicalMapper;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class MedicalTest {
     public static void main(String[] args) throws Exception {
+
+//        User user=
+//                User
+//                        .builder()
+//                        .name("test")
+//                        .family("test")
+//                        .password("test")
+//                        .birthDate(LocalDate.of(1980, 1, 1))
+//                        .role(Role.DOCTOR)
+//                        .status(true)
+//                        .username("test")
+//                        .nickname("test")
+//                        .locked(true)
+//                        .registerDate(LocalDate.now())
+//                        .build();
+//
+//        UserService.getService().save(user);
+
 //        Doctor doctor =
 //                Doctor
 //                        .builder()
+//                        .user(UserService.service.findById(2))
 //                        .specialty(Specialty.dermatologist)
 //                        .price(VisitPrice.VISIT2.getPrice())
 //                        .build();
 //
 //        DoctorService.getService().save(doctor);
 
-        Payment payment=
-                Payment
-                        .builder()
-                        .payType(PayType.CASH)
-                        .payDate(LocalDate.now())
-                        .price(DoctorService.getService().findById(2).getPrice())
-                        .doctor(DoctorService.getService().findById(2))
-                          .patient(PatientService.getService().findById(2))
-                        .build();
-
-        PaymentService.getService().save(payment);
-
-//        Medical medical =
-//                Medical
+//        Patient patient=
+//                Patient
 //                        .builder()
-//                        .id(3)
-//                        .title("test")
-//                        .description("test")
-//                        .duration(160)
-//                        .doctor(DoctorService.service.findById(22))
-//                        .payment(PaymentService.getService().findById(3))
+//                        .user(UserService.getService().findById(2))
 //                        .build();
+//
+//        PatientService.getService().save(patient);
+
+        Medical medical =
+                Medical
+                        .builder()
+                        .id(3)
+                        .title("test")
+                        .description("test")
+                        .duration(160)
+                        .doctor(DoctorService.service.findById(1))
+                        .price(20000)
+                        .build();
 
 
 //        Service test pass
@@ -65,7 +77,9 @@ public class MedicalTest {
 //        System.out.println(MedicalService.getService().findById(5));
 
 //        test passed
-//        System.out.println(MedicalService.getService().findMedicalByDoctorId(22));
+//        System.out.println(MedicalService.getService().findMedicalByDoctorId(1));
+
+
 
 
 
