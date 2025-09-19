@@ -26,10 +26,9 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
     public void save(Doctor doctor) throws Exception {
         doctor.setId(ConnectionProvider.getProvider().getNextId("doctor_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into doctors (id,user_id,specialty,price) values (?, ? ,?)"
+                "insert into doctors (id,user_id,specialty,price) values (doctor_seq.nextval,?, ? ,?)"
         );
-        preparedStatement.setInt(1, doctor.getId());
-        preparedStatement.setInt(2, doctor.getUser().getId());
+        preparedStatement.setInt(1, doctor.getUser().getId());
         preparedStatement.setString(2,doctor.getSpecialty().name());
         preparedStatement.setDouble(3, doctor.getPrice());
         preparedStatement.execute();
@@ -52,7 +51,7 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
                 "delete from doctors where id=?"
         );
         preparedStatement.setInt(1, id);
-        preparedStatement.executeUpdate();
+        preparedStatement.execute();
     }
 
     @Override
@@ -83,12 +82,12 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
         return doctor;
     }
 
-    public List<Doctor> findByUserId(String userId) throws Exception {
+    public List<Doctor> findByUserId(Integer userId) throws Exception {
         List<Doctor> doctorList = new ArrayList<>();
         preparedStatement = connection.prepareStatement(
-                "select * from users where user_id=?"
+                "select * from doctors where user_id=?"
         );
-        preparedStatement.setString(1, userId);
+        preparedStatement.setInt(1, userId);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Doctor doctor = doctorMapper.doctorMapper(resultSet);

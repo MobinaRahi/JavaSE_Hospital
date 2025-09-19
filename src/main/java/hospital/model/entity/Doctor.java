@@ -14,8 +14,8 @@ import lombok.experimental.SuperBuilder;
 @Setter
 
 public class Doctor {
-    private User user;
     private int id;
+    private User user;
     private Specialty specialty;
     private int price;
 

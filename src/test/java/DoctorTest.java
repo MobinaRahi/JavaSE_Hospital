@@ -1,15 +1,18 @@
-import hospital.model.entity.Patient;
+import hospital.model.entity.Doctor;
 import hospital.model.entity.User;
 import hospital.model.entity.enums.Role;
-import hospital.model.service.PatientService;
+import hospital.model.entity.enums.Specialty;
+import hospital.model.entity.enums.VisitPrice;
+import hospital.model.service.DoctorService;
 import hospital.model.service.UserService;
 
 import java.time.LocalDate;
 
-public class PatientTest {
-    public static void main(String[] args) throws Exception {
+import static hospital.model.entity.enums.Specialty.cardiologist;
 
-        User user =
+public class DoctorTest {
+    public static void main(String[] args) throws Exception {
+       /* User user =
                 User
                         .builder()
                         .name("sara")
@@ -22,32 +25,33 @@ public class PatientTest {
                         .locked(true)
                         .registerDate(LocalDate.of(2025, 8, 25))
                         .build();
-
-        Patient patient =
-                Patient
+*/
+        Doctor doctor =
+                Doctor
                         .builder()
                         .id(1)
                         .user(UserService.getService().findById(1))
+                        .specialty(cardiologist)
+                        .price(VisitPrice.VISIT2.getPrice())
                         .build();
-
+        //test passed
+        //DoctorService.getService().save(doctor);
 
         //test passed
-        //PatientService.getService().save(patient);
+        //DoctorService.getService().edit(doctor);
 
         //test passed
-        //PatientService.getService().edit(patient);
+        //DoctorService.getService().delete(12);
 
         //test passed
-        //PatientService.getService().delete(patient.getId());
+        //System.out.println(DoctorService.getService().findById(6));
 
         //test passed
-        //System.out.println(PatientService.getService().findById(3));
+        //System.out.println(DoctorService.getService().findAll());
 
         //test passed
-        //System.out.println(PatientService.getService().findAll());
+        //System.out.println(DoctorService.getService().findByUserId(1));
 
-        //test passed
-        //System.out.println(PatientService.getService().findByUserId(1));
-
+        System.out.println(DoctorService.getService().findBySpecialty("cardiologist"));
     }
 }

@@ -52,15 +52,15 @@ public class DoctorService implements Service<Doctor, Integer> {
         }
     }
 
-    public List<Doctor> findByUserId(String userId) throws Exception {
+    public List<Doctor> findByUserId(Integer userId) throws Exception {
         try (DoctorRepository doctorRepository = new DoctorRepository()) {
             return doctorRepository.findByUserId(userId);
         }
     }
 
-    public List<Doctor> findBySpecialtyId(String specialtyId) throws Exception {
+    public List<Doctor> findBySpecialty(String specialty) throws Exception {
         try (DoctorRepository doctorRepository = new DoctorRepository()) {
-            return doctorRepository.findBySpecialty(specialtyId);
+            return doctorRepository.findBySpecialty(specialty);
         }
     }
 }
