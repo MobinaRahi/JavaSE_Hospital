@@ -148,15 +148,23 @@ create sequence drug_stock_seq start with 1 increment by 1;
 --
 
 
-CREATE TABLE cash_desk
+CREATE TABLE cash_desks
 (
     id           NUMBER PRIMARY KEY,
-    cash_balance NUMBER DEFAULT 0,
-    bank_balance NUMBER DEFAULT 0
+    bank_id      number ,
+    payType      nvarchar2(20) default 'CASH',
+    constraint fk_bank_cash_desk foreign key (bank_id) references banks (id)
 );
 
 CREATE SEQUENCE cash_desk_seq START WITH 1 INCREMENT BY 1;
 
 --
 
+CREATE TABLE banks
+(
+    id    NUMBER PRIMARY KEY,
+    title NVARCHAR2(100) NOT NULL
+);
+
+CREATE SEQUENCE bank_seq START WITH 1 INCREMENT BY 1;
 
