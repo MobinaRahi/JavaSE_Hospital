@@ -62,7 +62,7 @@ public class MedicalTest {
 //        Service test pass
 
 //        test passed
-//        MedicalService.getService().save(medical);
+        MedicalService.getService().save(medical);
 
 //        test passed
 //        MedicalService.getService().edit(medical);
@@ -74,7 +74,7 @@ public class MedicalTest {
 //        System.out.println(MedicalService.getService().findAll());
 
 //        test passed
-//        System.out.println(MedicalService.getService().findById(5));
+//        System.out.println(MedicalService.getService().findById(4));
 
 //        test passed
 //        System.out.println(MedicalService.getService().findMedicalByDoctorId(1));

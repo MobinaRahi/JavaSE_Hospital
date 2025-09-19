@@ -25,12 +25,13 @@ public class TimeShiftRepository implements Repository<TimeShift, Integer>, Auto
     public void save(TimeShift timeShift) throws Exception {
         timeShift.setId(ConnectionProvider.getProvider().getNextId("time_shift_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into time_Shifts (id,doctor_id,medical_id,start_date_time,end_date_time)values(time_shift_seq.nextval,?,?,?,?) "
+                "insert into time_Shifts (id,doctor_id,medical_id,start_date_time,end_date_time)values(?,?,?,?,?) "
         );
-        preparedStatement.setInt(1, timeShift.getDoctor().getId());
-        preparedStatement.setInt(2, timeShift.getMedical().getId());
-        preparedStatement.setTimestamp(3, Timestamp.valueOf(timeShift.getStartDateTime()));
-        preparedStatement.setTimestamp(4, Timestamp.valueOf(timeShift.getEndDateTime()));
+        preparedStatement.setInt(1,timeShift.getId());
+        preparedStatement.setInt(2, timeShift.getDoctor().getId());
+        preparedStatement.setInt(3, timeShift.getMedical().getId());
+        preparedStatement.setTimestamp(4, Timestamp.valueOf(timeShift.getStartDateTime()));
+        preparedStatement.setTimestamp(5, Timestamp.valueOf(timeShift.getEndDateTime()));
         preparedStatement.execute();
         log.info("TimeShift save success.");
     }

@@ -1,5 +1,8 @@
 
+import hospital.model.entity.Doctor;
 import hospital.model.entity.Visit;
+import hospital.model.entity.enums.Specialty;
+import hospital.model.entity.enums.VisitPrice;
 import hospital.model.service.*;
 
 public class VisitTest {
@@ -8,6 +11,7 @@ public class VisitTest {
 //        Doctor doctor =
 //                Doctor
 //                        .builder()
+//                        .user(UserService.service.findById(2))
 //                        .specialty(Specialty.dentist)
 //                        .price(VisitPrice.VISIT2.getPrice())
 //                        .build();
@@ -23,7 +27,7 @@ public class VisitTest {
 //                        .role(Role.DOCTOR)
 //                        .status(true)
 //                        .username("test3")
-//                        .password("test")
+//                        .password("test4")
 //                        .nickname("test")
 //                        .locked(false)
 //                        .registerDate(LocalDate.now())
@@ -50,14 +54,14 @@ public class VisitTest {
 
 //        PaymentService.getService().save(payment);
 
-        Visit visit=
-                Visit
-                        .builder()
-                        .id(2)
-                        .doctor(DoctorService.getService().findById(1))
-                        .patient(PatientService.getService().findById(1))
-                        .timeShift(TimeShiftService.getService().findById(2))
-                        .build();
+//        Visit visit=
+//                Visit
+//                        .builder()
+//                        .id(4)
+//                        .doctor(DoctorService.getService().findById(4))
+//                        .patient(PatientService.getService().findById(1))
+//                        .timeShift(TimeShiftService.getService().findById(2))
+//                        .build();
 
 //        Service test pass
 
