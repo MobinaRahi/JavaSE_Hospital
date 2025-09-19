@@ -54,15 +54,15 @@ public class VisitTest {
                 Visit
                         .builder()
                         .id(2)
-                        .doctor(DoctorService.getService().findById(2))
-                        .patient(PatientService.getService().findById(2))
-                        .payment(PaymentService.getService().findById(3))
+                        .doctor(DoctorService.getService().findById(1))
+                        .patient(PatientService.getService().findById(1))
+                        .timeShift(TimeShiftService.getService().findById(2))
                         .build();
-        VisitService.getService().save(visit);
+
 //        Service test pass
 
 //        test passed
-//
+//        VisitService.getService().save(visit);
 
 //        test passed
 //        VisitService.getService().edit(visit);

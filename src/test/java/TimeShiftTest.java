@@ -22,8 +22,8 @@ public class TimeShiftTest {
                 TimeShift
                         .builder()
 //                        .id(2)
-                        .doctor(DoctorService.getService().findById(21))
-                        .medical(MedicalService.getService().findById(26))
+                        .doctor(DoctorService.getService().findById(1))
+                        .medical(MedicalService.getService().findById(3))
                         .startDateTime(LocalDateTime.of(2004, Month.JANUARY, 1, 11, 30, 0))
                         .endDateTime(LocalDateTime.of(2004, Month.JANUARY, 2, 11, 30, 0))
                         .build();
