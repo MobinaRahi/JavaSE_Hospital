@@ -1,6 +1,7 @@
 package hospital.model.entity;
 
 import com.google.gson.Gson;
+import hospital.model.entity.enums.PayType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,17 +15,11 @@ import lombok.experimental.SuperBuilder;
 public class CashDesk {
 
         private int id;
-        private float cashBalance;
-        private float bankBalance;
+        private Bank bank;
+        private PayType payType;
 
 
-        public void processPayment(Payment payment) {
-            if (payment.getPayType().name().equalsIgnoreCase("CASH")) {
-                cashBalance += payment.getPrice();
-            } else if (payment.getPayType().name().equalsIgnoreCase("CARD")) {
-                bankBalance += payment.getPrice();
-            }
-        }
+
 
 
         @Override
