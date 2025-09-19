@@ -2,6 +2,7 @@ package hospital.model.repository;
 
 
 import hospital.model.entity.Doctor;
+import hospital.model.service.DoctorService;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.DoctorMapper;
 import lombok.extern.log4j.Log4j2;
@@ -110,9 +111,25 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
         return doctorList;
     }
 
+    public List<Doctor> findByNameAndFamily(String name, String family) throws Exception {
+        List<Doctor> doctorList = new ArrayList<>();
+        for (Doctor doctor : DoctorService.getService().findAll()) {
+            if(doctor.getUser().getName().equals(name)&&doctor.getUser().getFamily().equals(family)){
+                doctorList.add(doctor);
+            }
+        }
+        return doctorList;
+    }
+
+
     @Override
     public void close() throws Exception {
-        preparedStatement.close();
-        connection.close();
+        if (preparedStatement != null && !preparedStatement.isClosed()) {
+            preparedStatement.close();
+        }
+        if (connection != null && !connection.isClosed()) {
+            connection.close();
+        }
     }
+
 }

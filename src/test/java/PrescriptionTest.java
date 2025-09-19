@@ -32,8 +32,8 @@ public class PrescriptionTest {
                 Prescription
                         .builder()
                         .id(2)
-                        .visit(VisitService.getService().findById(12))
-                        .payment(PaymentService.getService().findById(3))
+                        .visit(VisitService.getService().findById(4))
+                        .price(1500)
                         .build();
 
 //        Service test pass
