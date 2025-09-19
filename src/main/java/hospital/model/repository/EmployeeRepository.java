@@ -23,7 +23,7 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
     public void save(Employee employee) throws Exception {
         employee.setId(ConnectionProvider.getProvider().getNextId("employee_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into Employees (id,user_id,start_time,end_time) values(?,?,?,?)"
+                "insert into employees (id,user_id,start_time,end_time) values(?,?,?,?)"
         );
         preparedStatement.setInt(1, employee.getId());
         preparedStatement.setInt(2, employee.getUser().getId());
@@ -35,9 +35,8 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
     @Override
     public void edit(Employee employee) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update employees set user_id?,start_time=?,end_time=? where id=?"
+                "update employees set start_time=?,end_time=? where id=?"
         );
-        preparedStatement.setInt(1, employee.getUser().getId());
         preparedStatement.setTime(1, Time.valueOf(employee.getStartTime()));
         preparedStatement.setTime(2,Time.valueOf(employee.getEndTime()));
         preparedStatement.setInt(3, employee.getId());
