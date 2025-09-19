@@ -46,23 +46,23 @@ public class MedicalTest {
 //                        .build();
 //
 //        PatientService.getService().save(patient);
-
-        Medical medical =
-                Medical
-                        .builder()
-                        .id(3)
-                        .title("test")
-                        .description("test")
-                        .duration(160)
-                        .doctor(DoctorService.service.findById(1))
-                        .price(20000)
-                        .build();
+//
+//        Medical medical =
+//                Medical
+//                        .builder()
+//                        .id(3)
+//                        .title("test")
+//                        .description("test")
+//                        .duration(160)
+//                        .doctor(DoctorService.service.findById(1))
+//                        .price(20000)
+//                        .build();
 
 
 //        Service test pass
 
 //        test passed
-        MedicalService.getService().save(medical);
+//        MedicalService.getService().save(medical);
 
 //        test passed
 //        MedicalService.getService().edit(medical);

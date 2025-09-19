@@ -36,7 +36,7 @@ public class EmployeeTest {
 
 
         //test passed
-        //EmployeeService.getService().save(employee);
+        EmployeeService.getService().save(employee);
 
         //test passed
         //EmployeeService.getService().edit(employee);

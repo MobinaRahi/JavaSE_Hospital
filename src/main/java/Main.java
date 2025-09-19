@@ -1,18 +1,13 @@
-package hospital.model.tools;
-
 import hospital.model.entity.*;
-import hospital.model.entity.enums.Role;
-import hospital.model.entity.enums.Specialty;
-import hospital.model.entity.enums.VisitPrice;
 import hospital.model.service.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         //create user for SignUp
 
@@ -107,17 +102,17 @@ public class Main {
 //
 //        DoctorService.getService().save(doctor2);
 
-        Medical medical =
-                Medical
-                        .builder()
-                        .title("Medical 1")
-                        .description("Medical 1")
-                        .doctor(DoctorService.getService().findById(2))
-                        .duration(LocalTime.of(0,30))
-                        .price(1500)
-                        .build();
-
-        MedicalService.getService().save(medical);
+//        Medical medical =
+//                Medical
+//                        .builder()
+//                        .title("Medical 1")
+//                        .description("Medical 1")
+//                        .doctor(DoctorService.getService().findById(2))
+//                        .duration(30)
+//                        .price(1500)
+//                        .build();
+//
+//        MedicalService.getService().save(medical);
 
 
         //test signIn
@@ -147,18 +142,25 @@ public class Main {
 //        System.out.println(DoctorService.getService().findByNameAndFamily(name, family));
 //        System.out.println(DoctorService.getService().findBySpecialty("dermatologist"));
 
-//        TimeShift timeShift =
-//                TimeShift
-//                        .builder()
-//                        .doctor(DoctorService.getService().findById(2))
-//                        .medical(MedicalService.getService().findById(1))
-//                        .startDateTime(LocalDateTime.of(2004, Month.JANUARY, 1, 11, 30, 0))
-//                        .endDateTime(LocalDateTime.of(2004, Month.JANUARY, 2, 11, 30, 0))
-//                        .build();
-//
+        TimeShift timeShift =
+                TimeShift
+                        .builder()
+                        .doctor(DoctorService.getService().findById(2))
+                        .medical(MedicalService.getService().findById(1))
+                        .startDateTime(LocalDateTime.of(2004, Month.JANUARY, 1, 11, 30, 0))
+                        .endDateTime(LocalDateTime.of(2004, Month.JANUARY, 2, 11, 30, 0))
+                        .build();
+
 //        TimeShiftService.getService().save(timeShift);
 
-
+        for (TimeShift generateTimeShift : TimeShiftService.generateTimeShifts(
+                DoctorService.getService().findById(2),
+                MedicalService.getService().findById(5),
+                timeShift.getStartDateTime(),
+                timeShift.getEndDateTime()))
+        {
+            System.out.println(generateTimeShift.getStartDateTime().format(timeFormatter) + " -> " + generateTimeShift.getEndDateTime().format(timeFormatter));
+        }
 
     }
 }

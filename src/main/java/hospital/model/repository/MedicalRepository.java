@@ -30,7 +30,7 @@ public class MedicalRepository implements Repository<Medical, Integer>, AutoClos
         preparedStatement.setInt(1, medical.getId());
         preparedStatement.setString(2, medical.getTitle());
         preparedStatement.setString(3, medical.getDescription());
-        preparedStatement.setTime(4, Time.valueOf(medical.getDuration()));
+        preparedStatement.setInt(4, medical.getDuration());
         preparedStatement.setInt(5,medical.getDoctor().getId());
         preparedStatement.setFloat(6, medical.getPrice());
         preparedStatement.execute();
@@ -44,7 +44,7 @@ public class MedicalRepository implements Repository<Medical, Integer>, AutoClos
         );
         preparedStatement.setString(1, medical.getTitle());
         preparedStatement.setString(2, medical.getDescription());
-        preparedStatement.setTime(3, Time.valueOf(medical.getDuration()));
+        preparedStatement.setInt(3, medical.getDuration());
         preparedStatement.setInt(4,medical.getDoctor().getId());
         preparedStatement.setFloat(5, medical.getPrice());
         preparedStatement.setInt(6, medical.getId());

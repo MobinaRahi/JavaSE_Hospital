@@ -21,7 +21,7 @@ public class Medical {
     private String title;
     private String description;
     private Doctor doctor;
-    private LocalTime duration;
+    private int duration;
     private float price;
 
     public String toString() {
