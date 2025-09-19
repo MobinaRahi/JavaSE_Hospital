@@ -16,7 +16,6 @@ import java.util.List;
 public class Prescription implements Payable {
     private int id;
     private Visit visit;
-    private Payment payment;
     private List<Drug> drugList;
     private float price;
 
