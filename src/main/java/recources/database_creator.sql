@@ -146,3 +146,16 @@ create table drugs_stock
 create sequence drug_stock_seq start with 1 increment by 1;
 --
 
+
+CREATE TABLE cash_desk
+(
+    id           NUMBER PRIMARY KEY,
+    cash_balance NUMBER DEFAULT 0,
+    bank_balance NUMBER DEFAULT 0
+);
+
+CREATE SEQUENCE cash_desk_seq START WITH 1 INCREMENT BY 1;
+
+--
+
+
