@@ -31,7 +31,6 @@ create sequence doctor_seq start with 1 increment by 1;
 
 create table employees
 (
-    member_name nvarchar2(20) not null,
     id         number primary key,
     user_id    number,
     start_date date          not null,
@@ -63,7 +62,7 @@ create table patients
     constraint fk_patients_user FOREIGN KEY (user_id) references users (id)
 );
 
-create sequence patients_seq start with 1 increment by 1;
+create sequence patient_seq start with 1 increment by 1;
 --
 
 
@@ -116,8 +115,10 @@ create table prescriptions
 (
     id          number primary key,
     visit_id    number,
+    payment_id  number,
     price       number,
-    constraint fk_prescription_visit FOREIGN KEY (visit_id) references visits (id)
+    constraint fk_prescription_visit FOREIGN KEY (visit_id) references visits (id),
+    constraint fk_prescription_payment FOREIGN KEY (payment_id) references payments (id)
 );
 
 create sequence prescription_seq start with 1 increment by 1;

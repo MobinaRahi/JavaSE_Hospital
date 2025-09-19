@@ -14,9 +14,8 @@ import java.time.LocalTime;
 @Setter
 
 public class Employee {
-    private User user;
-    private String memberName;
     private int id;
+    private User user;
     private LocalTime startTime;
     private LocalTime endTime;
 

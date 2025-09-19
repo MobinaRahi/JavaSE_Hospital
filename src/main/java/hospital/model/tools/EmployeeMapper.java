@@ -10,7 +10,6 @@ public class EmployeeMapper {
     public Employee employeeMapper(ResultSet resultSet) throws Exception {
         return Employee
                 .builder()
-                .memberName(resultSet.getString("member_name"))
                 .id(resultSet.getInt("id"))
                 .user(UserService.getService().findById(resultSet.getInt("user_id")))
                 .startTime(resultSet.getTime("end_time").toLocalTime())

@@ -56,10 +56,4 @@ public class EmployeeService implements Service<Employee, Integer> {
             return employeeRepository.findByUserId(userId);
         }
     }
-
-    public List<Employee> findByMemberName(String memberName) throws Exception {
-        try(EmployeeRepository employeeRepository = new EmployeeRepository()) {
-        return employeeRepository.findByMemberName(memberName);
-        }
-    }
 }
