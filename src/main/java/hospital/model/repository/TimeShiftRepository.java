@@ -1,12 +1,17 @@
 package hospital.model.repository;
 
+import hospital.model.entity.Doctor;
+import hospital.model.entity.Medical;
 import hospital.model.entity.TimeShift;
+import hospital.model.service.DoctorService;
+import hospital.model.service.MedicalService;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.TimeShiftMapper;
 import lombok.extern.log4j.Log4j2;
 
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

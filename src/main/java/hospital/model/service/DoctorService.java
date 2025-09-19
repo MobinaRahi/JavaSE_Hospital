@@ -63,4 +63,10 @@ public class DoctorService implements Service<Doctor, Integer> {
             return doctorRepository.findBySpecialty(specialty);
         }
     }
+
+    public List<Doctor> findByNameAndFamily(String name, String family) throws Exception {
+        try (DoctorRepository doctorRepository = new DoctorRepository()) {
+            return doctorRepository.findByNameAndFamily(name,family);
+        }
+    }
 }

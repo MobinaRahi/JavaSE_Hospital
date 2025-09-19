@@ -2,6 +2,7 @@ package hospital.model.repository;
 
 
 import hospital.model.entity.Doctor;
+import hospital.model.service.DoctorService;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.DoctorMapper;
 import lombok.extern.log4j.Log4j2;
@@ -26,11 +27,12 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
     public void save(Doctor doctor) throws Exception {
         doctor.setId(ConnectionProvider.getProvider().getNextId("doctor_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into doctors (id,user_id,specialty,price) values (doctor_seq.nextval,?, ? ,?)"
+                "insert into doctors (id,user_id,specialty,price) values (?, ? ,?, ?)"
         );
-        preparedStatement.setInt(1, doctor.getUser().getId());
-        preparedStatement.setString(2,doctor.getSpecialty().name());
-        preparedStatement.setDouble(3, doctor.getPrice());
+        preparedStatement.setInt(1, doctor.getId());
+        preparedStatement.setInt(2, doctor.getUser().getId());
+        preparedStatement.setString(3,doctor.getSpecialty().name());
+        preparedStatement.setDouble(4, doctor.getPrice());
         preparedStatement.execute();
     }
 
@@ -110,9 +112,27 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
         return doctorList;
     }
 
+    public List<Doctor> findByNameAndFamily(String name, String family) throws Exception {
+        List<Doctor> doctorList = new ArrayList<>();
+        for (Doctor doctor : DoctorService.getService().findAll()) {
+            if(doctor.getUser().getName().equals(name)&&doctor.getUser().getFamily().equals(family)){
+                doctorList.add(doctor);
+            }
+        }
+        return doctorList;
+    }
+
+
+
+
     @Override
     public void close() throws Exception {
-        preparedStatement.close();
-        connection.close();
+        if (preparedStatement != null && !preparedStatement.isClosed()) {
+            preparedStatement.close();
+        }
+        if (connection != null && !connection.isClosed()) {
+            connection.close();
+        }
     }
+
 }

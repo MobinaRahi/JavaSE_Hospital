@@ -1,10 +1,15 @@
 package hospital.model.service;
 
+import hospital.model.entity.Doctor;
+import hospital.model.entity.Medical;
 import hospital.model.entity.TimeShift;
 import hospital.model.repository.TimeShiftRepository;
 import lombok.Getter;
 
 
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TimeShiftService implements Service<TimeShift, Integer> {
@@ -62,4 +67,26 @@ public class TimeShiftService implements Service<TimeShift, Integer> {
             return timeShiftRepository.findTimeShiftByMedicalId(medicalId);
         }
     }
+
+    public static List<TimeShift> generateTimeShifts(Doctor doctor, Medical medical, LocalDateTime startDateTime ,LocalDateTime endDateTime) throws Exception {
+        List<TimeShift> timeShiftList = new ArrayList<>();
+        LocalDateTime slotStartDateTime = startDateTime;
+        while (!slotStartDateTime.plusMinutes(medical.getDuration()).isAfter(endDateTime)){
+            LocalDateTime slotEndDateTime = slotStartDateTime.plusMinutes(medical.getDuration());
+            TimeShift timeShift =
+                    TimeShift
+                            .builder()
+                            .doctor(DoctorService.getService().findById(doctor.getId()))
+                            .medical(MedicalService.getService().findById(medical.getId()))
+                            .startDateTime(slotStartDateTime)
+                            .endDateTime(slotEndDateTime)
+                            .build();
+
+            timeShiftList.add(timeShift);
+            slotStartDateTime = slotEndDateTime;
+
+        }
+        return timeShiftList;
+    }
+
 }
