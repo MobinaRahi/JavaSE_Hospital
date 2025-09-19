@@ -27,11 +27,12 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
     public void save(Doctor doctor) throws Exception {
         doctor.setId(ConnectionProvider.getProvider().getNextId("doctor_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into doctors (id,user_id,specialty,price) values (doctor_seq.nextval,?, ? ,?)"
+                "insert into doctors (id,user_id,specialty,price) values (?, ? ,?, ?)"
         );
-        preparedStatement.setInt(1, doctor.getUser().getId());
-        preparedStatement.setString(2,doctor.getSpecialty().name());
-        preparedStatement.setDouble(3, doctor.getPrice());
+        preparedStatement.setInt(1, doctor.getId());
+        preparedStatement.setInt(2, doctor.getUser().getId());
+        preparedStatement.setString(3,doctor.getSpecialty().name());
+        preparedStatement.setDouble(4, doctor.getPrice());
         preparedStatement.execute();
     }
 
