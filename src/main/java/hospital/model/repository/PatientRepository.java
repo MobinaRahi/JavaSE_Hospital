@@ -26,7 +26,7 @@ public class PatientRepository implements Repository<Patient, Integer>, AutoClos
 
     @Override
     public void save(Patient patient) throws Exception {
-        patient.setId(ConnectionProvider.getProvider().getNextId("patients_seq"));
+        patient.setId(ConnectionProvider.getProvider().getNextId("patient_seq"));
         preparedStatement = connection.prepareStatement(
                 "insert into Patients (id,user_id) values(?,?)"
         );

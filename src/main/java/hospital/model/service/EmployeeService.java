@@ -26,7 +26,7 @@ public class EmployeeService implements Service<Employee, Integer> {
     @Override
     public void edit(Employee employee) throws Exception {
         try(EmployeeRepository employeeRepository = new EmployeeRepository()) {
-            employeeRepository.save(employee);
+            employeeRepository.edit(employee);
         }
     }
 
@@ -54,12 +54,6 @@ public class EmployeeService implements Service<Employee, Integer> {
     public List<Employee> findByUserId(Integer userId) throws Exception {
         try(EmployeeRepository employeeRepository = new EmployeeRepository()) {
             return employeeRepository.findByUserId(userId);
-        }
-    }
-
-    public List<Employee> findByMemberName(String memberName) throws Exception {
-        try(EmployeeRepository employeeRepository = new EmployeeRepository()) {
-        return employeeRepository.findByMemberName(memberName);
         }
     }
 }

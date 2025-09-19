@@ -26,12 +26,13 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
     public void save(Visit visit) throws Exception {
         visit.setId(ConnectionProvider.getProvider().getNextId("visit_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into visits (id,doctor_id,patient_id,time_shift_id,price)values(visit_seq.nextval,?,?,?,?)"
+                "insert into visits (id,doctor_id,patient_id,time_shift_id,price)values(?,?,?,?,?)"
         );
-        preparedStatement.setInt(1, visit.getDoctor().getId());
-        preparedStatement.setInt(2, visit.getPatient().getId());
-        preparedStatement.setInt(3, visit.getTimeShift().getId());
-        preparedStatement.setDouble(4, visit.getPrice());
+        preparedStatement.setLong(1, visit.getId());
+        preparedStatement.setInt(2, visit.getDoctor().getId());
+        preparedStatement.setInt(3, visit.getPatient().getId());
+        preparedStatement.setInt(4, visit.getTimeShift().getId());
+        preparedStatement.setDouble(5, visit.getPrice());
         preparedStatement.execute();
         log.info("Visit save success.");
     }

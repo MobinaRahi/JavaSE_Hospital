@@ -21,34 +21,33 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
 
     @Override
     public void save(Employee employee) throws Exception {
-        employee.setId(ConnectionProvider.getProvider().getNextId("patient_seq"));
+        employee.setId(ConnectionProvider.getProvider().getNextId("employee_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into Employee (member_name,id,user,start_time,end_time) values(?,?,?,?,?)"
+                "insert into Employees (id,user_id,start_time,end_time) values(?,?,?,?)"
         );
-        preparedStatement.setString(1, employee.getMemberName());
-        preparedStatement.setInt(2, employee.getId());
-        preparedStatement.setInt(3, employee.getUser().getId());
-        preparedStatement.setTime(4, Time.valueOf(employee.getStartTime()));
-        preparedStatement.setTime(5,Time.valueOf(employee.getEndTime()));
+        preparedStatement.setInt(1, employee.getId());
+        preparedStatement.setInt(2, employee.getUser().getId());
+        preparedStatement.setTime(3, Time.valueOf(employee.getStartTime()));
+        preparedStatement.setTime(4,Time.valueOf(employee.getEndTime()));
         preparedStatement.execute();
     }
 
     @Override
     public void edit(Employee employee) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update employee set member_name=?,start_time=?,end_time=? where id=?"
+                "update employees set user_id?,start_time=?,end_time=? where id=?"
         );
-        preparedStatement.setString(1, employee.getMemberName());
-        preparedStatement.setTime(2, Time.valueOf(employee.getStartTime()));
-        preparedStatement.setTime(3,Time.valueOf(employee.getEndTime()));
-        preparedStatement.setInt(4, employee.getId());
+        preparedStatement.setInt(1, employee.getUser().getId());
+        preparedStatement.setTime(1, Time.valueOf(employee.getStartTime()));
+        preparedStatement.setTime(2,Time.valueOf(employee.getEndTime()));
+        preparedStatement.setInt(3, employee.getId());
         preparedStatement.execute();
     }
 
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "delete from employee where id=?"
+                "delete from employees where id=?"
         );
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
@@ -58,7 +57,7 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
     public List<Employee> findAll() throws Exception {
         List<Employee> employees = new ArrayList<>();
         preparedStatement = connection.prepareStatement(
-                "select * from employee"
+                "select * from employees"
         );
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()){
@@ -72,7 +71,7 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
     public Employee findById(Integer id) throws Exception {
         Employee employee = null;
         preparedStatement =connection.prepareStatement(
-                "select * from employee where id=?"
+                "select * from employees where id=?"
         );
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -85,7 +84,7 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
     public List<Employee> findByUserId(Integer userId) throws Exception {
         List<Employee> employees = new ArrayList<>();
         preparedStatement = connection.prepareStatement(
-                "select * from employee where user_id=?"
+                "select * from employees where user_id=?"
         );
         preparedStatement.setInt(1, userId);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -96,19 +95,6 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
         return employees;
     }
 
-    public List<Employee> findByMemberName(String memberName) throws Exception {
-        List<Employee> employees = new ArrayList<>();
-        preparedStatement = connection.prepareStatement(
-                "select * from employee where member_name=?"
-        );
-        preparedStatement.setString(1, memberName);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while(resultSet.next()){
-            Employee employee = employeeMapper.employeeMapper(resultSet);
-            employees.add(employee);
-        }
-        return employees;
-    }
 
     @Override
     public void close() throws Exception {
