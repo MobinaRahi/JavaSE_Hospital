@@ -26,7 +26,7 @@ public class EmployeeService implements Service<Employee, Integer> {
     @Override
     public void edit(Employee employee) throws Exception {
         try(EmployeeRepository employeeRepository = new EmployeeRepository()) {
-            employeeRepository.save(employee);
+            employeeRepository.edit(employee);
         }
     }
 
