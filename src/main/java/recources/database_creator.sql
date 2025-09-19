@@ -48,7 +48,8 @@ create table payments
     pay_type      nvarchar2(20) default 'CASH',
     pay_date_time date   not null,
     price         number not null,
-    payable       number not null
+    pay_for       nvarchar2(20),
+    pay_id       number not null
 
 );
 create sequence payment_seq start with 1 increment by 1;

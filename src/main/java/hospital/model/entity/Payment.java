@@ -1,6 +1,7 @@
 package hospital.model.entity;
 
 import com.google.gson.Gson;
+import hospital.model.entity.enums.PayFor;
 import hospital.model.entity.enums.PayType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class Payment{
     private PayType payType;
     private LocalDateTime payDateTime;
     private float price;
+    private PayFor payFor;
     private Payable payable;
 
 

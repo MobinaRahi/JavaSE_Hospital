@@ -30,7 +30,7 @@ public class PaymentRepository implements Repository<Payment, Integer>,AutoClose
         preparedStatement.setString(2,payment.getPayType().name());
         preparedStatement.setTimestamp(3,Timestamp.valueOf(payment.getPayDateTime()));
         preparedStatement.setFloat(4,payment.getPrice());
-        preparedStatement.setObject(5,payment.getPayable());
+        preparedStatement.setInt(5,payment.getPayable().getId());
         preparedStatement.execute();
     }
 
