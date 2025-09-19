@@ -5,7 +5,6 @@ import hospital.model.entity.enums.PayType;
 import hospital.model.service.DoctorService;
 import hospital.model.service.PaymentService;
 import hospital.model.service.VisitService;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

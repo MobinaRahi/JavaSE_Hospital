@@ -4,6 +4,8 @@ import hospital.model.service.*;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -114,17 +116,17 @@ public class Main {
 //
 //        MedicalService.getService().save(medical);
 //
-//        Medical medical2 =
-//                Medical
-//                        .builder()
-//                        .title("Medical 1")
-//                        .description("Medical 1")
-//                        .doctor(DoctorService.getService().findById(2))
-//                        .duration(15)
-//                        .price(1500)
-//                        .build();
-////
-//        MedicalService.getService().save(medical2);
+        Medical medical2 =
+                Medical
+                        .builder()
+                        .title("Medical 1")
+                        .description("Medical 1")
+                        .doctor(DoctorService.getService().findById(2))
+                        .duration(15)
+                        .price(1500)
+                        .build();
+//
+        MedicalService.getService().save(medical2);
 
 
         //test signIn
@@ -178,41 +180,56 @@ public class Main {
 //        }
 //
 
-//        Drug drug1=
-//                Drug
-//                        .builder()
-//                        .name("aaa")
-//                        .price(12500)
-//                        .quantity(100)
-//                        .build();
-//        Drug drug2=
-//                Drug
-//                        .builder()
-//                        .name("bbb")
-//                        .price(12500)
-//                        .quantity(100)
-//                        .build();
-//        Drug drug3=
-//                Drug
-//                        .builder()
-//                        .name("ccc")
-//                        .price(12500)
-//                        .quantity(100)
-//                        .build();
-//        Drug drug4=
-//                Drug
-//                        .builder()
-//                        .name("ddd")
-//                        .price(12500)
-//                        .quantity(100)
-//                        .build();
-//
+        Drug drug1=
+                Drug
+                        .builder()
+                        .name("aaa")
+                        .price(12500)
+                        .quantity(100)
+                        .build();
+        Drug drug2=
+                Drug
+                        .builder()
+                        .name("bbb")
+                        .price(12500)
+                        .quantity(100)
+                        .build();
+        Drug drug3=
+                Drug
+                        .builder()
+                        .name("ccc")
+                        .price(12500)
+                        .quantity(100)
+                        .build();
+        Drug drug4=
+                Drug
+                        .builder()
+                        .name("ddd")
+                        .price(12500)
+                        .quantity(100)
+                        .build();
+
 //        DrugService.getService().save(drug1);
 //        DrugService.getService().save(drug2);
 //        DrugService.getService().save(drug3);
 //        DrugService.getService().save(drug4);
 
+        List<Drug>drugList=new ArrayList<>();
+        drugList.add(drug1);
+        drugList.add(drug2);
+        drugList.add(drug3);
+        drugList.add(drug4);
 
 
-   }
+        Prescription prescription=
+                Prescription
+                        .builder()
+                        .visit(VisitService.getService().findById(3))
+                        .price(12500)
+                        .build();
+
+
+
+
+    }
 }

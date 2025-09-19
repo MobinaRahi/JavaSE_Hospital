@@ -36,12 +36,12 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     @Override
     public void edit (Drug drug) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update drugs set name = ?, price = ?, quantity = ?, where id = ?"
+                "update drugs set name = ?, price = ?, quantity = ? where id = ?"
         );
         preparedStatement.setString(1, drug.getName());
         preparedStatement.setDouble(2, drug.getPrice());
-        preparedStatement.setInt(4, drug.getQuantity());
-        preparedStatement.setInt(5, drug.getId());
+        preparedStatement.setInt(3, drug.getQuantity());
+        preparedStatement.setInt(4, drug.getId());
         preparedStatement.execute();
     }
 

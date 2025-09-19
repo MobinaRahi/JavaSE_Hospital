@@ -116,10 +116,8 @@ create table prescriptions
 (
     id         number primary key,
     visit_id   number,
-    payment_id number,
     price      number,
-    constraint fk_prescription_visit FOREIGN KEY (visit_id) references visits (id),
-    constraint fk_prescription_payment FOREIGN KEY (payment_id) references payments (id)
+    constraint fk_prescription_visit FOREIGN KEY (visit_id) references visits (id)
 );
 
 create sequence prescription_seq start with 1 increment by 1;
@@ -149,23 +147,33 @@ create sequence drug_stock_seq start with 1 increment by 1;
 --
 
 
-CREATE TABLE cash_desks
+create table cash_desks
 (
     id           NUMBER PRIMARY KEY,
     bank_id      number ,
     payType      nvarchar2(20) default 'CASH',
     constraint fk_bank_cash_desk foreign key (bank_id) references banks (id)
 );
-
 CREATE SEQUENCE cash_desk_seq START WITH 1 INCREMENT BY 1;
 
 --
 
-CREATE TABLE banks
+create table banks
 (
     id    NUMBER PRIMARY KEY,
     title NVARCHAR2(100) NOT NULL
 );
-
 CREATE SEQUENCE bank_seq START WITH 1 INCREMENT BY 1;
+--
+
+create table prescriptions_drugs
+(
+    id               number primary key,
+    prescription_id  number not null,
+    drug_id          number not null,
+    constraint fk_prescriptions_drug_prescription foreign key (prescription_id) references prescriptions (id),
+    constraint fk_prescriptions_drug_drug foreign key (drug_id) references drugs (id)
+);
+create sequence prescriptions_drug_seq start with 1 increment by 1;
+--
 

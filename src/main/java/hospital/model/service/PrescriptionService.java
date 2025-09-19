@@ -1,5 +1,6 @@
 package hospital.model.service;
 
+import hospital.model.entity.Drug;
 import hospital.model.entity.Prescription;
 import hospital.model.repository.PrescriptionRepository;
 import lombok.Getter;
@@ -57,4 +58,5 @@ public class PrescriptionService implements Service<Prescription,Integer>{
     }
 
     }
+
 }
