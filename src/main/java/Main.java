@@ -113,6 +113,18 @@ public class Main {
 //                        .build();
 //
 //        MedicalService.getService().save(medical);
+//
+//        Medical medical2 =
+//                Medical
+//                        .builder()
+//                        .title("Medical 1")
+//                        .description("Medical 1")
+//                        .doctor(DoctorService.getService().findById(2))
+//                        .duration(15)
+//                        .price(1500)
+//                        .build();
+////
+//        MedicalService.getService().save(medical2);
 
 
         //test signIn
@@ -141,26 +153,66 @@ public class Main {
 //        String family = "test";
 //        System.out.println(DoctorService.getService().findByNameAndFamily(name, family));
 //        System.out.println(DoctorService.getService().findBySpecialty("dermatologist"));
-
-        TimeShift timeShift =
-                TimeShift
-                        .builder()
-                        .doctor(DoctorService.getService().findById(2))
-                        .medical(MedicalService.getService().findById(1))
-                        .startDateTime(LocalDateTime.of(2004, Month.JANUARY, 1, 11, 30, 0))
-                        .endDateTime(LocalDateTime.of(2004, Month.JANUARY, 2, 11, 30, 0))
-                        .build();
-
+//
+//        TimeShift timeShift =
+//                TimeShift
+//                        .builder()
+//                        .doctor(DoctorService.getService().findById(2))
+//                        .medical(MedicalService.getService().findById(6))
+//                        .startDateTime(LocalDateTime.of(2004, Month.JANUARY, 1, 11, 30, 0))
+//                        .endDateTime(LocalDateTime.of(2004, Month.JANUARY, 2, 11, 30, 0))
+//                        .build();
+//
 //        TimeShiftService.getService().save(timeShift);
+//
 
-        for (TimeShift generateTimeShift : TimeShiftService.generateTimeShifts(
-                DoctorService.getService().findById(2),
-                MedicalService.getService().findById(5),
-                timeShift.getStartDateTime(),
-                timeShift.getEndDateTime()))
-        {
-            System.out.println(generateTimeShift.getStartDateTime().format(timeFormatter) + " -> " + generateTimeShift.getEndDateTime().format(timeFormatter));
-        }
+        //Doctor's shifts
 
-    }
+//        for (TimeShift generateTimeShift : TimeShiftService.generateTimeShifts(
+//                DoctorService.getService().findById(2),
+//                MedicalService.getService().findById(6),
+//                timeShift.getStartDateTime(),
+//                timeShift.getEndDateTime()))
+//        {
+//            System.out.println(generateTimeShift.getStartDateTime().format(timeFormatter) + " -> " + generateTimeShift.getEndDateTime().format(timeFormatter));
+//        }
+//
+
+//        Drug drug1=
+//                Drug
+//                        .builder()
+//                        .name("aaa")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//        Drug drug2=
+//                Drug
+//                        .builder()
+//                        .name("bbb")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//        Drug drug3=
+//                Drug
+//                        .builder()
+//                        .name("ccc")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//        Drug drug4=
+//                Drug
+//                        .builder()
+//                        .name("ddd")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//
+//        DrugService.getService().save(drug1);
+//        DrugService.getService().save(drug2);
+//        DrugService.getService().save(drug3);
+//        DrugService.getService().save(drug4);
+
+
+
+   }
 }

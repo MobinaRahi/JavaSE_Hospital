@@ -82,14 +82,13 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     }
 
 
-    public List<Drug> findByNameAndPrice(String name, Double price) throws Exception {
+    public List<Drug> findByName(String name) throws Exception {
         List<Drug> drugList = new ArrayList<>();
 
         preparedStatement = connection.prepareStatement(
-                "select * from drugs where name like ? and price like ?"
+                "select * from drugs where name like ?"
         );
         preparedStatement.setString(1, name + "%");
-        preparedStatement.setDouble(2, Double.parseDouble(price + "%"));
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {

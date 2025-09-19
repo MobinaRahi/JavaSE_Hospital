@@ -48,9 +48,9 @@ public class DrugService implements Service<Drug, Integer> {
         }
     }
 
-    public List<Drug> findByNameAndPrice(String name, Double price) throws Exception {
+    public List<Drug> findByName(String name) throws Exception {
         try (DrugRepository drugRepository = new DrugRepository()) {
-            return drugRepository.findByNameAndPrice(name, price);
+            return drugRepository.findByName(name);
         }
     }
 
