@@ -1,24 +1,28 @@
+
 import hospital.model.entity.Drug;
+import hospital.model.entity.DrugStock;
 import hospital.model.service.DrugService;
+import hospital.model.service.DrugStockService;
 
 public class DrugTest {
     public static void main(String[] args) throws Exception {
-//        DrugStock drugStock=
-//                DrugStock
-//                        .builder()
-//                        .drugCount(10)
-//                        .build();
-//                DrugStockService.getService().save(drugStock);
+        DrugStock drugStock=
+                DrugStock
+                        .builder()
+                        .drug(DrugService.getService().findById(1))
+                        .drugCount(10)
+                        .build();
+                DrugStockService.getService().save(drugStock);
 
 
-        Drug drug=
-        Drug
-                .builder()
-                .name("test")
-                .price(120)
-                .quantity(10)
-                .build();
-                DrugService.getService().save(drug);
+//        Drug drug=
+//        Drug
+//                .builder()
+//                .name("test")
+//                .price(120)
+//                .quantity(10)
+//                .build();
+//                DrugService.getService().save(drug);
 
         //        Service test pass
 

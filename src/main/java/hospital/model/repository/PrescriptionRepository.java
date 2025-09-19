@@ -28,11 +28,10 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
     public void save(Prescription prescription) throws Exception {
         prescription.setId(ConnectionProvider.getProvider().getNextId("prescription_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into prescriptions (id,visit_id,payment_id,price)values (prescription_seq.nextval,?,?,?)"
+                "insert into prescriptions (id,visit_id,price)values (prescription_seq.nextval,?,?)"
         );
         preparedStatement.setInt(1, prescription.getVisit().getId());
-        preparedStatement.setInt(2, prescription.getPayment().getId());
-        preparedStatement.setDouble(3, prescription.getPrice());
+        preparedStatement.setDouble(2, prescription.getPrice());
         preparedStatement.execute();
         log.info("Prescription has been saved successfully");
     }
@@ -40,12 +39,11 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
     @Override
     public void edit(Prescription prescription) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update prescriptions set visit_id=?,payment_id=?,price=? where id=?"
+                "update prescriptions set visit_id=?,price=? where id=?"
         );
         preparedStatement.setInt(1, prescription.getVisit().getId());
-        preparedStatement.setInt(2, prescription.getPayment().getId());
-        preparedStatement.setDouble(3, prescription.getPrice());
-        preparedStatement.setInt(4, prescription.getId());
+        preparedStatement.setDouble(2, prescription.getPrice());
+        preparedStatement.setInt(3, prescription.getId());
         preparedStatement.execute();
         log.info("Prescription has been edited successfully");
     }
