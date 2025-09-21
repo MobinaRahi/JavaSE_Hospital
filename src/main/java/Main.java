@@ -191,9 +191,9 @@ public class Main {
 //        }
 
         //show Booked visit for Doctor
-        for (DoctorShift bookedTimeShift : DoctorService.getService().findBookedTimeShifts()) {
-            System.out.println(bookedTimeShift.getId());
-        }
+//        for (DoctorShift bookedTimeShift : DoctorService.getService().findBookedTimeShifts()) {
+//            System.out.println(bookedTimeShift.getAppointmentStart()+" -> "+bookedTimeShift.getAppointmentEnd());
+//        }
 
 
 //
