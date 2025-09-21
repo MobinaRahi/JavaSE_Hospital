@@ -17,7 +17,15 @@ public class Prescription implements Payable {
     private int id;
     private Visit visit;
     private List<Drug> drugList;
-    private float price;
+    private double price;
+
+    public double getPrice() {
+        double totalPrice = 0;
+        for (Drug drug : drugList) {
+            totalPrice += drug.getPrice();
+        }
+        return totalPrice;
+    }
 
     public String toString() {
         Gson gson = new Gson();

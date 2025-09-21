@@ -22,7 +22,6 @@ public class PrescriptionService implements Service<Prescription, Integer> {
 
     @Override
     public void save(Prescription prescription) throws Exception {
-
         try (PrescriptionRepository prescriptionRepository = new PrescriptionRepository()) {
             prescriptionRepository.save(prescription);
         }
@@ -75,23 +74,6 @@ public class PrescriptionService implements Service<Prescription, Integer> {
             return prescriptionRepository.updatePrescriptionPrice(prescriptionId);
         }
     }
-
-    public static void prescriptionsDrugs(List<Drug> drugList, int prescription_id) throws SQLException {
-        Connection connection = ConnectionProvider.getProvider().getOracleConnection();
-        for (Drug drug : drugList) {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "insert into prescriptions_drugs (prescription_id,drug_id)values (?,?)"
-            );
-            preparedStatement.setInt(1, prescription_id);
-            preparedStatement.setInt(2, drug.getId());
-            preparedStatement.execute();
-        }
-
-
-
-
-    }
-
 }
 
 

@@ -97,6 +97,20 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
         return drugList;
     }
 
+    public List<Drug> findByPrescriptionId(int prescriptionId) throws Exception {
+        List<Drug> drugList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement(
+                "select * from PRESCRIPTIONS_DRUGS where DRUG_ID=?"
+        );
+        preparedStatement.setInt(1, prescriptionId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            drugList.add(drugMapper.drugMapper(resultSet));
+        }
+        return drugList;
+    }
 
 
     @Override

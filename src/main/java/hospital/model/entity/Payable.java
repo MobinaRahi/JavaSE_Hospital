@@ -2,5 +2,5 @@ package hospital.model.entity;
 
 public interface Payable {
     int getId();
-    float getPrice();
+    double getPrice();
     }

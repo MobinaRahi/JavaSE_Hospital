@@ -36,6 +36,15 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
         preparedStatement.setInt(2, prescription.getVisit().getId());
         preparedStatement.setDouble(3, prescription.getPrice());
         preparedStatement.execute();
+
+        for (Drug drug : prescription.getDrugList()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "insert into prescriptions_drugs (prescription_id,drug_id)values (?,?)"
+            );
+            preparedStatement.setInt(1, prescription.getId());
+            preparedStatement.setInt(2, drug.getId());
+            preparedStatement.execute();
+        }
         log.info("Prescription has been saved successfully");
     }
 
@@ -67,9 +76,14 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
         preparedStatement = connection.prepareStatement(
                 "select * from prescriptions"
         );
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            Prescription prescription = prescriptionMapper.prescriptionMapper(resultSet);
+        ResultSet prescriptionResultSet = preparedStatement.executeQuery();
+        while (prescriptionResultSet.next()) {
+            preparedStatement = connection.prepareStatement(
+                    "select * from PRESCRIPTIONS_DRUGS where PRESCRIPTION_ID=?"
+            );
+            preparedStatement.setInt(1, prescriptionResultSet.getInt("ID"));
+            ResultSet drugListResultSet = preparedStatement.executeQuery();
+            Prescription prescription = prescriptionMapper.prescriptionMapper(prescriptionResultSet, drugListResultSet);
             prescriptionList.add(prescription);
         }
         return prescriptionList;
@@ -82,9 +96,14 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
                 "select * from prescriptions where id=?"
         );
         preparedStatement.setInt(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            prescription = prescriptionMapper.prescriptionMapper(resultSet);
+        ResultSet prescriptionResultSet = preparedStatement.executeQuery();
+        if (prescriptionResultSet.next()) {
+            preparedStatement = connection.prepareStatement(
+                    "select * from PRESCRIPTIONS_DRUGS where PRESCRIPTION_ID=?"
+            );
+            preparedStatement.setInt(1, id);
+            ResultSet drugListResultSet = preparedStatement.executeQuery();
+            prescription = prescriptionMapper.prescriptionMapper(prescriptionResultSet, drugListResultSet);
         }
         return prescription;
     }

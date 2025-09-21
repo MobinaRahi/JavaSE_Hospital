@@ -20,7 +20,7 @@ public class Visit implements Payable{
     private Patient patient;
     private TimeShift timeShift;
     private Payment payment;
-    private float price;
+    private double price;
 
     public String toString() {
         Gson gson = new Gson();

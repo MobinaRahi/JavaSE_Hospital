@@ -54,5 +54,11 @@ public class DrugService implements Service<Drug, Integer> {
         }
     }
 
+    public List<Drug> findByPrescriptionId(int prescriptionId) throws Exception {
+        try (DrugRepository drugRepository = new DrugRepository()) {
+            return drugRepository.findByPrescriptionId(prescriptionId);
+        }
+    }
+
 
 }
