@@ -1,6 +1,8 @@
 package hospital.model.service;
 
 import hospital.model.entity.Doctor;
+import hospital.model.entity.DoctorShift;
+import hospital.model.entity.TimeShift;
 import hospital.model.repository.DoctorRepository;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -67,6 +69,12 @@ public class DoctorService implements Service<Doctor, Integer> {
     public List<Doctor> findByNameAndFamily(String name, String family) throws Exception {
         try (DoctorRepository doctorRepository = new DoctorRepository()) {
             return doctorRepository.findByNameAndFamily(name,family);
+        }
+    }
+
+    public List<DoctorShift> findBookedTimeShifts() throws Exception{
+        try (DoctorRepository doctorRepository = new DoctorRepository()) {
+            return doctorRepository.findBookedTimeShifts();
         }
     }
 }

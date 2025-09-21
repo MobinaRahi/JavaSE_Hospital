@@ -190,47 +190,53 @@ public class Main {
 //            System.out.println(generateTimeShift.getStartDateTime().format(timeFormatter) + " -> " + generateTimeShift.getEndDateTime().format(timeFormatter));
 //        }
 
+        //show Booked visit for Doctor
+        for (DoctorShift bookedTimeShift : DoctorService.getService().findBookedTimeShifts()) {
+            System.out.println(bookedTimeShift.getId());
+        }
+
+
 //
 
-        Drug drug1=
-                Drug
-                        .builder()
-                        .name("aaa")
-                        .price(12500)
-                        .quantity(100)
-                        .build();
-        Drug drug2=
-                Drug
-                        .builder()
-                        .name("bbb")
-                        .price(12500)
-                        .quantity(100)
-                        .build();
-        Drug drug3=
-                Drug
-                        .builder()
-                        .name("ccc")
-                        .price(12500)
-                        .quantity(100)
-                        .build();
-        Drug drug4=
-                Drug
-                        .builder()
-                        .name("ddd")
-                        .price(12500)
-                        .quantity(100)
-                        .build();
+//        Drug drug1=
+//                Drug
+//                        .builder()
+//                        .name("aaa")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//        Drug drug2=
+//                Drug
+//                        .builder()
+//                        .name("bbb")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//        Drug drug3=
+//                Drug
+//                        .builder()
+//                        .name("ccc")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//        Drug drug4=
+//                Drug
+//                        .builder()
+//                        .name("ddd")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
 
 //        DrugService.getService().save(drug1);
 //        DrugService.getService().save(drug2);
 //        DrugService.getService().save(drug3);
 //        DrugService.getService().save(drug4);
 
-        List<Drug>drugList=new ArrayList<>();
-        drugList.add(drug1);
-        drugList.add(drug2);
-        drugList.add(drug3);
-        drugList.add(drug4);
+//        List<Drug>drugList=new ArrayList<>();
+//        drugList.add(drug1);
+//        drugList.add(drug2);
+//        drugList.add(drug3);
+//        drugList.add(drug4);
 
 
 //        Prescription prescription=
@@ -252,6 +258,9 @@ public class Main {
 //        for (Drug drug : PrescriptionService.getService().showPrescription(1)) {
 //            System.out.println(drug.getName());
 //        }
+
+
+
 
 
 

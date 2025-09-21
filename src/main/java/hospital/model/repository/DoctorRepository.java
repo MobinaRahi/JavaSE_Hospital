@@ -2,9 +2,12 @@ package hospital.model.repository;
 
 
 import hospital.model.entity.Doctor;
+import hospital.model.entity.DoctorShift;
+import hospital.model.entity.TimeShift;
 import hospital.model.service.DoctorService;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.DoctorMapper;
+import hospital.model.tools.TimeShiftMapper;
 import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
@@ -122,8 +125,26 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
         return doctorList;
     }
 
-
-
+    public List<DoctorShift> findBookedTimeShifts() throws Exception {
+        List<DoctorShift> doctorShiftList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from doctors_shifts where status=2"
+        );
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            DoctorShift doctorShift =
+                    DoctorShift
+                            .builder()
+                            .id(resultSet.getInt("id"))
+                            .doctorId(resultSet.getInt("doctor_id"))
+                            .status(resultSet.getInt("status"))
+                            .appointmentStart(resultSet.getTimestamp("appointment_start").toLocalDateTime())
+                            .appointmentEnd(resultSet.getTimestamp("appointment_end").toLocalDateTime())
+                            .build();
+            doctorShiftList.add(doctorShift);
+        }
+        return doctorShiftList;
+    }
 
     @Override
     public void close() throws Exception {

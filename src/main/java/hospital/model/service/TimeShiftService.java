@@ -4,6 +4,7 @@ import hospital.model.entity.Doctor;
 import hospital.model.entity.DoctorShift;
 import hospital.model.entity.Medical;
 import hospital.model.entity.TimeShift;
+import hospital.model.repository.DoctorRepository;
 import hospital.model.repository.TimeShiftRepository;
 import hospital.model.tools.ConnectionProvider;
 import lombok.Getter;
@@ -112,5 +113,6 @@ public class TimeShiftService implements Service<TimeShift, Integer> {
         }
         return timeShiftList;
     }
+
 
 }

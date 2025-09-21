@@ -1,6 +1,7 @@
 package hospital.model.repository;
 
 import hospital.model.entity.Doctor;
+import hospital.model.entity.DoctorShift;
 import hospital.model.entity.Medical;
 import hospital.model.entity.TimeShift;
 import hospital.model.service.DoctorService;
@@ -32,7 +33,7 @@ public class TimeShiftRepository implements Repository<TimeShift, Integer>, Auto
         preparedStatement = connection.prepareStatement(
                 "insert into time_Shifts (id,doctor_id,medical_id,start_date_time,end_date_time)values(?,?,?,?,?) "
         );
-        preparedStatement.setInt(1,timeShift.getId());
+        preparedStatement.setInt(1, timeShift.getId());
         preparedStatement.setInt(2, timeShift.getDoctor().getId());
         preparedStatement.setInt(3, timeShift.getMedical().getId());
         preparedStatement.setTimestamp(4, Timestamp.valueOf(timeShift.getStartDateTime()));

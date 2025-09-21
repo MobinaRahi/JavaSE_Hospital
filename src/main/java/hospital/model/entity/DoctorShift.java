@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class DoctorShift {
     private int id;
     private int doctorId;
+    private int status;
     private LocalDateTime appointmentStart;
     private LocalDateTime appointmentEnd;
 
