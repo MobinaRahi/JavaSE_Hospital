@@ -70,6 +70,12 @@ public class PrescriptionService implements Service<Prescription, Integer> {
         }
     }
 
+    public List<Drug> updatePrescriptionPrice(Integer prescriptionId) throws Exception {
+        try (PrescriptionRepository prescriptionRepository = new PrescriptionRepository()) {
+            return prescriptionRepository.updatePrescriptionPrice(prescriptionId);
+        }
+    }
+
     public static void prescriptionsDrugs(List<Drug> drugList, int prescription_id) throws SQLException {
         Connection connection = ConnectionProvider.getProvider().getOracleConnection();
         for (Drug drug : drugList) {
@@ -80,6 +86,10 @@ public class PrescriptionService implements Service<Prescription, Integer> {
             preparedStatement.setInt(2, drug.getId());
             preparedStatement.execute();
         }
+
+
+
+
     }
 
 }

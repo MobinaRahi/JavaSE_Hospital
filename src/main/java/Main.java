@@ -1,4 +1,5 @@
 import hospital.model.entity.*;
+import hospital.model.entity.enums.VisitPrice;
 import hospital.model.repository.PrescriptionRepository;
 import hospital.model.service.*;
 
@@ -259,6 +260,19 @@ public class Main {
 //            System.out.println(drug.getName());
 //        }
 
+        //about payment of prescription
+        Visit visit =
+                Visit
+                        .builder()
+                        .doctor(DoctorService.getService().findById(1))
+                        .patient(PatientService.getService().findById(3))
+                        .timeShift(TimeShiftService.getService().findById(2))
+                        .price(VisitPrice.VISIT1.getPrice())
+                        .build();
+
+
+//        PrescriptionService.getService().updatePrescriptionPrice(1);
+//        VisitService.getService().save(visit);
 
 
     }

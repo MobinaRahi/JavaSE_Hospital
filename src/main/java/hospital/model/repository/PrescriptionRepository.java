@@ -112,4 +112,37 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
         }
         return drugList;
     }
+
+    public List<Drug> updatePrescriptionPrice(Integer prescriptionId) throws Exception {
+        DrugMapper drugMapper = new DrugMapper();
+        List<Drug> drugList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement(
+                "select * from drugs join prescriptions_drugs on drugs.id=prescriptions_drugs.drug_id where " +
+                        "prescriptions_drugs.prescription_id=?"
+        );
+        preparedStatement.setInt(1, prescriptionId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Drug drug = drugMapper.drugMapper(resultSet);
+            drugList.add(drug);
+        }
+
+
+        double totalPrice = 0;
+        for (Drug drug : drugList) {
+            totalPrice += drug.getPrice();
+        }
+
+        preparedStatement = connection.prepareStatement(
+                "update prescriptions set price=? where id=?"
+        );
+        preparedStatement.setDouble(1, totalPrice);
+        preparedStatement.setInt(2, prescriptionId);
+        preparedStatement.executeUpdate();
+
+        return drugList;
+    }
+
 }
