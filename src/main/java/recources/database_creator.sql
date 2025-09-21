@@ -180,7 +180,7 @@ create sequence prescriptions_drug_seq start with 1 increment by 1;
  (
      id  number primary key,
      doctor_id number not null ,
-     status   number(1)     default 1,
+     status   number(1)     default 0,
      appointment_start date not null,
      appointment_end date not null
  );
