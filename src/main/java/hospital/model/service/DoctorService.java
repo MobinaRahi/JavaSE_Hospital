@@ -73,9 +73,21 @@ public class DoctorService implements Service<Doctor, Integer> {
         }
     }
 
+    public List<DoctorShift> findAvailableTimeShifts() throws Exception{
+        try (DoctorRepository doctorRepository = new DoctorRepository()) {
+            return doctorRepository.findAvailableTimeShifts();
+        }
+    }
+
     public List<DoctorShift> findBookedTimeShifts() throws Exception{
         try (DoctorRepository doctorRepository = new DoctorRepository()) {
             return doctorRepository.findBookedTimeShifts();
+        }
+    }
+
+    public List<DoctorShift> findPaidTimeShifts() throws Exception{
+        try (DoctorRepository doctorRepository = new DoctorRepository()) {
+            return doctorRepository.findPaidTimeShifts();
         }
     }
 

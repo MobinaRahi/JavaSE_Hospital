@@ -127,7 +127,49 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
         return doctorList;
     }
 
+    public List<DoctorShift> findAvailableTimeShifts() throws Exception {
+        List<DoctorShift> doctorShiftList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from doctors_shifts where status=0"
+        );
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            DoctorShift doctorShift =
+                    DoctorShift
+                            .builder()
+                            .id(resultSet.getInt("id"))
+                            .doctorId(resultSet.getInt("doctor_id"))
+                            .status(resultSet.getInt("status"))
+                            .appointmentStart(resultSet.getTimestamp("appointment_start").toLocalDateTime())
+                            .appointmentEnd(resultSet.getTimestamp("appointment_end").toLocalDateTime())
+                            .build();
+            doctorShiftList.add(doctorShift);
+        }
+        return doctorShiftList;
+    }
+
     public List<DoctorShift> findBookedTimeShifts() throws Exception {
+        List<DoctorShift> doctorShiftList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from doctors_shifts where status=1"
+        );
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            DoctorShift doctorShift =
+                    DoctorShift
+                            .builder()
+                            .id(resultSet.getInt("id"))
+                            .doctorId(resultSet.getInt("doctor_id"))
+                            .status(resultSet.getInt("status"))
+                            .appointmentStart(resultSet.getTimestamp("appointment_start").toLocalDateTime())
+                            .appointmentEnd(resultSet.getTimestamp("appointment_end").toLocalDateTime())
+                            .build();
+            doctorShiftList.add(doctorShift);
+        }
+        return doctorShiftList;
+    }
+
+    public List<DoctorShift> findPaidTimeShifts() throws Exception {
         List<DoctorShift> doctorShiftList = new ArrayList<>();
         preparedStatement = connection.prepareStatement(
                 "select * from doctors_shifts where status=2"
@@ -161,6 +203,7 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
         }
         return patient;
     }
+
 
     @Override
     public void close() throws Exception {

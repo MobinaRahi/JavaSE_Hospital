@@ -192,7 +192,7 @@ public class Main {
 //        }
 
         //show Booked visit for Doctor
-//        for (DoctorShift bookedTimeShift : DoctorService.getService().findBookedTimeShifts()) {
+//        for (DoctorShift bookedTimeShift : DoctorService.getService().findPaidTimeShifts()) {
 //            System.out.println(bookedTimeShift.getAppointmentStart()+" -> "+bookedTimeShift.getAppointmentEnd());
 //        }
 
@@ -261,18 +261,31 @@ public class Main {
 //        }
 
         //about payment of prescription
-        Visit visit =
-                Visit
-                        .builder()
-                        .doctor(DoctorService.getService().findById(1))
-                        .patient(PatientService.getService().findById(3))
-                        .timeShift(TimeShiftService.getService().findById(2))
-                        .price(VisitPrice.VISIT1.getPrice())
-                        .build();
+//        Visit visit =
+//                Visit
+//                        .builder()
+//                        .doctor(DoctorService.getService().findById(1))
+//                        .patient(PatientService.getService().findById(3))
+//                        .timeShift(TimeShiftService.getService().findById(2))
+//                        .price(VisitPrice.VISIT1.getPrice())
+//                        .build();
 
 
 //        PrescriptionService.getService().updatePrescriptionPrice(1);
 //        VisitService.getService().save(visit);
+
+
+        //employee
+//        DoctorService.getService().findAll().forEach(System.out::println);
+//        for (DoctorShift bookedTimeShift : DoctorService.getService().findPaidTimeShifts()) {
+//            System.out.println(bookedTimeShift.getDoctorId()+" BOOKED " +bookedTimeShift.getAppointmentStart()+" -> "+bookedTimeShift.getAppointmentEnd());
+//        }
+//        for (DoctorShift findAvailableTimeShifts : DoctorService.getService().findPaidTimeShifts()) {
+//            System.out.println(findAvailableTimeShifts.getDoctorId()+" Available " +findAvailableTimeShifts.getAppointmentStart()+" -> "+findAvailableTimeShifts.getAppointmentEnd());
+//        }
+//        for (DoctorShift findPaidTimeShifts : DoctorService.getService().findPaidTimeShifts()) {
+//            System.out.println(findPaidTimeShifts.getId()+" Paid " +findPaidTimeShifts.getAppointmentStart()+" -> "+findPaidTimeShifts.getAppointmentEnd());
+//        }
 
 
     }
