@@ -242,12 +242,16 @@ public class Main {
 //
 //        PrescriptionService.getService().save(prescription);
 
+
+        //save prescription_drugs
 //       PrescriptionService.prescriptionsDrugs(drugList,1);
 
 
-        for (Drug drug : PrescriptionService.getService().showPrescription(1)) {
-            System.out.println(drug.getName());
-        }
+
+        // show prescription
+//        for (Drug drug : PrescriptionService.getService().showPrescription(1)) {
+//            System.out.println(drug.getName());
+//        }
 
 
 
