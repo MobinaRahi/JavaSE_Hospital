@@ -161,7 +161,7 @@ create table cash_desks
     id          number primary key,
     bank_id      number ,
     payType      nvarchar2(20) default 'CASH',
-    constraint fk_bank_cash_desk foreign key (bank_id) references banks (id)
+    constraint fk_cash_desk_bank foreign key (bank_id) references banks (id)
 );
 create sequence cash_desk_seq start with 1 increment by 1;
 --
