@@ -176,4 +176,11 @@ create table prescriptions_drugs
 );
 create sequence prescriptions_drug_seq start with 1 increment by 1;
 --
-
+ create table  doctors_shifts
+ (
+     id  number primary key,
+     doctor_id number not null ,
+     appointment_start date not null,
+     appointment_end date not null
+ );
+create sequence doctors_shift_seq start with 1 increment by 1;

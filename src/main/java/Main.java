@@ -105,7 +105,19 @@ public class Main {
 //
 //        DoctorService.getService().save(doctor2);
 
-//        Medical medical =
+        Medical medical =
+                Medical
+                        .builder()
+                        .title("Medical 1")
+                        .description("Medical 1")
+                        .doctor(DoctorService.getService().findById(4))
+                        .duration(60)
+                        .price(1500)
+                        .build();
+
+//        MedicalService.getService().save(medical);
+//
+//        Medical medical2 =
 //                Medical
 //                        .builder()
 //                        .title("Medical 1")
@@ -114,20 +126,8 @@ public class Main {
 //                        .duration(30)
 //                        .price(1500)
 //                        .build();
-//
-//        MedicalService.getService().save(medical);
-//
-        Medical medical2 =
-                Medical
-                        .builder()
-                        .title("Medical 1")
-                        .description("Medical 1")
-                        .doctor(DoctorService.getService().findById(2))
-                        .duration(15)
-                        .price(1500)
-                        .build();
-//
-        MedicalService.getService().save(medical2);
+////
+//        MedicalService.getService().save(medical2);
 
 
         //test signIn
@@ -162,64 +162,75 @@ public class Main {
 //                        .builder()
 //                        .doctor(DoctorService.getService().findById(2))
 //                        .medical(MedicalService.getService().findById(6))
-//                        .startDateTime(LocalDateTime.of(2004, Month.JANUARY, 1, 11, 30, 0))
-//                        .endDateTime(LocalDateTime.of(2004, Month.JANUARY, 2, 11, 30, 0))
+//                        .startDateTime(LocalDateTime.of(4000, Month.JANUARY, 1, 11, 30, 0))
+//                        .endDateTime(LocalDateTime.of(4000, Month.JANUARY, 1, 15, 30, 0))
 //                        .build();
 //
 //        TimeShiftService.getService().save(timeShift);
-//
+        TimeShift timeShift1 =
+                TimeShift
+                        .builder()
+                        .doctor(DoctorService.getService().findById(4))
+                        .medical(MedicalService.getService().findById(37))
+                        .startDateTime(LocalDateTime.of(1404, Month.JANUARY, 1, 10, 30, 0))
+                        .endDateTime(LocalDateTime.of(1404, Month.JANUARY, 1, 12, 30, 0))
+                        .build();
+
+//        TimeShiftService.getService().save(timeShift1);
+
 
         //Doctor's shifts
 
-//        for (TimeShift generateTimeShift : TimeShiftService.generateTimeShifts(
-//                DoctorService.getService().findById(2),
-//                MedicalService.getService().findById(6),
-//                timeShift.getStartDateTime(),
-//                timeShift.getEndDateTime()))
-//        {
-//            System.out.println(generateTimeShift.getStartDateTime().format(timeFormatter) + " -> " + generateTimeShift.getEndDateTime().format(timeFormatter));
-//        }
+        for (TimeShift generateTimeShift : TimeShiftService.generateTimeShifts(
+                DoctorService.getService().findById(timeShift1.getDoctor().getId()),
+                MedicalService.getService().findById(timeShift1.getMedical().getId()),
+                timeShift1.getStartDateTime(),
+                timeShift1.getEndDateTime()))
+        {
+            System.out.println(generateTimeShift.getStartDateTime().format(timeFormatter) + " -> " + generateTimeShift.getEndDateTime().format(timeFormatter));
+        }
+
 //
 
-        Drug drug1=
-                Drug
-                        .builder()
-                        .name("aaa")
-                        .price(12500)
-                        .quantity(100)
-                        .build();
-        Drug drug2=
-                Drug
-                        .builder()
-                        .name("bbb")
-                        .price(12500)
-                        .quantity(100)
-                        .build();
-        Drug drug3=
-                Drug
-                        .builder()
-                        .name("ccc")
-                        .price(12500)
-                        .quantity(100)
-                        .build();
-        Drug drug4=
-                Drug
-                        .builder()
-                        .name("ddd")
-                        .price(12500)
-                        .quantity(100)
-                        .build();
-
-        DrugService.getService().save(drug1);
-        DrugService.getService().save(drug2);
-        DrugService.getService().save(drug3);
-        DrugService.getService().save(drug4);
-
-        List<Drug>drugList=new ArrayList<>();
-        drugList.add(drug1);
-        drugList.add(drug2);
-        drugList.add(drug3);
-        drugList.add(drug4);
+//        Drug drug1=
+//                Drug
+//                        .builder()
+//                        .name("aaa")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//        Drug drug2=
+//                Drug
+//                        .builder()
+//                        .name("bbb")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//        Drug drug3=
+//                Drug
+//                        .builder()
+//                        .name("ccc")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//        Drug drug4=
+//                Drug
+//                        .builder()
+//                        .name("ddd")
+//                        .price(12500)
+//                        .quantity(100)
+//                        .build();
+//
+//        DrugService.getService().save(drug1);
+//        DrugService.getService().save(drug2);
+//        DrugService.getService().save(drug3);
+//        DrugService.getService().save(drug4);
+//
+//        List<Drug>drugList=new ArrayList<>();
+//        drugList.add(drug1);
+//        drugList.add(drug2);
+//        drugList.add(drug3);
+//        drugList.add(drug4);
 
 
 
@@ -233,7 +244,7 @@ public class Main {
 //
 //        PrescriptionService.getService().save(prescription);
 
-       PrescriptionService.prescriptionsDrugs(drugList,1);
+//       PrescriptionService.prescriptionsDrugs(drugList,1);
 
 
 
