@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -27,10 +28,18 @@ public class ConnectionProvider {
         return basicDataSource.getConnection();
     }
 
-    public int getNextId(String sequenceName) throws Exception{
-        ResultSet resultSet = getOracleConnection().prepareStatement(String.format("select %s.nextval as NEXT_ID from dual", sequenceName)).executeQuery();
-        resultSet.next();
-        return resultSet.getInt("NEXT_ID");
+    public int getNextId(String sequenceName) throws Exception {
+        String sql = String.format("select %s.nextval as NEXT_ID from dual", sequenceName);
+        try (Connection connection = getOracleConnection();
+             PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("NEXT_ID");
+            } else {
+                throw new SQLException("Sequence " + sequenceName + " did not return a value!");
+            }
+        }
     }
+
 
 }

@@ -3,6 +3,7 @@ package hospital.model.repository;
 import hospital.model.entity.Drug;
 import hospital.model.entity.Prescription;
 import hospital.model.tools.ConnectionProvider;
+import hospital.model.tools.DrugMapper;
 import hospital.model.tools.PrescriptionMapper;
 import lombok.extern.log4j.Log4j2;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public class PrescriptionRepository implements Repository<Prescription, Integer>, AutoCloseable{
+public class PrescriptionRepository implements Repository<Prescription, Integer>, AutoCloseable {
 
     private final Connection connection;
     private PreparedStatement preparedStatement;
@@ -95,4 +96,22 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
         connection.close();
     }
 
+    public List<Drug> showPrescription(Integer prescriptionId) throws Exception {
+        DrugMapper drugMapper = new DrugMapper();
+        List<Drug> drugList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from prescriptions_drugs where prescription_id=?"
+        );
+        preparedStatement.setInt(1, prescriptionId);
+        preparedStatement.execute();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            preparedStatement = connection.prepareStatement(
+                    "select * from prescriptions_drugs where prescription_id=?"
+            );
+            Drug drug = drugMapper.drugMapper(resultSet);
+            drugList.add(drug);
+        }
+        return drugList;
+    }
 }

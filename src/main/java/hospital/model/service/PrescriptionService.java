@@ -64,14 +64,20 @@ public class PrescriptionService implements Service<Prescription, Integer> {
 
     }
 
-    public static void prescriptionsDrugs(List<Drug>drugList,int prescription_id) throws SQLException {
+    public List<Drug> showPrescription(Integer prescriptionId) throws Exception {
+        try (PrescriptionRepository prescriptionRepository = new PrescriptionRepository()) {
+            return prescriptionRepository.showPrescription(prescriptionId);
+        }
+    }
+
+    public static void prescriptionsDrugs(List<Drug> drugList, int prescription_id) throws SQLException {
         Connection connection = ConnectionProvider.getProvider().getOracleConnection();
         for (Drug drug : drugList) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "insert into prescriptions_drugs (prescription_id,drug_id)values (?,?)"
             );
             preparedStatement.setInt(1, prescription_id);
-            preparedStatement.setInt(2,drug.getId());
+            preparedStatement.setInt(2, drug.getId());
             preparedStatement.execute();
         }
     }
