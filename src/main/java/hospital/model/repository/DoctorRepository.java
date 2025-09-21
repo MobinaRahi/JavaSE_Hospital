@@ -3,10 +3,12 @@ package hospital.model.repository;
 
 import hospital.model.entity.Doctor;
 import hospital.model.entity.DoctorShift;
+import hospital.model.entity.Patient;
 import hospital.model.entity.TimeShift;
 import hospital.model.service.DoctorService;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.DoctorMapper;
+import hospital.model.tools.PatientMapper;
 import hospital.model.tools.TimeShiftMapper;
 import lombok.extern.log4j.Log4j2;
 
@@ -144,6 +146,20 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
             doctorShiftList.add(doctorShift);
         }
         return doctorShiftList;
+    }
+
+    public Patient showPatientInformation(Integer visitId) throws Exception {
+        PatientMapper patientMapper = new PatientMapper();
+        Patient patient = null;
+        preparedStatement = connection.prepareStatement(
+                "select * from patients join visits on visits.patient_id = patients.id where visits.id = ?"
+        );
+        preparedStatement.setInt(1, visitId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            patient=patientMapper.patientMapper(resultSet);
+        }
+        return patient;
     }
 
     @Override

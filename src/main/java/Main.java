@@ -195,8 +195,9 @@ public class Main {
 //            System.out.println(bookedTimeShift.getAppointmentStart()+" -> "+bookedTimeShift.getAppointmentEnd());
 //        }
 
+        //show patients Information
+//        System.out.println(DoctorService.getService().showPatientInformation(3));
 
-//
 
 //        Drug drug1=
 //                Drug
@@ -238,7 +239,6 @@ public class Main {
 //        drugList.add(drug3);
 //        drugList.add(drug4);
 
-
 //        Prescription prescription=
 //                Prescription
 //                        .builder()
@@ -248,13 +248,13 @@ public class Main {
 //
 //        PrescriptionService.getService().save(prescription);
 
-
         //save prescription_drugs
+
 //       PrescriptionService.prescriptionsDrugs(drugList,1);
 
 
-
         // show prescription
+
 //        for (Drug drug : PrescriptionService.getService().showPrescription(1)) {
 //            System.out.println(drug.getName());
 //        }
