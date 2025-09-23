@@ -34,6 +34,10 @@ public class Main {
 
         TimeShiftTestService.saveTimeShifts();
 
+        PrescriptionTestService.savePrescriptions();
+
+        VisitsTestService.saveVisits();
+
 
         for (DoctorShift bookedTimeShift : DoctorService.getService().findPaidTimeShifts()) {
             System.out.println(bookedTimeShift.getAppointmentStart()+" -> "+bookedTimeShift.getAppointmentEnd());
@@ -42,20 +46,6 @@ public class Main {
 
         System.out.println(DoctorService.getService().showPatientInformation(3));
 
-        List<Drug> drugList = DrugTestService.saveDrugs();
-
-        Prescription prescription=
-                Prescription
-                        .builder()
-                        .drugList(drugList)
-                        .visit(VisitService.getService().findById(3))
-                        .price(12500)
-                        .build();
-
-        PrescriptionService.getService().save(prescription);
-        System.out.println(prescription);
-
-//        save prescription_drugs
 
 //       PrescriptionService.getService().prescriptionsDrugs(drugList,1);
 
@@ -68,20 +58,6 @@ public class Main {
         for (Drug drug : PrescriptionService.getService().showPrescription(1)) {
             System.out.println(drug.getName());
         }
-
-//        about payment of prescription
-        Visit visit =
-                Visit
-                        .builder()
-                        .doctor(DoctorService.getService().findById(1))
-                        .patient(PatientService.getService().findById(3))
-                        .timeShift(TimeShiftService.getService().findById(2))
-                        .price(VisitPrice.VISIT1.getPrice())
-                        .build();
-
-
-        PrescriptionService.getService().updatePrescriptionPrice(1);
-        VisitService.getService().save(visit);
 
 
 //        employee
