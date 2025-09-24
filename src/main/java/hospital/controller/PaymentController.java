@@ -3,13 +3,16 @@ package hospital.controller;
 import hospital.model.entity.Payment;
 import hospital.model.entity.enums.PayFor;
 import hospital.model.entity.enums.PayType;
+import hospital.model.service.PaymentService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import lombok.extern.log4j.Log4j;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ResourceBundle;
 @Log4j
 public class PaymentController implements Initializable{
@@ -37,4 +40,19 @@ public class PaymentController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+    private void resetForm(){
+        idText.clear();
+        for( PayType payType:PayType.values()){
+            payTypeCombo.getItems().add(payType);
+        }
+        payTypeCombo.getSelectionModel().select(0);
+        DatePicker.setValue(LocalDate.now());
+
+        for( PayFor payFor :PayFor.values()){
+            payForCombo.getItems().add(payFor);
+        }
+        priceText.clear();
+      //  showDateOnTable(PaymentService.getService().findAll());
+    }
+    private void showDateOnTable(List<Payment> paymentList){}
 }
