@@ -7,14 +7,14 @@ import hospital.model.service.PaymentService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
-@Log4j
+@Log4j2
 public class PaymentController implements Initializable{
     @FXML
     private TextField idText,priceText;
