@@ -2,8 +2,6 @@ package hospital.model.repository;
 
 
 import hospital.model.entity.*;
-import hospital.model.service.DoctorService;
-import hospital.model.service.UserService;
 import hospital.model.tools.*;
 import lombok.extern.log4j.Log4j2;
 
