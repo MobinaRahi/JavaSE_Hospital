@@ -101,7 +101,10 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
         List<Drug> drugList = new ArrayList<>();
 
         preparedStatement = connection.prepareStatement(
-                "select * from PRESCRIPTIONS_DRUGS where DRUG_ID=?"
+                "SELECT d.id, d.name, d.price, d.quantity " +
+                        "FROM drugs d " +
+                        "JOIN prescriptions_drugs pd ON d.id = pd.drug_id " +
+                        "WHERE pd.prescription_id = ?"
         );
         preparedStatement.setInt(1, prescriptionId);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -111,6 +114,7 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
         }
         return drugList;
     }
+
 
 
     @Override
