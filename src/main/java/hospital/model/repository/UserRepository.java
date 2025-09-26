@@ -2,6 +2,7 @@ package hospital.model.repository;
 
 
 import hospital.model.entity.User;
+import hospital.model.entity.enums.Role;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.UserMapper;
 import lombok.extern.log4j.Log4j2;
@@ -116,6 +117,22 @@ public class UserRepository implements Repository<User, Integer>, AutoCloseable{
         }
         return user;
     }
+
+    public List<User> findByNameAndFamily(String name, String family) throws Exception {
+        List<User> userList = new ArrayList<>();
+
+        preparedStatement = connection.prepareStatement("select * from users where name like ? and family like ?");
+        preparedStatement.setString(1, name + "%");
+        preparedStatement.setString(2, family + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            User user = userMapper.userMapper(resultSet);
+            userList.add(user);
+        }
+        return userList;
+    }
+
 
     @Override
     public void close() throws Exception {
