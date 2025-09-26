@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+
 @Log4j2
 public class PatientController implements Initializable {
 
