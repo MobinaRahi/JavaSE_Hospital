@@ -1,15 +1,10 @@
 package hospital.model.repository;
 
 
-import hospital.model.entity.Doctor;
-import hospital.model.entity.DoctorShift;
-import hospital.model.entity.Patient;
-import hospital.model.entity.TimeShift;
+import hospital.model.entity.*;
 import hospital.model.service.DoctorService;
-import hospital.model.tools.ConnectionProvider;
-import hospital.model.tools.DoctorMapper;
-import hospital.model.tools.PatientMapper;
-import hospital.model.tools.TimeShiftMapper;
+import hospital.model.service.UserService;
+import hospital.model.tools.*;
 import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
@@ -96,12 +91,15 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
         );
         preparedStatement.setInt(1, userId);
         ResultSet resultSet = preparedStatement.executeQuery();
+
         while (resultSet.next()) {
             Doctor doctor = doctorMapper.doctorMapper(resultSet);
             doctorList.add(doctor);
         }
+
         return doctorList;
     }
+
 
     public List<Doctor>  findBySpecialty(String specialty) throws Exception {
         List<Doctor> doctorList = new ArrayList<>();
@@ -118,12 +116,19 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
     }
 
     public List<Doctor> findByNameAndFamily(String name, String family) throws Exception {
+        UserMapper userMapper = new UserMapper();
         List<Doctor> doctorList = new ArrayList<>();
-        for (Doctor doctor : DoctorService.getService().findAll()) {
-            if(doctor.getUser().getName().equals(name)&&doctor.getUser().getFamily().equals(family)){
-                doctorList.add(doctor);
-            }
-        }
+    preparedStatement = connection.prepareStatement(
+            "select *from users where name like ? and family like ?"
+    );
+    preparedStatement.setString(1, name+"%");
+    preparedStatement.setString(2, family+"%");
+    ResultSet resultSet = preparedStatement.executeQuery();
+    while (resultSet.next()) {
+        User user = userMapper.userMapper(resultSet);
+        List<Doctor> doctorsOfUser = findByUserId(user.getId());
+        doctorList.addAll(doctorsOfUser);
+    }
         return doctorList;
     }
 
