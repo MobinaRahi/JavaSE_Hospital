@@ -12,7 +12,7 @@ public class EmployeeMapper {
                 .builder()
                 .id(resultSet.getInt("id"))
                 .user(UserService.getService().findById(resultSet.getInt("user_id")))
-                .startTime(resultSet.getTime("end_time").toLocalTime())
+                .startTime(resultSet.getTime("start_time").toLocalTime())
                 .endTime(resultSet.getTime("end_time").toLocalTime())
                 .build();
     }

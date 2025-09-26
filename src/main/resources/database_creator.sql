@@ -33,8 +33,8 @@ create table employees
 (
     id         number primary key,
     user_id    number,
-    start_time date not null,
-    end_time   date not null,
+    start_time nvarchar2(20) not null,
+    end_time   nvarchar2(20) not null,
     constraint fk_employee_user FOREIGN KEY (user_id) references users (id)
 );
 

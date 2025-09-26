@@ -5,6 +5,8 @@ import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.EmployeeMapper;
 
 import java.sql.*;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +29,8 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
         );
         preparedStatement.setInt(1, employee.getId());
         preparedStatement.setInt(2, employee.getUser().getId());
-        preparedStatement.setTime(3, Time.valueOf(employee.getStartTime()));
-        preparedStatement.setTime(4,Time.valueOf(employee.getEndTime()));
+        preparedStatement.setString(3, employee.getStartTime().format(DateTimeFormatter.ISO_LOCAL_TIME));
+        preparedStatement.setString(4, employee.getEndTime().format(DateTimeFormatter.ISO_LOCAL_TIME));
         preparedStatement.execute();
     }
 
@@ -37,8 +39,8 @@ public class EmployeeRepository implements Repository<Employee, Integer>, AutoCl
         preparedStatement = connection.prepareStatement(
                 "update employees set start_time=?,end_time=? where id=?"
         );
-        preparedStatement.setTime(1, Time.valueOf(employee.getStartTime()));
-        preparedStatement.setTime(2,Time.valueOf(employee.getEndTime()));
+        preparedStatement.setString(1, employee.getStartTime().format(DateTimeFormatter.ISO_LOCAL_TIME));
+        preparedStatement.setString(2, employee.getEndTime().format(DateTimeFormatter.ISO_LOCAL_TIME));
         preparedStatement.setInt(3, employee.getId());
         preparedStatement.execute();
     }
