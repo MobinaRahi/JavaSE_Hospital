@@ -3,7 +3,6 @@ package hospital.controller;
 import hospital.model.entity.User;
 import hospital.model.entity.enums.Role;
 import hospital.model.service.UserService;
-import javafx.beans.property.adapter.JavaBeanBooleanPropertyBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
