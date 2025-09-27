@@ -1,7 +1,4 @@
 package hospital.model.repository;
-
-import hospital.model.entity.Employee;
-import hospital.model.entity.User;
 import hospital.model.entity.Visit;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.VisitMapper;
@@ -70,7 +67,7 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
         );
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Visit visit = visitMapper.visitmapper(resultSet);
+            Visit visit = visitMapper.visitMapper(resultSet);
             visits.add(visit);
         }
         return visits;
@@ -85,23 +82,11 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            visit = visitMapper.visitmapper(resultSet);
+            visit = visitMapper.visitMapper(resultSet);
         }
         return visit;
     }
 
-//    public Visit findByPatientId(Integer patientId) throws Exception {
-//        Visit visit = null;
-//        preparedStatement = connection.prepareStatement(
-//                "select * from visits where patient_id=?"
-//        );
-//        preparedStatement.setInt(1, patientId);
-//        ResultSet resultSet = preparedStatement.executeQuery();
-//        if (resultSet.next()) {
-//            visit = visitMapper.visitmapper(resultSet);
-//        }
-//        return visit;
-//    }
 
     @Override
     public void close() throws Exception {
@@ -117,7 +102,7 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
         preparedStatement.setInt(1, doctorId);
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()){
-            Visit visit = visitMapper.visitmapper(resultSet);
+            Visit visit = visitMapper.visitMapper(resultSet);
             visitList.add(visit);
         }
         return visitList;
@@ -131,7 +116,7 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
         preparedStatement.setInt(1, patientId);
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()){
-            Visit visit = visitMapper.visitmapper(resultSet);
+            Visit visit = visitMapper.visitMapper(resultSet);
             visitList.add(visit);
         }
         return visitList;

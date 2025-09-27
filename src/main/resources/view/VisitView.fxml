@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.VisitController">
    <children>
       <VBox layoutX="14.0" layoutY="30.0" prefHeight="200.0" prefWidth="42.0">
@@ -55,7 +54,6 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -63,14 +61,12 @@
             <Label text="Doctor_Id" GridPane.rowIndex="1" />
             <Label text="Patient_Id" GridPane.rowIndex="2" />
             <Label text="TimeShift_Id" GridPane.rowIndex="3" />
-            <Label text="Payment_Id" GridPane.rowIndex="4" />
-            <Label text="Price" GridPane.rowIndex="5" />
+            <Label text="Price" GridPane.rowIndex="4" />
             <TextField fx:id="idText" GridPane.columnIndex="1" />
             <TextField fx:id="doctorIdText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="patientIdText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="timeShiftIdText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="paymentIdText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ComboBox fx:id="priceCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="priceCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <TableView fx:id="visitTable" layoutX="344.0" layoutY="52.0" prefHeight="227.0" prefWidth="347.0">
