@@ -90,6 +90,19 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
         return visit;
     }
 
+//    public Visit findByPatientId(Integer patientId) throws Exception {
+//        Visit visit = null;
+//        preparedStatement = connection.prepareStatement(
+//                "select * from visits where patient_id=?"
+//        );
+//        preparedStatement.setInt(1, patientId);
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        if (resultSet.next()) {
+//            visit = visitMapper.visitmapper(resultSet);
+//        }
+//        return visit;
+//    }
+
     @Override
     public void close() throws Exception {
         preparedStatement.close();

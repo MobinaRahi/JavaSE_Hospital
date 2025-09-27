@@ -62,7 +62,7 @@ public class TimeShiftService implements Service<TimeShift, Integer> {
         }
     }
 
-    public TimeShift findTimeShiftByDoctorId(int doctorId) throws Exception {
+    public List<TimeShift> findTimeShiftByDoctorId(int doctorId) throws Exception {
         try (TimeShiftRepository timeShiftRepository = new TimeShiftRepository()) {
             return timeShiftRepository.findTimeShiftByDoctorId(doctorId);
         }

@@ -62,4 +62,9 @@ public class VisitService implements Service<Visit,Integer>{
             return visitRepository.findByPatientId(patientId);
         }
     }
+//    public Visit findByPatientId(Integer patientId) throws Exception{
+//        try (VisitRepository visitRepository = new VisitRepository()) {
+//            return visitRepository.findByPatientId(patientId);
+//        }
+//    }
 }

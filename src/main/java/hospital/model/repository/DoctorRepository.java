@@ -47,6 +47,11 @@ public class DoctorRepository implements Repository<Doctor , Integer>, AutoClose
 
     @Override
     public void delete(Integer id) throws Exception {
+        PreparedStatement ps = connection.prepareStatement(
+                "DELETE FROM time_shifts WHERE doctor_id=?"
+        );
+        ps.setInt(1, id);
+        ps.execute();
         preparedStatement = connection.prepareStatement(
                 "delete from doctors where id=?"
         );

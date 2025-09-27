@@ -94,17 +94,18 @@ public class TimeShiftRepository implements Repository<TimeShift, Integer>, Auto
         return timeShift;
     }
 
-    public TimeShift findTimeShiftByDoctorId(int doctorId) throws Exception {
-        TimeShift timeShift = null;
+    public List<TimeShift> findTimeShiftByDoctorId(int doctorId) throws Exception {
+        List<TimeShift> timeShiftList = new ArrayList<>();
         preparedStatement = connection.prepareStatement(
                 "select * from time_Shifts where doctor_id=?"
         );
         preparedStatement.setInt(1, doctorId);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            timeShift = timeShiftMapper.timeShiftMapper(resultSet);
+        while (resultSet.next()) {
+            TimeShift timeShift = timeShiftMapper.timeShiftMapper(resultSet);
+            timeShiftList.add(timeShift);
         }
-        return timeShift;
+        return timeShiftList;
     }
 
     public TimeShift findTimeShiftByMedicalId(int medicalId) throws Exception {
