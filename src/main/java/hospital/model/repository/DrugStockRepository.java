@@ -1,5 +1,4 @@
 package hospital.model.repository;
-import hospital.model.entity.Drug;
 import hospital.model.entity.DrugStock;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.DrugStockMapper;
@@ -62,7 +61,7 @@ public class DrugStockRepository implements Repository<DrugStock, Integer>,AutoC
     @Override
     public List<DrugStock> findAll ( ) throws Exception {
         List<DrugStock> drugStockList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from druugs_stock order by drug_count");
+        preparedStatement = connection.prepareStatement("select * from drugs_stock order by drug_count");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             DrugStock drugStock=drugStockMapper .drugStockMapper(resultSet);

@@ -1,9 +1,9 @@
 package hospital.controller;
 
-import hospital.model.entity.Drug;
 import hospital.model.entity.DrugStock;
 import hospital.model.service.DrugService;
 import hospital.model.service.DrugStockService;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ public class DrugStockController implements Initializable {
     private TableView<DrugStock> drugStockTable;
 
     @FXML
-    private TableColumn<Drug,Integer> idColumn , drugIdColumn , drugCountColumn;
+    private TableColumn<DrugStock,Integer> idColumn , drugIdColumn , drugCountColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -37,8 +37,7 @@ public class DrugStockController implements Initializable {
         try {
             resetForm();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
-            alert.show();
+            throw new RuntimeException(e);
         }
 
         saveButton.setOnAction(event -> {
@@ -98,7 +97,7 @@ public class DrugStockController implements Initializable {
         });
 
         drugStockTable.setOnKeyReleased((event) -> selectFromTable());
-        drugStockTable.setOnKeyReleased((event) -> selectFromTable());
+        drugStockTable.setOnMouseReleased((event) -> selectFromTable());
 
     }
 
@@ -114,8 +113,15 @@ public class DrugStockController implements Initializable {
         ObservableList<DrugStock> drugStockObservableList = FXCollections.observableArrayList(drugStockList);
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        drugIdColumn.setCellValueFactory(new PropertyValueFactory<>("drugId"));
-        drugCountColumn.setCellValueFactory(new  PropertyValueFactory<>("count"));
+        drugIdColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getDrug() != null) {
+                return new SimpleObjectProperty<>(cellData.getValue().getDrug().getId());
+            } else {
+                return new SimpleObjectProperty<>(null);
+            }
+        });
+
+        drugCountColumn.setCellValueFactory(new  PropertyValueFactory<>("drugCount"));
         drugStockTable.setItems(drugStockObservableList);
     }
 
