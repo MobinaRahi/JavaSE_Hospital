@@ -62,7 +62,7 @@ public class MedicalController implements Initializable {
                 restForm();
             } catch (Exception e) {
                 log.error("medical Save Failed" + e.getMessage());
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Person Edit Failed " + e.getMessage(), ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Medical Save Failed" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
         });
@@ -79,7 +79,7 @@ public class MedicalController implements Initializable {
                                 .duration(Integer.parseInt(durationText.getText()))
                                 .price(Float.parseFloat(priceText.getText()))
                                 .build();
-                MedicalService.getService().save(medical);
+                MedicalService.getService().edit(medical);
                 log.info("Medical Saved Successfully");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edited Successfully\n" + medical, ButtonType.OK);
                 alert.show();
