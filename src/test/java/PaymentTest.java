@@ -43,18 +43,27 @@ public class PaymentTest {
 //                        .build();
 //
 //        PatientService.getService().save(patient);
+     Payable payable = VisitService.getService().findById(3);
+if (payable == null) {
+    throw new RuntimeException("Visit with this ID not found");
+}
 
-        Payment payment=
-                Payment
-                        .builder()
-                        .payType(PayType.CASH)
-                        .payDateTime(LocalDateTime.now())
-                        .price(1500)
-                        .payFor(PayFor.Visit)
-                        .payable(VisitService.getService().findById(3))
-                        .build();
+Payment payment = Payment.builder()
+        .payType(PayType.CASH)
+        .payDateTime(LocalDateTime.now())
+        .price(1500)
+        .payFor(PayFor.Visit)
+        .payable(payable)
+        .build();
 
-        PaymentService.getService().save(payment);
+try {
+    PaymentService.getService().save(payment);
+    System.out.println(" Payment saved successfully.");
+} catch (Exception e) {
+    System.out.println(" Error saving payment: " + e.getMessage());
+    e.printStackTrace();
+}
+    
 
         //        Service test pass
 
