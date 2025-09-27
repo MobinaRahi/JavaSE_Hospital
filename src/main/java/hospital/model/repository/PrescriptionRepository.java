@@ -70,6 +70,24 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
         log.info("Prescription has been deleted successfully");
     }
 
+    public void removeDrugFromPrescription(int prescriptionId, int drugId) throws Exception {
+        preparedStatement = connection.prepareStatement(
+                "delete from prescriptions_drugs where prescription_id=? and drug_id=?"
+        );
+        preparedStatement.setInt(1, prescriptionId);
+        preparedStatement.setInt(2, drugId);
+        preparedStatement.execute();
+    }
+
+    public void addDrugToPrescription(int prescriptionId, int drugId) throws Exception {
+        preparedStatement = connection.prepareStatement(
+                "insert into prescriptions_drugs (prescription_id, drug_id) values (?, ?)"
+        );
+        preparedStatement.setInt(1, prescriptionId);
+        preparedStatement.setInt(2, drugId);
+        preparedStatement.execute();
+    }
+
     @Override
     public List<Prescription> findAll() throws Exception {
         List<Prescription> prescriptionList = new ArrayList<>();
@@ -108,7 +126,6 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
         return prescription;
     }
 
-
     @Override
     public void close() throws Exception {
         preparedStatement.close();
@@ -132,36 +149,5 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
         return drugList;
     }
 
-    public List<Drug> updatePrescriptionPrice(Integer prescriptionId) throws Exception {
-        DrugMapper drugMapper = new DrugMapper();
-        List<Drug> drugList = new ArrayList<>();
-
-        preparedStatement = connection.prepareStatement(
-                "select * from drugs join prescriptions_drugs on drugs.id=prescriptions_drugs.drug_id where " +
-                        "prescriptions_drugs.prescription_id=?"
-        );
-        preparedStatement.setInt(1, prescriptionId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-            Drug drug = drugMapper.drugMapper(resultSet);
-            drugList.add(drug);
-        }
-
-
-        double totalPrice = 0;
-        for (Drug drug : drugList) {
-            totalPrice += drug.getPrice();
-        }
-
-        preparedStatement = connection.prepareStatement(
-                "update prescriptions set price=? where id=?"
-        );
-        preparedStatement.setDouble(1, totalPrice);
-        preparedStatement.setInt(2, prescriptionId);
-        preparedStatement.executeUpdate();
-
-        return drugList;
-    }
 
 }

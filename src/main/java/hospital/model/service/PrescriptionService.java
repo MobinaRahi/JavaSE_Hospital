@@ -63,17 +63,23 @@ public class PrescriptionService implements Service<Prescription, Integer> {
 
     }
 
-    public List<Drug> showPrescription(Integer prescriptionId) throws Exception {
+    public void removeDrugFromPrescription(int prescriptionId, int drugId) throws Exception{
+        try (PrescriptionRepository prescriptionRepository = new PrescriptionRepository()) {
+            prescriptionRepository.removeDrugFromPrescription(prescriptionId,drugId);
+        }
+    }
+    public void addDrugToPrescription(int prescriptionId, int drugId) throws Exception{
+        try (PrescriptionRepository prescriptionRepository = new PrescriptionRepository()) {
+            prescriptionRepository.addDrugToPrescription(prescriptionId,drugId);
+        }
+    }
+
+public List<Drug> showPrescription(Integer prescriptionId) throws Exception {
         try (PrescriptionRepository prescriptionRepository = new PrescriptionRepository()) {
             return prescriptionRepository.showPrescription(prescriptionId);
         }
     }
 
-    public List<Drug> updatePrescriptionPrice(Integer prescriptionId) throws Exception {
-        try (PrescriptionRepository prescriptionRepository = new PrescriptionRepository()) {
-            return prescriptionRepository.updatePrescriptionPrice(prescriptionId);
-        }
-    }
 }
 
 
