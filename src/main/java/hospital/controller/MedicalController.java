@@ -38,7 +38,7 @@ public class MedicalController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            restForm();
+            resetForm();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data", ButtonType.OK);
             alert.show();
@@ -59,7 +59,7 @@ public class MedicalController implements Initializable {
                 log.info("Medical Saved Successfully");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" + medical, ButtonType.OK);
                 alert.show();
-                restForm();
+                resetForm();
             } catch (Exception e) {
                 log.error("medical Save Failed" + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Medical Save Failed" + e.getMessage(), ButtonType.OK);
@@ -80,10 +80,10 @@ public class MedicalController implements Initializable {
                                 .price(Float.parseFloat(priceText.getText()))
                                 .build();
                 MedicalService.getService().edit(medical);
-                log.info("Medical Saved Successfully");
+                log.info("Medical Edit Successfully");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edited Successfully\n" + medical, ButtonType.OK);
                 alert.show();
-                restForm();
+                resetForm();
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Medical Edit Failed " + e.getMessage(), ButtonType.OK);
                 alert.show();
@@ -96,7 +96,7 @@ public class MedicalController implements Initializable {
                 log.info("Medical Deleted Successfully");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully\n" + idText.getText(), ButtonType.OK);
                 alert.show();
-                restForm();
+                resetForm();
             } catch (Exception e) {
                 log.error("Medical Delete Failed" + e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Medical Delete Failed " + e.getMessage(), ButtonType.OK);
@@ -110,7 +110,7 @@ public class MedicalController implements Initializable {
         searchDoctorIdText.setOnKeyReleased((event) -> searchByDoctorId());
     }
 
-    private void restForm() throws Exception {
+    private void resetForm() throws Exception {
         idText.clear();
         titleText.clear();
         descriptionText.clear();
