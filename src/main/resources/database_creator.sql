@@ -38,24 +38,20 @@ create table employees
     constraint fk_employee_user FOREIGN KEY (user_id) references users (id)
 );
 
-create sequence employee_seq start with 1 increment by 1;
+create sequence employee_seq start with 1 increment by ith 1 increment by 1;
 --
-
-
 create table payments
 (
     id            number primary key,
     pay_type      nvarchar2(20) default 'CASH',
-    pay_date_time date   not null,
+    pay_date_time TIMESTAMP not null,
     price         number not null,
     pay_for       nvarchar2(20),
-    pay_id       number not null
-
+    payable_id     number not null
 );
 create sequence payment_seq start with 1 increment by 1;
+
 --
-
-
 create table patients
 (
     id      number primary key,
