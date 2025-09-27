@@ -45,11 +45,6 @@ public class PaymentService implements Service<Payment,Integer> {
         }
     }
 
-    public Payment findByPayable (Payable payable) throws Exception {
-        try (PaymentRepository paymentRepository = new PaymentRepository()) {
-            return paymentRepository.findByPayable(payable);
-        }
-    }
 
     @Override
     public Payment findById (Integer id) throws Exception {
