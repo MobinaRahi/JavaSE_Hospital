@@ -43,7 +43,7 @@ public class PaymentRepository implements Repository<Payment, Integer>,AutoClose
         preparedStatement.setTimestamp(2, Timestamp.valueOf(payment.getPayDateTime()));
         preparedStatement.setFloat(3,payment.getPrice());
         preparedStatement.setObject(4,payment.getPayable());
-        preparedStatement.setInt(4, payment.getId());
+        preparedStatement.setInt(5, payment.getId());
         preparedStatement.execute();
 
     }
@@ -80,16 +80,17 @@ public class PaymentRepository implements Repository<Payment, Integer>,AutoClose
         }
         return payment;
     }
-    public Payment findByPayable (Payable payable) throws Exception {
+        public Payment findByPayable (Payable payable) throws Exception {
         Payment payment = null;
-        preparedStatement = connection.prepareStatement("select * from payments where payable=?");
-        preparedStatement.setObject(1, payable);
+        preparedStatement = connection.prepareStatement("select * from payments where payable_id=?"); // فرض بر نام ستون payable_id
+        preparedStatement.setInt(1, payable.getId());
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             payment = paymentMapper.paymentMapper(resultSet);
         }
         return payment;
     }
+
 
 
     @Override
