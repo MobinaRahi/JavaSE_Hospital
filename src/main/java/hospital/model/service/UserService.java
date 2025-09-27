@@ -1,7 +1,7 @@
 package hospital.model.service;
 
+import hospital.controller.exception.UserNotFoundException;
 import hospital.model.entity.User;
-import hospital.model.entity.enums.Role;
 import hospital.model.repository.UserRepository;
 import lombok.Getter;
 
@@ -58,7 +58,13 @@ public class UserService implements Service<User, Integer> {
 
     public User findByUsernameAndPassword(String username, String password) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
-            return userRepository.findByUsernameAndPassword(username, password);
+            User user = userRepository.findByUsernameAndPassword(username, password);
+            if (user != null) {
+                return user;
+            }
+            else  {
+                throw new UserNotFoundException();
+            }
         }
     }
 
