@@ -1,6 +1,8 @@
 package hospital.model.service;
 
+import hospital.model.entity.Employee;
 import hospital.model.entity.Visit;
+import hospital.model.repository.EmployeeRepository;
 import hospital.model.repository.VisitRepository;
 import lombok.Getter;
 
@@ -47,6 +49,17 @@ public class VisitService implements Service<Visit,Integer>{
     public Visit findById(Integer id) throws Exception {
         try (VisitRepository visitRepository = new VisitRepository()) {
             return visitRepository.findById(id);
+        }
+    }
+
+    public List<Visit> findByDoctorId(Integer doctorId) throws Exception {
+        try(VisitRepository visitRepository = new VisitRepository()) {
+            return visitRepository.findByDoctorId(doctorId);
+        }
+    }
+    public List<Visit> findByPatientId(Integer patientId) throws Exception {
+        try(VisitRepository visitRepository = new VisitRepository()) {
+            return visitRepository.findByPatientId(patientId);
         }
     }
 }

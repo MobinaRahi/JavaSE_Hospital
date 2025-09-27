@@ -1,5 +1,7 @@
 package hospital.model.repository;
 
+import hospital.model.entity.Employee;
+import hospital.model.entity.User;
 import hospital.model.entity.Visit;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.VisitMapper;
@@ -92,6 +94,34 @@ public class VisitRepository implements Repository<Visit, Integer> ,AutoCloseabl
     public void close() throws Exception {
         preparedStatement.close();
         connection.close();
+    }
+
+    public List<Visit> findByDoctorId(Integer doctorId) throws Exception {
+        List<Visit> visitList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from visits where doctor_id=?"
+        );
+        preparedStatement.setInt(1, doctorId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next()){
+            Visit visit = visitMapper.visitmapper(resultSet);
+            visitList.add(visit);
+        }
+        return visitList;
+    }
+
+    public List<Visit> findByPatientId(Integer patientId) throws Exception {
+        List<Visit> visitList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement(
+                "select * from visits where patient_id=?"
+        );
+        preparedStatement.setInt(1, patientId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next()){
+            Visit visit = visitMapper.visitmapper(resultSet);
+            visitList.add(visit);
+        }
+        return visitList;
     }
 
 }
