@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class CashDeskController implements Initializable {
 
     @FXML
-    private TextField idText, bankIdText;
+    private TextField idText, bankText;
 
     @FXML
     private ComboBox<PayType> payTypeCombo;
@@ -47,13 +47,13 @@ public class CashDeskController implements Initializable {
         try {
             resetForm();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully\n" + idText.getText(), ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Initialization Failed\n" + e.getMessage(), ButtonType.OK);
             alert.show();
         }
 
         saveButton.setOnAction(event -> {
             try {
-                Bank bank = BankService.getService().findById(Integer.parseInt(bankIdText.getText()));
+                Bank bank = BankService.getService().findById(Integer.parseInt(bankText.getText()));
                 CashDesk cashDesk = CashDesk
                         .builder()
                         .bank(bank)
@@ -61,19 +61,19 @@ public class CashDeskController implements Initializable {
                         .build();
                 CashDeskService.getService().save(cashDesk);
                 log.info("CashDesk Saved Successfully");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "saved Successfully\n" + idText.getText(), ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" + idText.getText(), ButtonType.OK);
                 alert.show();
                 resetForm();
             } catch (Exception e) {
                 log.error("CashDesk Save Failed " + e.getMessage());
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "saved Successfully\n" + idText.getText(), ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Save Failed\n" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
         });
 
         editButton.setOnAction(event -> {
             try {
-                Bank bank = BankService.getService().findById(Integer.parseInt(bankIdText.getText()));
+                Bank bank = BankService.getService().findById(Integer.parseInt(bankText.getText()));
                 CashDesk cashDesk = CashDesk
                         .builder()
                         .id(Integer.parseInt(idText.getText()))
@@ -87,7 +87,7 @@ public class CashDeskController implements Initializable {
                 resetForm();
             } catch (Exception e) {
                 log.error("CashDesk Edit Failed " + e.getMessage());
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edited Successfully\n" + idText.getText(), ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Edit Failed\n" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
         });
@@ -101,7 +101,7 @@ public class CashDeskController implements Initializable {
                 resetForm();
             } catch (Exception e) {
                 log.error("CashDesk Delete Failed " + e.getMessage());
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully\n" + idText.getText(), ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Delete Failed\n" + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
         });
@@ -112,7 +112,7 @@ public class CashDeskController implements Initializable {
 
     private void resetForm() throws Exception {
         idText.clear();
-        bankIdText.clear();
+        bankText.clear();
         payTypeCombo.getItems().clear();
 
         payTypeCombo.setItems(FXCollections.observableArrayList(PayType.values()));
@@ -134,14 +134,13 @@ public class CashDeskController implements Initializable {
     private void selectFromTable() {
         try {
             CashDesk cashDesk = cashDeskTable.getSelectionModel().getSelectedItem();
+            if (cashDesk == null) return;
             idText.setText(String.valueOf(cashDesk.getId()));
-            bankIdText.setText(String.valueOf(cashDesk.getBank().getId()));
+            bankText.setText(String.valueOf(cashDesk.getBank().getId()));
             payTypeCombo.getSelectionModel().select(cashDesk.getPayType());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
     }
-
-
 }
