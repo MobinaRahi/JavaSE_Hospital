@@ -50,9 +50,9 @@ public class MedicalService implements Service<Medical, Integer> {
         }
     }
 
-    public Medical findMedicalByDoctorId(Integer id) throws Exception {
+    public List<Medical> findByDoctorId(Integer id) throws Exception {
         try (MedicalRepository medicalRepository = new MedicalRepository()) {
-            return medicalRepository.findMedicalByDoctorId(id);
+            return medicalRepository.findByDoctorId(id);
         }
     }
 }

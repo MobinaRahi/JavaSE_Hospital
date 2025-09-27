@@ -91,17 +91,18 @@ public class MedicalRepository implements Repository<Medical, Integer>, AutoClos
         return medical;
     }
 
-    public Medical findMedicalByDoctorId(Integer id) throws Exception {
-        Medical medical = null;
+    public List<Medical> findByDoctorId(Integer doctorId) throws Exception {
+        List<Medical> medicalList = new ArrayList<>();
         preparedStatement = connection.prepareStatement(
                 "select * from medicals where doctor_id=?"
         );
-        preparedStatement.setInt(1, id);
+        preparedStatement.setInt(1, doctorId);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            medical = medicalMapper.medicalMapper(resultSet);
+        while(resultSet.next()) {
+            Medical medical = medicalMapper.medicalMapper(resultSet);
+            medicalList.add(medical);
         }
-        return medical;
+        return medicalList;
     }
 
     @Override
