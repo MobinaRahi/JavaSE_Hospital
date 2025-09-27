@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.extern.log4j.Log4j2;
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

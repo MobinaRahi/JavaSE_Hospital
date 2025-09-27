@@ -4,7 +4,6 @@ import hospital.model.entity.Medical;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.MedicalMapper;
 import lombok.extern.log4j.Log4j2;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

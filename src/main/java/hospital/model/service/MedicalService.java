@@ -3,7 +3,6 @@ package hospital.model.service;
 import hospital.model.entity.Medical;
 import hospital.model.repository.MedicalRepository;
 import lombok.Getter;
-
 import java.util.List;
 
 public class MedicalService implements Service<Medical, Integer> {

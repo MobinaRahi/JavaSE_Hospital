@@ -12,6 +12,7 @@ public class FxApp extends Application {
         launch();
     }
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FormLoader.getFormLoader().showStage(primaryStage, "/view/doctor.fxml", "doctor");
