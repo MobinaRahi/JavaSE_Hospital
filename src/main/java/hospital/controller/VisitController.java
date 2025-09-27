@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 @Log4j2
 public class VisitController implements Initializable {
     @FXML
-    private TextField idText,doctorIdText,patientIdText,timeShiftIdText,paymentIdText,searchDoctorId,searchPatientId;
+    private TextField idText,doctorIdText,patientIdText,timeShiftIdText,searchDoctorId,searchPatientId;
 
     @FXML
     private ComboBox<VisitPrice> priceCombo;
@@ -50,8 +50,7 @@ public class VisitController implements Initializable {
                                 .doctor(DoctorService.getService().findById(Integer.parseInt(doctorIdText.getText())))
                                 .patient(PatientService.getService().findById(Integer.parseInt(patientIdText.getText())))
                                 .timeShift(TimeShiftService.getService().findById(Integer.parseInt(timeShiftIdText.getText())))
-                                .payment(PaymentService.getService().findById(Integer.parseInt(paymentIdText.getText())))
-                                .price(priceCombo.getSelectionModel().getSelectedIndex())
+                                .price(priceCombo.getSelectionModel().getSelectedItem().getPrice())
                                 .build();
                 VisitService.getService().save(visit);
                 log.info("Visit Saved Successfully");
@@ -73,8 +72,7 @@ public class VisitController implements Initializable {
                                 .doctor(DoctorService.getService().findById(Integer.parseInt(doctorIdText.getText())))
                                 .patient(PatientService.getService().findById(Integer.parseInt(patientIdText.getText())))
                                 .timeShift(TimeShiftService.getService().findById(Integer.parseInt(timeShiftIdText.getText())))
-                                .payment(PaymentService.getService().findById(Integer.parseInt(paymentIdText.getText())))
-                                .price(priceCombo.getSelectionModel().getSelectedIndex())
+                                .price(priceCombo.getSelectionModel().getSelectedItem().getPrice())
                                 .build();
                 VisitService.getService().edit(visit);
                 log.info("Visit Edited Successfully");
@@ -116,16 +114,15 @@ public class VisitController implements Initializable {
         doctorIdText.clear();
         patientIdText.clear();
         timeShiftIdText.clear();
-        paymentIdText.clear();
         searchDoctorId.clear();
         searchPatientId.clear();
+        priceCombo.getItems().clear();
 
 
 
-        for (VisitPrice visitPrice : VisitPrice.values()) {
-            priceCombo.getItems().add(visitPrice);
+        for (VisitPrice price : VisitPrice.values()) {
+            priceCombo.getItems().add(price);
         }
-        priceCombo.getSelectionModel().select(0);
 
         showDateOnTable(VisitService.getService().findAll());
     }
@@ -151,8 +148,7 @@ public class VisitController implements Initializable {
             doctorIdText.setText(String.valueOf(visit.getDoctor().getId()));
             patientIdText.setText(String.valueOf(visit.getPatient().getId()));
             timeShiftIdText.setText(String.valueOf(visit.getTimeShift().getId()));
-            paymentIdText.setText(String.valueOf(visit.getPayment().getId()));
-            priceCombo.getSelectionModel().select(0);
+            priceCombo.getSelectionModel().select((int) visit.getPrice());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();

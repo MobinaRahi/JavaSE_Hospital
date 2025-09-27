@@ -19,7 +19,6 @@ public class Visit implements Payable{
     private Doctor doctor;
     private Patient patient;
     private TimeShift timeShift;
-    private Payment payment;
     private double price;
 
     public String toString() {
