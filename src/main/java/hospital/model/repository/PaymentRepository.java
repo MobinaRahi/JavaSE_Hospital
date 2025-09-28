@@ -24,7 +24,7 @@ public class PaymentRepository implements Repository<Payment, Integer>, AutoClos
     public void save(Payment payment) throws Exception {
         payment.setId(ConnectionProvider.getProvider().getNextId("payment_seq"));
         preparedStatement = connection.prepareStatement(
-                "insert into Payments (id, pay_type, pay_date_time, price, pay_for, payable_id, payable_type) values (?, ?, ?, ?, ?, ?, ?)"
+                "insert into Payments (id, pay_type, pay_date_time, price, pay_for, pay_id) values (?, ?, ?, ?, ?, ?)"
         );
         preparedStatement.setInt(1, payment.getId());
         preparedStatement.setString(2, payment.getPayType().name());
@@ -32,14 +32,14 @@ public class PaymentRepository implements Repository<Payment, Integer>, AutoClos
         preparedStatement.setFloat(4, payment.getPrice());
         preparedStatement.setString(5, payment.getPayFor().name());
         preparedStatement.setInt(6, payment.getPayable().getId());
-        preparedStatement.setString(7, payment.getPayable().getClass().getSimpleName());
+//        preparedStatement.setString(7, payment.getPayable().getClass().getSimpleName());
         preparedStatement.execute();
     }
 
     @Override
     public void edit(Payment payment) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update Payments set pay_type=?, pay_date_time=?, price=?, pay_for=?, payable_id=?, payable_type=? where id=?"
+                "update Payments set pay_type=?, pay_date_time=?, price=?, pay_for=?, pay_id=?, where id=?"
         );
         preparedStatement.setString(1, payment.getPayType().name());
         preparedStatement.setTimestamp(2, Timestamp.valueOf(payment.getPayDateTime()));
@@ -73,7 +73,7 @@ public class PaymentRepository implements Repository<Payment, Integer>, AutoClos
     @Override
     public Payment findById(Integer id) throws Exception {
         Payment payment = null;
-        preparedStatement = connection.prepareStatement("select * from Payments where id=?");
+        preparedStatement = connection.prepareStatement("select * from payments where id=?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {

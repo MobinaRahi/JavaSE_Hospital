@@ -72,6 +72,8 @@ public class DrugRepository implements Repository<Drug, Integer>,AutoCloseable {
     @Override
     public Drug findById (Integer id) throws Exception {
         Drug drug = null;
+        System.out.println();
+        System.out.println(connection);
         preparedStatement = connection.prepareStatement("select * from drugs where id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();

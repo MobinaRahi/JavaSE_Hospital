@@ -6,13 +6,13 @@ import hospital.model.service.DrugStockService;
 
 public class DrugTest {
     public static void main(String[] args) throws Exception {
-        DrugStock drugStock=
-                DrugStock
-                        .builder()
-                        .drug(DrugService.getService().findById(1))
-                        .drugCount(10)
-                        .build();
-                DrugStockService.getService().save(drugStock);
+//        DrugStock drugStock=
+//                DrugStock
+//                        .builder()
+//                        .drug(DrugService.getService().findById(1))
+//                        .drugCount(10)
+//                        .build();
+//                DrugStockService.getService().save(drugStock);
 
 
 //        Drug drug=
@@ -39,7 +39,7 @@ public class DrugTest {
 //        System.out.println(DrugService.getService().findAll());
 
 //        test passed
-//        System.out.println(DrugService.getService().findById(3));
+        System.out.println(DrugService.getService().findById(1));
 
 
     }

@@ -18,7 +18,7 @@ public class FxApp extends Application {
         FormLoader.getFormLoader().showStage(primaryStage, "/view/LoginView.fxml", "Login");
         //FormLoader.getFormLoader().showStage(primaryStage, "/view/DoctorView.fxml", "doctor");
         //FormLoader.getFormLoader().showStage(primaryStage, "/view/PrescriptionView.fxml", "Prescription");
-        //FormLoader.getFormLoader().showStage(primaryStage, "/view/payment.fxml", "Payment");
+        FormLoader.getFormLoader().showStage(primaryStage, "/view/payment.fxml", "Payment");
         //FormLoader.getFormLoader().showStage(primaryStage, "/view/Patient.fxml", "Patient");
         //FormLoader.getFormLoader().showStage(primaryStage, "/view/Medical.fxml", "Medical");
         //FormLoader.getFormLoader().showStage(primaryStage, "/view/CashDesk.fxml", "CashDesk");

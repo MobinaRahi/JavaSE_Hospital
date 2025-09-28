@@ -18,10 +18,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
+
 @Log4j2
-public class PaymentController implements Initializable{
+public class PaymentController implements Initializable {
     @FXML
-    private TextField idText,priceText;
+    private TextField idText, priceText;
     @FXML
     private DatePicker DatePicker;
     @FXML
@@ -29,17 +30,18 @@ public class PaymentController implements Initializable{
     @FXML
     private ComboBox<PayFor> payForCombo;
     @FXML
-    private Button saveButton,editButton,deleteButton;
+    private Button saveButton, editButton, deleteButton;
     @FXML
     private TableView<Payment> paymentTable;
     @FXML
-    private TableColumn<Payment,Integer> idColumn,priceColumn;
+    private TableColumn<Payment, Integer> idColumn, priceColumn;
     @FXML
-    private TableColumn<Payment, LocalDateTime>dateColumn;
+    private TableColumn<Payment, LocalDateTime> dateColumn;
     @FXML
-    private TableColumn<Payment,PayType> payTypeColumn;
+    private TableColumn<Payment, PayType> payTypeColumn;
     @FXML
-    private TableColumn<Payment,PayFor> payForColumn;
+    private TableColumn<Payment, PayFor> payForColumn;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -102,20 +104,22 @@ public class PaymentController implements Initializable{
 
 
     }
-    private void resetForm() throws Exception{
+
+    private void resetForm() throws Exception {
         idText.clear();
-        for( PayType payType:PayType.values()){
+        for (PayType payType : PayType.values()) {
             payTypeCombo.getItems().add(payType);
         }
         payTypeCombo.getSelectionModel().select(0);
         DatePicker.setValue(LocalDate.now());
 
-        for( PayFor payFor :PayFor.values()){
+        for (PayFor payFor : PayFor.values()) {
             payForCombo.getItems().add(payFor);
         }
         priceText.clear();
         showDataOnTable(PaymentService.getService().findAll());
     }
+
     private void showDataOnTable(List<Payment> paymentList) {
         ObservableList<Payment> observableList = FXCollections.observableList(paymentList);
 

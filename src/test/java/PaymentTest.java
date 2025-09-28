@@ -5,11 +5,12 @@ import hospital.model.entity.enums.PayType;
 import hospital.model.service.DoctorService;
 import hospital.model.service.PaymentService;
 import hospital.model.service.VisitService;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class PaymentTest {
-    public static void main (String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 //        Doctor doctor =
 //                Doctor
 //                        .builder()
@@ -17,7 +18,6 @@ public class PaymentTest {
 //                        .price(VisitPrice.VISIT1.getPrice())
 //                        .build();
 //        DoctorService.getService().save(doctor);
-
 
 
 //        User user=
@@ -43,27 +43,30 @@ public class PaymentTest {
 //                        .build();
 //
 //        PatientService.getService().save(patient);
-     Payable payable = VisitService.getService().findById(3);
-if (payable == null) {
-    throw new RuntimeException("Visit with this ID not found");
-}
+//        System.out.println("Service: " + PaymentService.getService());
+        System.out.println("Service by id :" + PaymentService.getService().findById(1).getPayable());
+        Payable payable = PaymentService.getService().findById(1).getPayable();
+        if (payable == null) {
+            throw new RuntimeException("Visit with this ID not found");
+        }
 
-Payment payment = Payment.builder()
-        .payType(PayType.CASH)
-        .payDateTime(LocalDateTime.now())
-        .price(1500)
-        .payFor(PayFor.Visit)
-        .payable(payable)
-        .build();
+        Payment payment = Payment
+                .builder()
+                .payType(PayType.CASH)
+                .payDateTime(LocalDateTime.now())
+                .price(1500)
+                .payFor(PayFor.Visit)
+                .payable(payable)
+                .build();
 
-try {
-    PaymentService.getService().save(payment);
-    System.out.println(" Payment saved successfully.");
-} catch (Exception e) {
-    System.out.println(" Error saving payment: " + e.getMessage());
-    e.printStackTrace();
-}
-    
+        try {
+            PaymentService.getService().save(payment);
+            System.out.println(" Payment saved successfully.");
+        } catch (Exception e) {
+            System.out.println(" Error saving payment: " + e.getMessage());
+            e.printStackTrace();
+        }
+
 
         //        Service test pass
 

@@ -21,6 +21,12 @@ public class PaymentMapper {
                 .price(resultSet.getFloat("price"))
                 .payFor(PayFor.valueOf(resultSet.getString("pay_for")))
                 .build();
+
+        System.out.println();
+        System.out.println(resultSet.getString("pay_for"));
+        System.out.println(PayFor.valueOf(resultSet.getString("pay_for")));
+        System.out.println();
+
         int pay_id = resultSet.getInt("pay_id");
         if (payment.getPayFor().equals(PayFor.Visit)) {
             payment.setPayable(VisitService.getService().findById(pay_id));
