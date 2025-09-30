@@ -3,7 +3,9 @@ package hospital.controller;
 import hospital.model.entity.Drug;
 import hospital.model.entity.Prescription;
 import hospital.model.service.PrescriptionService;
+import hospital.model.service.UserService;
 import hospital.model.service.VisitService;
+import hospital.model.tools.FormLoader;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -12,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
@@ -37,6 +40,9 @@ public class PrescriptionController implements Initializable {
 
     @FXML
     private Button prescriptionDeleteButton;
+
+    @FXML
+    private Button addDrugButton;
 
     @FXML
     private TableView<Prescription> prescriptionTable;
@@ -152,6 +158,7 @@ public class PrescriptionController implements Initializable {
             }
         });
 
+
         prescriptionTable.setOnKeyReleased((event) -> selectFromTable());
 
         prescriptionTable.setOnMouseReleased((event) -> selectFromTable());
@@ -192,6 +199,19 @@ public class PrescriptionController implements Initializable {
             drugPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
             drugQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             drugListTable.setItems(drugObservableList);
+
+
+            addDrugButton.setOnAction(e -> {
+                try{
+                    Stage stage = new Stage();
+                    FormLoader.getFormLoader().showStage(stage, "/view/AddDrugView.fxml.", "Add Drugs");
+                    addDrugButton.getScene().getWindow().hide();
+
+                }catch (Exception ex){
+                    Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage());
+                    alert.show();
+                }
+            });
 
         } catch (Exception e) {
             log.error("Error updating prescription: " + e.getMessage());
