@@ -23,10 +23,10 @@ import java.util.ResourceBundle;
 @Log4j2
 public class TimeShiftController implements Initializable {
     @FXML
-    private TextField idText, doctorIdText, medicalIdText, searchDoctorIdText;
+    private TextField idText, doctorNameText, medicalNameText, searchDoctorIdText;
 
     @FXML
-    private DatePicker startDateTime, endDateTime;
+    private DatePicker startDate, endDate;
 
     @FXML
     private Button saveButton;
@@ -71,10 +71,10 @@ public class TimeShiftController implements Initializable {
                 TimeShift timeShift =
                         TimeShift
                                 .builder()
-                                .doctor(DoctorService.getService().findById(Integer.parseInt(doctorIdText.getText())))
-                                .medical(MedicalService.getService().findById(Integer.parseInt(medicalIdText.getText())))
-                                .startDateTime(startDateTime.getValue().atStartOfDay())
-                                .endDateTime(endDateTime.getValue().atStartOfDay())
+                                .doctor(DoctorService.getService().findById(Integer.parseInt(doctorNameText.getText())))
+                                .medical(MedicalService.getService().findById(Integer.parseInt(medicalNameText.getText())))
+                                .startDateTime(startDate.getValue().atStartOfDay())
+                                .endDateTime(endDate.getValue().atStartOfDay())
                                 .build();
                 TimeShiftService.getService().save(timeShift);
                 log.info("TimeShift Saved Successfully");
@@ -82,7 +82,7 @@ public class TimeShiftController implements Initializable {
                 alert.show();
                 resetForm();
             } catch (Exception e) {
-                log.error("TimeShift Save Failed " + e.getMessage());
+                log.error("TimeShift Save Failed {}", e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
                 alert.show();
             }
@@ -94,10 +94,10 @@ public class TimeShiftController implements Initializable {
                         TimeShift
                                 .builder()
                                 .id(Integer.parseInt(idText.getText()))
-                                .doctor(DoctorService.getService().findById(Integer.parseInt(doctorIdText.getText())))
-                                .medical(MedicalService.getService().findById(Integer.parseInt(medicalIdText.getText())))
-                                .startDateTime(startDateTime.getValue().atStartOfDay())
-                                .endDateTime(endDateTime.getValue().atStartOfDay())
+                                .doctor(DoctorService.getService().findById(Integer.parseInt(doctorNameText.getText())))
+                                .medical(MedicalService.getService().findById(Integer.parseInt(medicalNameText.getText())))
+                                .startDateTime(startDate.getValue().atStartOfDay())
+                                .endDateTime(endDate.getValue().atStartOfDay())
                                 .build();
                 TimeShiftService.getService().edit(timeShift);
                 log.info("TimeShift edited Successfully");
@@ -105,7 +105,7 @@ public class TimeShiftController implements Initializable {
                 alert.show();
                 resetForm();
             } catch (Exception e) {
-                log.error("TimeShift edited Failed " + e.getMessage());
+                log.error("TimeShift edited Failed {}", e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
                 alert.show();
             }
@@ -171,11 +171,11 @@ public class TimeShiftController implements Initializable {
 
     private void resetForm() throws Exception {
         idText.clear();
-        doctorIdText.clear();
-        medicalIdText.clear();
+        doctorNameText.clear();
+        medicalNameText.clear();
         searchDoctorIdText.clear();
-        startDateTime.setValue(LocalDate.now());
-        endDateTime.setValue(LocalDate.now());
+        startDate.setValue(LocalDate.now());
+        endDate.setValue(LocalDate.now());
         showDataOnTable(TimeShiftService.getService().findAll());
     }
 
@@ -183,10 +183,10 @@ public class TimeShiftController implements Initializable {
         try {
             TimeShift timeShift = timeShiftTable.getSelectionModel().getSelectedItem();
             idText.setText(String.valueOf(timeShift.getId()));
-            doctorIdText.setText(String.valueOf(timeShift.getDoctor().getId()));
-            medicalIdText.setText(String.valueOf(timeShift.getMedical().getId()));
-            startDateTime.setValue(timeShift.getStartDateTime().toLocalDate());
-            endDateTime.setValue(timeShift.getEndDateTime().toLocalDate());
+            doctorNameText.setText(String.valueOf(timeShift.getDoctor().getId()));
+            medicalNameText.setText(String.valueOf(timeShift.getMedical().getId()));
+            startDate.setValue(timeShift.getStartDateTime().toLocalDate());
+            endDate.setValue(timeShift.getEndDateTime().toLocalDate());
 
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
