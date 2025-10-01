@@ -3,6 +3,7 @@ package hospital.controller;
 import hospital.model.entity.Patient;
 import hospital.model.service.PatientService;
 import hospital.model.service.UserService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,7 +34,10 @@ public class PatientController implements Initializable {
     private TableView<Patient> patientTable;
 
     @FXML
-    private TableColumn<Patient, Integer> idColumn, userIdColumn;
+    private TableColumn<Patient, Integer> idColumn;
+
+    @FXML
+    private TableColumn<Patient, String> userIdColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -115,7 +119,9 @@ public class PatientController implements Initializable {
         ObservableList<Patient> ObservableList = FXCollections.observableList(patientList);
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        userIdColumn.setCellValueFactory(new PropertyValueFactory<>("user_id"));
+        userIdColumn.setCellValueFactory(cellData->
+                new SimpleStringProperty(cellData.getValue().getUser().getName())
+        );
         patientTable.setItems(ObservableList);
     }
 

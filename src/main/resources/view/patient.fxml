@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="353.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="hospital.controller.PatientController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.PatientController">
    <children>
       <GridPane layoutX="41.0" layoutY="67.0" prefHeight="148.0" prefWidth="268.0">
         <columnConstraints>
@@ -52,13 +52,13 @@
             </Button>
          </children>
       </HBox>
-      <TableView fx:id="patientTable" layoutX="357.0" layoutY="64.0" prefHeight="225.0" prefWidth="173.0">
+      <TableView fx:id="patientTable" layoutX="352.0" layoutY="64.0" prefHeight="225.0" prefWidth="178.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="92.0" text="id" />
-          <TableColumn fx:id="userIdColumn" text="userId" />
+          <TableColumn fx:id="userIdColumn" prefWidth="85.0" text="name" />
         </columns>
       </TableView>
-      <HBox layoutX="229.0" layoutY="14.0" prefHeight="39.0" prefWidth="328.0">
+      <HBox layoutX="229.0" layoutY="14.0" prefHeight="39.0" prefWidth="301.0">
          <children>
             <Label prefHeight="29.0" prefWidth="51.0" text="Search" />
             <Label prefHeight="28.0" prefWidth="54.0" text="UserId:">
@@ -66,7 +66,7 @@
                   <Insets left="15.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="searchUserIdText" />
+            <TextField fx:id="searchUserIdText" prefHeight="31.0" prefWidth="178.0" />
          </children>
       </HBox>
    </children>

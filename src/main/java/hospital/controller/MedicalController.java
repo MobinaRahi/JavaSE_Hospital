@@ -3,6 +3,7 @@ package hospital.controller;
 import hospital.model.entity.Medical;
 import hospital.model.service.DoctorService;
 import hospital.model.service.MedicalService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,10 +28,10 @@ public class MedicalController implements Initializable {
     private TableView<Medical> medicalTable;
 
     @FXML
-    private TableColumn<Medical, String> titleColumn, descriptionColumn;
+    private TableColumn<Medical, String> titleColumn, descriptionColumn, doctorIdColumn;
 
     @FXML
-    private TableColumn<Medical, Integer> idColumn, doctorIdColumn, durationColumn;
+    private TableColumn<Medical, Integer> idColumn, durationColumn;
 
     @FXML
     private TableColumn<Medical, Float> priceColumn;
@@ -128,7 +129,8 @@ public class MedicalController implements Initializable {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        doctorIdColumn.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
+        doctorIdColumn.setCellValueFactory(cellData->
+                new SimpleStringProperty(cellData.getValue().getDoctor().getUser().getName()));
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         medicalTable.setItems(medicalObservableList);

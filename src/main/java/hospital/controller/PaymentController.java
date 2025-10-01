@@ -107,15 +107,16 @@ public class PaymentController implements Initializable {
 
     private void resetForm() throws Exception {
         idText.clear();
-        for (PayType payType : PayType.values()) {
-            payTypeCombo.getItems().add(payType);
-        }
+       for (PayType payType : PayType.values()) {
+           payTypeCombo.getItems().add(payType);
+       }
         payTypeCombo.getSelectionModel().select(0);
         DatePicker.setValue(LocalDate.now());
 
         for (PayFor payFor : PayFor.values()) {
             payForCombo.getItems().add(payFor);
         }
+        payForCombo.getSelectionModel().select(0);
         priceText.clear();
         showDataOnTable(PaymentService.getService().findAll());
     }

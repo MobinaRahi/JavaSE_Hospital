@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.PaymentController">
    <children>
       <GridPane layoutX="48.0" layoutY="49.0" prefHeight="356.0" prefWidth="302.0">
         <columnConstraints>
@@ -38,7 +38,7 @@
             <ComboBox fx:id="payTypeCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <DatePicker fx:id="DatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="priceText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="payForCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <HBox layoutX="53.0" layoutY="422.0" prefHeight="47.0" prefWidth="302.0">
