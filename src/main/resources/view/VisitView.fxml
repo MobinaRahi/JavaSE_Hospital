@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.VisitController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.VisitController">
    <children>
       <VBox layoutX="14.0" layoutY="30.0" prefHeight="200.0" prefWidth="42.0">
          <children>
@@ -69,14 +69,14 @@
             <ComboBox fx:id="priceCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <TableView fx:id="visitTable" layoutX="344.0" layoutY="52.0" prefHeight="227.0" prefWidth="347.0">
+      <TableView fx:id="visitTable" layoutX="344.0" layoutY="52.0" prefHeight="227.0" prefWidth="512.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="24.00006103515625" text="Id" />
-          <TableColumn fx:id="doctorIdColumn" prefWidth="61.60003662109375" text="Doctor_Id" />
-            <TableColumn fx:id="patientIdColumn" prefWidth="64.0" text="Patient_Id" />
-            <TableColumn fx:id="timeShiftIdColumn" prefWidth="77.59991455078125" text="TimeShift_Id" />
-            <TableColumn fx:id="paymentIdColumn" prefWidth="67.19989013671875" text="Paymen_Id" />
-            <TableColumn fx:id="priceColumn" prefWidth="53.5999755859375" text="Price" />
+          <TableColumn fx:id="doctorIdColumn" prefWidth="108.0" text="DoctorName" />
+            <TableColumn fx:id="patientIdColumn" prefWidth="118.0" text="PatientName" />
+            <TableColumn fx:id="timeShiftIdColumn" prefWidth="116.0" text="TimeShift_Id" />
+            <TableColumn fx:id="paymentIdColumn" prefWidth="98.0" text="Paymen_Id" />
+            <TableColumn fx:id="priceColumn" prefWidth="46.0" text="Price" />
         </columns>
       </TableView>
       <Button fx:id="saveButton" layoutX="56.0" layoutY="255.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Save" />

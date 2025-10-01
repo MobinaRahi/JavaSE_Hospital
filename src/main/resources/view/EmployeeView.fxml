@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.EmployeeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.EmployeeController">
    <children>
       <GridPane layoutX="89.0" layoutY="22.0">
         <columnConstraints>
@@ -38,12 +38,12 @@
       </GridPane>
       <Label layoutX="342.0" layoutY="26.0" text="Search :" />
       <Label layoutX="403.0" layoutY="26.0" text="User_Id :" />
-      <TableView fx:id="employeeTable" layoutX="307.0" layoutY="56.0" prefHeight="200.0" prefWidth="303.0">
+      <TableView fx:id="employeeTable" layoutX="307.0" layoutY="56.0" prefHeight="200.0" prefWidth="327.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="28.800048828125" text="Id" />
-          <TableColumn fx:id="userIdColumn" prefWidth="63.199951171875" text="User_Id" />
-            <TableColumn fx:id="startTimeColumn" prefWidth="103.20001220703125" text="Start_Time" />
-            <TableColumn fx:id="endTimeColumn" prefWidth="107.20001220703125" text="End_Time" />
+          <TableColumn fx:id="userIdColumn" prefWidth="94.0" text="User_Name" />
+            <TableColumn fx:id="startTimeColumn" prefWidth="106.0" text="Start_Time" />
+            <TableColumn fx:id="endTimeColumn" prefWidth="97.0" text="End_Time" />
         </columns>
       </TableView>
       <Button fx:id="saveButton" layoutX="86.0" layoutY="156.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Save" />

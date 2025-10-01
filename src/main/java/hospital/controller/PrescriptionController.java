@@ -3,7 +3,6 @@ package hospital.controller;
 import hospital.model.entity.Drug;
 import hospital.model.entity.Prescription;
 import hospital.model.service.PrescriptionService;
-import hospital.model.service.UserService;
 import hospital.model.service.VisitService;
 import hospital.model.tools.FormLoader;
 import javafx.beans.property.SimpleObjectProperty;

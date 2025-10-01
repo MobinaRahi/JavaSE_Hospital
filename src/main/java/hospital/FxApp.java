@@ -25,6 +25,8 @@ public class FxApp extends Application {
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/CashDesk.fxml", "CashDesk");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/Drug.fxml", "Drug");
 //         FormLoader.getFormLoader().showStage(primaryStage, "/view/DrugStock.fxml", "DrugStock");
-         FormLoader.getFormLoader().showStage(primaryStage, "/view/AddDrugView.fxml", "Drugs");
+//         FormLoader.getFormLoader().showStage(primaryStage, "/view/AddDrugView.fxml", "Drugs");
+//         FormLoader.getFormLoader().showStage(primaryStage, "/view/VisitView.fxml", "Visit");
+//         FormLoader.getFormLoader().showStage(primaryStage, "/view/EmployeeView.fxml", "Employee");
     }
 }

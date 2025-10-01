@@ -2,6 +2,8 @@ package hospital.controller;
 import hospital.model.entity.Visit;
 import hospital.model.entity.enums.VisitPrice;
 import hospital.model.service.*;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +31,10 @@ public class VisitController implements Initializable {
     private TableView<Visit> visitTable;
 
     @FXML
-    private TableColumn<Visit,Integer> idColumn,doctorIdColumn,patientIdColumn,timeShiftIdColumn,paymentIdColumn;
+    private TableColumn<Visit,Integer> idColumn,timeShiftIdColumn,paymentIdColumn;
+
+    @FXML
+    private TableColumn<Visit,String> doctorIdColumn,patientIdColumn;
 
     @FXML
     private TableColumn<Visit,VisitPrice> priceColumn;
@@ -131,9 +136,12 @@ public class VisitController implements Initializable {
         ObservableList<Visit> observableList = FXCollections.observableList(visitList);
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        doctorIdColumn.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
-        patientIdColumn.setCellValueFactory(new PropertyValueFactory<>("patientId"));
-        timeShiftIdColumn.setCellValueFactory(new PropertyValueFactory<>("timeShiftId"));
+        doctorIdColumn.setCellValueFactory(cellData->
+                new SimpleStringProperty(cellData.getValue().getDoctor().getUser().getName()));
+        patientIdColumn.setCellValueFactory(cellData->
+                new SimpleStringProperty(cellData.getValue().getPatient().getUser().getName()));
+        timeShiftIdColumn.setCellValueFactory(cellData->
+                new SimpleObjectProperty<>(cellData.getValue().getTimeShift().getId()));
         paymentIdColumn.setCellValueFactory(new PropertyValueFactory<>("paymentId"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 

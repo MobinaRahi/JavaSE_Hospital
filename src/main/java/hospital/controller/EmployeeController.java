@@ -4,6 +4,7 @@ package hospital.controller;
 import hospital.model.entity.Employee;
 import hospital.model.service.EmployeeService;
 import hospital.model.service.UserService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +30,10 @@ public class EmployeeController implements Initializable {
     private TableView<Employee> employeeTable;
 
     @FXML
-    private TableColumn<Employee,Integer> idColumn,userIdColumn;
+    private TableColumn<Employee,Integer> idColumn;
+
+    @FXML
+    private TableColumn<Employee,String> userIdColumn;
 
     @FXML
     private TableColumn<Employee, LocalTime> startTimeColumn,endTimeColumn;
@@ -122,7 +126,8 @@ public class EmployeeController implements Initializable {
         ObservableList<Employee> observableList = FXCollections.observableList(employeeList);
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        userIdColumn.setCellValueFactory(cellData->
+                new SimpleStringProperty(cellData.getValue().getUser().getName()));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         employeeTable.setItems(observableList);
