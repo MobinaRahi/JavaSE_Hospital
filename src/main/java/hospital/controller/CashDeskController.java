@@ -47,7 +47,7 @@ public class CashDeskController implements Initializable {
         try {
             resetForm();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Initialization Failed\n" + e.getMessage(), ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
         }
 

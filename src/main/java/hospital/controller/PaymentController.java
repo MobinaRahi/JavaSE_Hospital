@@ -34,7 +34,9 @@ public class PaymentController implements Initializable {
     @FXML
     private TableView<Payment> paymentTable;
     @FXML
-    private TableColumn<Payment, Integer> idColumn, priceColumn;
+    private TableColumn<Payment, Integer> idColumn;
+    @FXML
+    private TableColumn<Payment,Float> priceColumn;
     @FXML
     private TableColumn<Payment, LocalDateTime> dateColumn;
     @FXML
@@ -58,38 +60,46 @@ public class PaymentController implements Initializable {
                                 .builder()
                                 .payType(payTypeCombo.getSelectionModel().getSelectedItem())
                                 .payDateTime(DatePicker.getValue().atTime(LocalTime.now()))
-                                .price(Integer.parseInt(priceText.getText()))
+                                .price(Float.parseFloat(priceText.getText()))
                                 .payFor(payForCombo.getSelectionModel().getSelectedItem())
                                 .build();
                 PaymentService.getService().save(payment);
                 log.info("payment Saved successFully");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Saved Successfully\n" + payment, ButtonType.OK);
+                alert.show();
+                resetForm();
             } catch (Exception e) {
                 log.error("payment save Failed" + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Payment Save Failed " + e.getMessage(), ButtonType.OK);
+                alert.show();
             }
         });
 
         editButton.setOnAction(event -> {
             try {
-                Payment selectedPayment = paymentTable.getSelectionModel().getSelectedItem();
-                if (selectedPayment != null) {
-                    selectedPayment.setPayType(payTypeCombo.getSelectionModel().getSelectedItem());
-                    selectedPayment.setPayDateTime(DatePicker.getValue().atTime(LocalTime.now()));
-                    selectedPayment.setPrice(Integer.parseInt(priceText.getText()));
-                    selectedPayment.setPayFor(payForCombo.getSelectionModel().getSelectedItem());
-
-                    PaymentService.getService().edit(selectedPayment);
-                    log.info("payment Updated successfully");
-                } else {
-                    log.warn("No payment selected for update");
-                }
+                Payment payment =
+                        Payment
+                                .builder()
+                                .payType(payTypeCombo.getSelectionModel().getSelectedItem())
+                                .payDateTime(DatePicker.getValue().atTime(LocalTime.now()))
+                                .price(Float.parseFloat(priceText.getText()))
+                                .payFor(payForCombo.getSelectionModel().getSelectedItem())
+                                .build();
+                PaymentService.getService().edit(payment);
+                log.info("payment edited successFully");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Edited Successfully\n" + payment, ButtonType.OK);
+                alert.show();
+                resetForm();
             } catch (Exception e) {
-                log.error("payment update Failed: " + e.getMessage());
+                log.error("payment edited Failed" + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Payment Edit Failed " + e.getMessage(), ButtonType.OK);
+                alert.show();
             }
         });
         deleteButton.setOnAction((event) -> {
             try {
                 PaymentService.getService().delete(Integer.parseInt(idText.getText()));
-                log.info("Patient Delete Successfully");
+                log.info("Payment Delete Successfully");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Deleted Successfully\n" + idText.getText(), ButtonType.OK);
                 alert.show();
                 resetForm();
@@ -107,6 +117,7 @@ public class PaymentController implements Initializable {
 
     private void resetForm() throws Exception {
         idText.clear();
+        priceText.clear();
        for (PayType payType : PayType.values()) {
            payTypeCombo.getItems().add(payType);
        }
@@ -117,7 +128,6 @@ public class PaymentController implements Initializable {
             payForCombo.getItems().add(payFor);
         }
         payForCombo.getSelectionModel().select(0);
-        priceText.clear();
         showDataOnTable(PaymentService.getService().findAll());
     }
 
@@ -140,7 +150,7 @@ public class PaymentController implements Initializable {
             idText.setText(String.valueOf(payment.getId()));
             payTypeCombo.getSelectionModel().select(payment.getPayType());
             DatePicker.setValue(payment.getPayDateTime().toLocalDate());
-            priceText.setText(String.valueOf(payment.getPrice()));
+            priceText.setText(String.valueOf(Float.parseFloat(priceText.getText())));
             payForCombo.getSelectionModel().select(payment.getPayFor());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
