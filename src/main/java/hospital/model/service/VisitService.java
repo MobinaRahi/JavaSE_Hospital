@@ -1,11 +1,7 @@
 package hospital.model.service;
-
-import hospital.model.entity.Employee;
 import hospital.model.entity.Visit;
-import hospital.model.repository.EmployeeRepository;
 import hospital.model.repository.VisitRepository;
 import lombok.Getter;
-
 import java.util.List;
 
 public class VisitService implements Service<Visit,Integer>{

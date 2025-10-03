@@ -2,7 +2,6 @@ package hospital.model.repository;
 
 
 import hospital.model.entity.User;
-import hospital.model.entity.enums.Role;
 import hospital.model.tools.ConnectionProvider;
 import hospital.model.tools.UserMapper;
 import lombok.extern.log4j.Log4j2;

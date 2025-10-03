@@ -3,12 +3,7 @@ package hospital.model.service;
 import hospital.model.entity.Drug;
 import hospital.model.entity.Prescription;
 import hospital.model.repository.PrescriptionRepository;
-import hospital.model.tools.ConnectionProvider;
 import lombok.Getter;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 public class PrescriptionService implements Service<Prescription, Integer> {

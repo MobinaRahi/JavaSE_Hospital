@@ -4,15 +4,11 @@ import hospital.model.entity.Doctor;
 import hospital.model.entity.DoctorShift;
 import hospital.model.entity.Medical;
 import hospital.model.entity.TimeShift;
-import hospital.model.repository.DoctorRepository;
 import hospital.model.repository.TimeShiftRepository;
 import hospital.model.tools.ConnectionProvider;
 import lombok.Getter;
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -20,6 +20,7 @@ public class VisitsTestService {
                         .price(VisitPrice.VISIT1.getPrice())
                         .build();
 
+       // PrescriptionService.getService().updatePrescriptionPrice(1);
         VisitService.getService().save(visit);
 
     }

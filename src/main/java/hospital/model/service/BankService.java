@@ -2,9 +2,7 @@ package hospital.model.service;
 
 
 import hospital.model.entity.Bank;
-import hospital.model.entity.Drug;
 import hospital.model.repository.BankRepository;
-import hospital.model.repository.DrugRepository;
 import lombok.Getter;
 import java.util.List;
 
