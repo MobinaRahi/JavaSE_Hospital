@@ -6,6 +6,7 @@ import hospital.model.entity.enums.PayType;
 import hospital.model.service.PaymentService;
 import hospital.model.service.UserService;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,7 +38,9 @@ public class PaymentController implements Initializable {
     @FXML
     private TableView<Payment> paymentTable;
     @FXML
-    private TableColumn<Payment, Integer> idColumn,payIdColumn;
+    private TableColumn<Payment, Integer> idColumn;
+    @FXML
+    private TableColumn<Payment, String> payIdColumn;
     @FXML
     private TableColumn<Payment,Float> priceColumn;
     @FXML
@@ -125,6 +128,8 @@ public class PaymentController implements Initializable {
         idText.clear();
         priceText.clear();
         payIdText.clear();
+        payTypeCombo.getItems().clear();
+        payForCombo.getItems().clear();
        for (PayType payType : PayType.values()) {
            payTypeCombo.getItems().add(payType);
        }
@@ -146,11 +151,8 @@ public class PaymentController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("payDateTime"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         payForColumn.setCellValueFactory(new PropertyValueFactory<>("payFor"));
-            payIdColumn.setCellValueFactory(cellData ->
-                    new SimpleIntegerProperty(cellData.getValue().getPayable().getId()).asObject()
-            );
-
-            paymentTable.setItems(observableList);
+        payIdColumn.setCellValueFactory(cellData->
+                new SimpleObjectProperty<>(cellData.getValue().getPayable().getId()).asString());
     }
 
 
