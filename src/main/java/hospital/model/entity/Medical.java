@@ -1,14 +1,10 @@
 package hospital.model.entity;
 
 import com.google.gson.Gson;
-import hospital.model.service.DoctorService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalTime;
-import java.util.List;
 
 
 @SuperBuilder

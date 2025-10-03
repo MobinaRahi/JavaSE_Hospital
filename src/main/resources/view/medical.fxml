@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.MedicalController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.MedicalController">
    <children>
       <GridPane layoutX="35.0" layoutY="37.0" prefHeight="359.0" prefWidth="300.0">
         <columnConstraints>
@@ -35,7 +35,7 @@
             <Label text="Duration" GridPane.rowIndex="4" />
             <Label text="Price" GridPane.rowIndex="5" />
             <Label text="Id" />
-            <TextField fx:id="idText" GridPane.columnIndex="1" />
+            <TextField fx:id="idText" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="titleText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="descriptionText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="doctorIdText" GridPane.columnIndex="1" GridPane.rowIndex="3" />

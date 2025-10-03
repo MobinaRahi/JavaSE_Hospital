@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.VisitController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.VisitController">
    <children>
       <VBox layoutX="14.0" layoutY="30.0" prefHeight="200.0" prefWidth="42.0">
          <children>
@@ -62,21 +62,20 @@
             <Label text="Patient_Id" GridPane.rowIndex="2" />
             <Label text="TimeShift_Id" GridPane.rowIndex="3" />
             <Label text="Price" GridPane.rowIndex="4" />
-            <TextField fx:id="idText" GridPane.columnIndex="1" />
+            <TextField fx:id="idText" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="doctorIdText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="patientIdText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="timeShiftIdText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="priceCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <TableView fx:id="visitTable" layoutX="344.0" layoutY="52.0" prefHeight="227.0" prefWidth="512.0">
+      <TableView fx:id="visitTable" layoutX="344.0" layoutY="52.0" prefHeight="227.0" prefWidth="446.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="24.00006103515625" text="Id" />
           <TableColumn fx:id="doctorIdColumn" prefWidth="108.0" text="DoctorName" />
             <TableColumn fx:id="patientIdColumn" prefWidth="118.0" text="PatientName" />
             <TableColumn fx:id="timeShiftIdColumn" prefWidth="116.0" text="TimeShift_Id" />
-            <TableColumn fx:id="paymentIdColumn" prefWidth="98.0" text="Paymen_Id" />
-            <TableColumn fx:id="priceColumn" prefWidth="46.0" text="Price" />
+            <TableColumn fx:id="priceColumn" prefWidth="77.99993896484375" text="Price" />
         </columns>
       </TableView>
       <Button fx:id="saveButton" layoutX="56.0" layoutY="255.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Save" />
