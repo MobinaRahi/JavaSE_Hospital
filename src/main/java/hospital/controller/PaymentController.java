@@ -153,6 +153,8 @@ public class PaymentController implements Initializable {
         payForColumn.setCellValueFactory(new PropertyValueFactory<>("payFor"));
         payIdColumn.setCellValueFactory(cellData->
                 new SimpleObjectProperty<>(cellData.getValue().getPayable().getId()).asString());
+
+        paymentTable.setItems(observableList);
     }
 
 
