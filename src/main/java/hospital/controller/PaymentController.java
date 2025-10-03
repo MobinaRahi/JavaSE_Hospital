@@ -69,7 +69,7 @@ public class PaymentController implements Initializable {
                 alert.show();
                 resetForm();
             } catch (Exception e) {
-                log.error("payment save Failed" + e.getMessage());
+                log.error("payment save Failed" + e);
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Payment Save Failed " + e.getMessage(), ButtonType.OK);
                 alert.show();
             }
@@ -150,7 +150,7 @@ public class PaymentController implements Initializable {
             idText.setText(String.valueOf(payment.getId()));
             payTypeCombo.getSelectionModel().select(payment.getPayType());
             DatePicker.setValue(payment.getPayDateTime().toLocalDate());
-            priceText.setText(String.valueOf(Float.parseFloat(priceText.getText())));
+            priceText.setText(String.valueOf(payment.getPrice()));
             payForCombo.getSelectionModel().select(payment.getPayFor());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
