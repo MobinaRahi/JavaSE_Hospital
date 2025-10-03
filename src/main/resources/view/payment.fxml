@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.PaymentController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.PaymentController">
    <children>
       <GridPane layoutX="48.0" layoutY="49.0" prefHeight="356.0" prefWidth="302.0">
         <columnConstraints>
@@ -25,6 +25,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -39,6 +40,8 @@
             <DatePicker fx:id="DatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="priceText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="payForCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="payId" GridPane.rowIndex="5" />
+            <TextField fx:id="payIdText" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <HBox layoutX="53.0" layoutY="422.0" prefHeight="47.0" prefWidth="302.0">
@@ -56,13 +59,14 @@
             <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" />
          </children>
       </HBox>
-      <TableView fx:id="paymentTable" layoutX="404.0" layoutY="59.0" prefHeight="403.0" prefWidth="503.0">
+      <TableView fx:id="paymentTable" layoutX="404.0" layoutY="59.0" prefHeight="403.0" prefWidth="602.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="100.0" text="id" />
           <TableColumn fx:id="payTypeColumn" prefWidth="100.0" text="payType" />
             <TableColumn fx:id="dateColumn" prefWidth="100.0" text="payDateTime" />
             <TableColumn fx:id="priceColumn" prefWidth="100.0" text="price" />
             <TableColumn fx:id="payForColumn" prefWidth="100.0" text="payFor" />
+            <TableColumn fx:id="payIdColumn" prefWidth="100.0" text="payId" />
         </columns>
       </TableView>
    </children>
