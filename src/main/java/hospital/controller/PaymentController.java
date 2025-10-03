@@ -4,6 +4,9 @@ import hospital.model.entity.Payment;
 import hospital.model.entity.enums.PayFor;
 import hospital.model.entity.enums.PayType;
 import hospital.model.service.PaymentService;
+import hospital.model.service.UserService;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +25,7 @@ import java.util.ResourceBundle;
 @Log4j2
 public class PaymentController implements Initializable {
     @FXML
-    private TextField idText, priceText;
+    private TextField idText, priceText,payIdText;
     @FXML
     private DatePicker DatePicker;
     @FXML
@@ -34,7 +37,7 @@ public class PaymentController implements Initializable {
     @FXML
     private TableView<Payment> paymentTable;
     @FXML
-    private TableColumn<Payment, Integer> idColumn;
+    private TableColumn<Payment, Integer> idColumn,payIdColumn;
     @FXML
     private TableColumn<Payment,Float> priceColumn;
     @FXML
@@ -62,6 +65,7 @@ public class PaymentController implements Initializable {
                                 .payDateTime(DatePicker.getValue().atTime(LocalTime.now()))
                                 .price(Float.parseFloat(priceText.getText()))
                                 .payFor(payForCombo.getSelectionModel().getSelectedItem())
+                                .payable(PaymentService.getService().findById(Integer.parseInt(payIdText.getText())).getPayable())
                                 .build();
                 PaymentService.getService().save(payment);
                 log.info("payment Saved successFully");
@@ -80,10 +84,12 @@ public class PaymentController implements Initializable {
                 Payment payment =
                         Payment
                                 .builder()
+                                .id(Integer.parseInt(idText.getText()))
                                 .payType(payTypeCombo.getSelectionModel().getSelectedItem())
                                 .payDateTime(DatePicker.getValue().atTime(LocalTime.now()))
                                 .price(Float.parseFloat(priceText.getText()))
                                 .payFor(payForCombo.getSelectionModel().getSelectedItem())
+                                .payable(PaymentService.getService().findById(Integer.parseInt(payIdText.getText())).getPayable())
                                 .build();
                 PaymentService.getService().edit(payment);
                 log.info("payment edited successFully");
@@ -118,11 +124,12 @@ public class PaymentController implements Initializable {
     private void resetForm() throws Exception {
         idText.clear();
         priceText.clear();
+        payIdText.clear();
        for (PayType payType : PayType.values()) {
            payTypeCombo.getItems().add(payType);
        }
         payTypeCombo.getSelectionModel().select(0);
-        DatePicker.setValue(LocalDate.now());
+        DatePicker.setValue(LocalDate.from(LocalDateTime.now()));
 
         for (PayFor payFor : PayFor.values()) {
             payForCombo.getItems().add(payFor);
@@ -139,8 +146,11 @@ public class PaymentController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("payDateTime"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         payForColumn.setCellValueFactory(new PropertyValueFactory<>("payFor"));
+            payIdColumn.setCellValueFactory(cellData ->
+                    new SimpleIntegerProperty(cellData.getValue().getPayable().getId()).asObject()
+            );
 
-        paymentTable.setItems(observableList);
+            paymentTable.setItems(observableList);
     }
 
 
@@ -152,6 +162,7 @@ public class PaymentController implements Initializable {
             DatePicker.setValue(payment.getPayDateTime().toLocalDate());
             priceText.setText(String.valueOf(payment.getPrice()));
             payForCombo.getSelectionModel().select(payment.getPayFor());
+            payIdText.setText(String.valueOf(payment.getPayable().getId()));
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
             alert.show();
