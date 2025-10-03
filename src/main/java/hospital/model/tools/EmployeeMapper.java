@@ -2,9 +2,7 @@ package hospital.model.tools;
 
 import hospital.model.entity.Employee;
 import hospital.model.service.UserService;
-
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class EmployeeMapper {
     public Employee employeeMapper(ResultSet resultSet) throws Exception {

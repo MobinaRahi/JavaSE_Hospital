@@ -1,7 +1,5 @@
 package hospital.model.tools;
 import hospital.model.entity.Bank;
-import hospital.model.entity.Drug;
-
 import java.sql.ResultSet;
 
 

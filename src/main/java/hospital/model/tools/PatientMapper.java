@@ -2,10 +2,7 @@ package hospital.model.tools;
 
 
 import hospital.model.entity.Patient;
-import hospital.model.service.PrescriptionService;
 import hospital.model.service.UserService;
-import hospital.model.service.VisitService;
-
 import java.sql.ResultSet;
 
 public class PatientMapper {

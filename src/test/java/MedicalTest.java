@@ -1,13 +1,4 @@
-import hospital.model.entity.*;
-import hospital.model.entity.enums.PayType;
-import hospital.model.entity.enums.Role;
-import hospital.model.entity.enums.Specialty;
-import hospital.model.entity.enums.VisitPrice;
-import hospital.model.service.*;
-import hospital.model.tools.MedicalMapper;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class MedicalTest {
     public static void main(String[] args) throws Exception {

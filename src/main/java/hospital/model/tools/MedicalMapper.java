@@ -2,8 +2,6 @@ package hospital.model.tools;
 
 import hospital.model.entity.Medical;
 import hospital.model.service.DoctorService;
-import hospital.model.service.PaymentService;
-
 import java.sql.ResultSet;
 
 

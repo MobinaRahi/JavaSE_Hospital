@@ -1,8 +1,5 @@
 
-import hospital.model.entity.Doctor;
 import hospital.model.entity.Visit;
-import hospital.model.entity.enums.Specialty;
-import hospital.model.entity.enums.VisitPrice;
 import hospital.model.service.*;
 
 public class VisitTest {

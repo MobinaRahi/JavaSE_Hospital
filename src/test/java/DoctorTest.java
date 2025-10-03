@@ -1,12 +1,8 @@
 import hospital.model.entity.Doctor;
-import hospital.model.entity.User;
-import hospital.model.entity.enums.Role;
-import hospital.model.entity.enums.Specialty;
 import hospital.model.entity.enums.VisitPrice;
 import hospital.model.service.DoctorService;
 import hospital.model.service.UserService;
 
-import java.time.LocalDate;
 
 import static hospital.model.entity.enums.Specialty.cardiologist;
 

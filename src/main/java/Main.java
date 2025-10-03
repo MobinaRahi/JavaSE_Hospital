@@ -1,18 +1,7 @@
 import hospital.model.entity.*;
-import hospital.model.entity.enums.Role;
-import hospital.model.entity.enums.Specialty;
-import hospital.model.entity.enums.VisitPrice;
-import hospital.model.repository.PrescriptionRepository;
 import hospital.model.service.*;
 import testServices.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {

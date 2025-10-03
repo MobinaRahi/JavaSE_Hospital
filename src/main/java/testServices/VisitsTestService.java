@@ -1,13 +1,9 @@
 package testServices;
 
-import hospital.model.entity.User;
+
 import hospital.model.entity.Visit;
-import hospital.model.entity.enums.Role;
 import hospital.model.entity.enums.VisitPrice;
 import hospital.model.service.*;
-
-import java.time.LocalDate;
-import java.time.Month;
 
 public class VisitsTestService {
     public static void saveVisits() throws Exception {

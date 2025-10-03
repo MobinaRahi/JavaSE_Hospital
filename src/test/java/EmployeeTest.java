@@ -1,10 +1,6 @@
 import hospital.model.entity.Employee;
-import hospital.model.entity.User;
-import hospital.model.entity.enums.Role;
 import hospital.model.service.EmployeeService;
 import hospital.model.service.UserService;
-
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class EmployeeTest {
