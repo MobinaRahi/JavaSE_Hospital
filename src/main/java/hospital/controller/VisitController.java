@@ -31,7 +31,7 @@ public class VisitController implements Initializable {
     private TableView<Visit> visitTable;
 
     @FXML
-    private TableColumn<Visit,Integer> idColumn,timeShiftIdColumn,paymentIdColumn;
+    private TableColumn<Visit,Integer> idColumn,timeShiftIdColumn;
 
     @FXML
     private TableColumn<Visit,String> doctorIdColumn,patientIdColumn;
@@ -128,6 +128,7 @@ public class VisitController implements Initializable {
         for (VisitPrice price : VisitPrice.values()) {
             priceCombo.getItems().add(price);
         }
+        priceCombo.getSelectionModel().select(0);
 
         showDateOnTable(VisitService.getService().findAll());
     }
@@ -142,7 +143,6 @@ public class VisitController implements Initializable {
                 new SimpleStringProperty(cellData.getValue().getPatient().getUser().getName()));
         timeShiftIdColumn.setCellValueFactory(cellData->
                 new SimpleObjectProperty<>(cellData.getValue().getTimeShift().getId()));
-        paymentIdColumn.setCellValueFactory(new PropertyValueFactory<>("paymentId"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
 

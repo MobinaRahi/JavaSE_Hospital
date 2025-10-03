@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="1161.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.UserController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="1266.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.UserController">
    <children>
       <VBox layoutX="14.0" layoutY="47.0" prefHeight="200.0" prefWidth="0.0" />
       <VBox layoutX="14.0" layoutY="171.0" prefHeight="200.0" prefWidth="34.0">
@@ -81,8 +82,11 @@
             <ComboBox fx:id="roleCombo" prefHeight="26.0" prefWidth="179.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
-                  <RadioButton fx:id="statusEnableRadio" mnemonicParsing="false" selected="true" text="Enable" />
-                  <RadioButton fx:id="statusDisableRadio" mnemonicParsing="false" text="Disable">
+                  <RadioButton fx:id="statusEnableRadio" mnemonicParsing="false" selected="true" text="Enable">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="sa" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="statusDisableRadio" mnemonicParsing="false" text="Disable" toggleGroup="$sa">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin></RadioButton>
@@ -93,8 +97,11 @@
             <TextField fx:id="nickNameText" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <children>
-                  <RadioButton fx:id="lockedEnableRadio" mnemonicParsing="false" prefHeight="18.0" prefWidth="89.0" selected="true" text="Enable" />
-                  <RadioButton fx:id="lockedDisableRadio" mnemonicParsing="false" text="Disable">
+                  <RadioButton fx:id="lockedEnableRadio" mnemonicParsing="false" prefHeight="18.0" prefWidth="89.0" selected="true" text="Enable">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="ea" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="lockedDisableRadio" mnemonicParsing="false" text="Disable" toggleGroup="$ea">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin></RadioButton>
@@ -103,19 +110,19 @@
             <DatePicker fx:id="registerDate" GridPane.columnIndex="1" GridPane.rowIndex="10" />
          </children>
       </GridPane>
-      <TableView fx:id="userTable" layoutX="332.0" layoutY="62.0" prefHeight="385.0" prefWidth="809.0">
+      <TableView fx:id="userTable" layoutX="332.0" layoutY="62.0" prefHeight="385.0" prefWidth="931.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="33.0" text="Id" />
           <TableColumn fx:id="nameColumn" prefWidth="76.0" text="Name" />
             <TableColumn fx:id="familyColumn" prefWidth="93.0" text="Family" />
             <TableColumn fx:id="birthDateColumn" prefWidth="86.0" text="BirthDate" />
-            <TableColumn fx:id="roleColumn" minWidth="0.0" prefWidth="0.0" text="Role" />
-            <TableColumn fx:id="statusColumn" prefWidth="69.0" text="Status" />
-            <TableColumn fx:id="userNameColumn" prefWidth="106.0" text="UserName" />
-            <TableColumn fx:id="passwordColumn" prefWidth="91.0" text="Password" />
-            <TableColumn fx:id="nickNameColumn" minWidth="0.0" prefWidth="85.0" text="NickName" />
-            <TableColumn fx:id="lockedColumn" prefWidth="66.0" text="Locked" />
-            <TableColumn fx:id="registerDateColumn" prefWidth="103.0" text="RegisterDate" />
+            <TableColumn fx:id="roleColumn" minWidth="0.0" prefWidth="88.0" text="Role" />
+            <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="49.5999755859375" text="Status" />
+            <TableColumn fx:id="userNameColumn" prefWidth="121.5999755859375" text="UserName" />
+            <TableColumn fx:id="passwordColumn" prefWidth="114.39996337890625" text="Password" />
+            <TableColumn fx:id="nickNameColumn" minWidth="0.0" prefWidth="88.0" text="NickName" />
+            <TableColumn fx:id="lockedColumn" prefWidth="64.800048828125" text="Locked" />
+            <TableColumn fx:id="registerDateColumn" prefWidth="113.5999755859375" text="RegisterDate" />
         </columns>
       </TableView>
       <Label layoutX="342.0" layoutY="25.0" text="Search :" />

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.PatientController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="571.0" xmlns="http://javafx.com/javafx/8.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.PatientController">
    <children>
       <GridPane layoutX="41.0" layoutY="67.0" prefHeight="148.0" prefWidth="268.0">
         <columnConstraints>
@@ -25,7 +25,7 @@
         </rowConstraints>
          <children>
             <Label text="id" />
-            <TextField fx:id="idText" prefHeight="28.0" prefWidth="163.0" GridPane.columnIndex="1">
+            <TextField fx:id="idText" editable="false" prefHeight="28.0" prefWidth="163.0" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
