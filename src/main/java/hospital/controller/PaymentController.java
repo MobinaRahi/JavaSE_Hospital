@@ -38,9 +38,7 @@ public class PaymentController implements Initializable {
     @FXML
     private TableView<Payment> paymentTable;
     @FXML
-    private TableColumn<Payment, Integer> idColumn;
-    @FXML
-    private TableColumn<Payment, String> payIdColumn;
+    private TableColumn<Payment, Integer> idColumn,payIdColumn;
     @FXML
     private TableColumn<Payment,Float> priceColumn;
     @FXML
@@ -151,8 +149,16 @@ public class PaymentController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("payDateTime"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         payForColumn.setCellValueFactory(new PropertyValueFactory<>("payFor"));
-        payIdColumn.setCellValueFactory(cellData->
-                new SimpleObjectProperty<>(cellData.getValue().getPayable().getId()).asString());
+        payIdColumn.setCellValueFactory(cellData -> {
+            Payment payment = cellData.getValue();
+            if (payment == null || payment.getPayable() == null) {
+
+                return new SimpleObjectProperty<>(null);
+            }
+            return new SimpleObjectProperty<>(payment.getPayable().getId());
+        });
+
+
 
         paymentTable.setItems(observableList);
     }

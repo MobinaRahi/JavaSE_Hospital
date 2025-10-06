@@ -47,7 +47,7 @@ create table payments
     pay_date_time TIMESTAMP not null,
     price         number not null,
     pay_for       nvarchar2(20),
-    payable_id     number not null
+    pay_id     number not null
 );
 create sequence payment_seq start with 1 increment by 1;
 

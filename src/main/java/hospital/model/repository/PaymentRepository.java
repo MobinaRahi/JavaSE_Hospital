@@ -32,7 +32,7 @@ public class PaymentRepository implements Repository<Payment, Integer>, AutoClos
         preparedStatement.setFloat(4, payment.getPrice());
         preparedStatement.setString(5, payment.getPayFor().name());
         preparedStatement.setInt(6, payment.getPayable().getId());
-//        preparedStatement.setString(7, payment.getPayable().getClass().getSimpleName());
+//
         preparedStatement.execute();
     }
 
@@ -46,8 +46,7 @@ public class PaymentRepository implements Repository<Payment, Integer>, AutoClos
         preparedStatement.setFloat(3, payment.getPrice());
         preparedStatement.setString(4, payment.getPayFor().name());
         preparedStatement.setInt(5, payment.getPayable().getId());
-        preparedStatement.setString(6, payment.getPayable().getClass().getSimpleName());
-        preparedStatement.setInt(7, payment.getId());
+        preparedStatement.setInt(6, payment.getId());
         preparedStatement.execute();
     }
 
