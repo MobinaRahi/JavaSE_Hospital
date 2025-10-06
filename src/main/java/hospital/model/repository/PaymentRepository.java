@@ -32,14 +32,13 @@ public class PaymentRepository implements Repository<Payment, Integer>, AutoClos
         preparedStatement.setFloat(4, payment.getPrice());
         preparedStatement.setString(5, payment.getPayFor().name());
         preparedStatement.setInt(6, payment.getPayable().getId());
-//
         preparedStatement.execute();
     }
 
     @Override
     public void edit(Payment payment) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update Payments set pay_type=?, pay_date_time=?, price=?, pay_for=?, pay_id=?, where id=?"
+                "update payments set pay_type=?, pay_date_time=?, price=?, pay_for=?, pay_id=? where id=?"
         );
         preparedStatement.setString(1, payment.getPayType().name());
         preparedStatement.setTimestamp(2, Timestamp.valueOf(payment.getPayDateTime()));
