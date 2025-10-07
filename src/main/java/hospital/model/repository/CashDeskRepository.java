@@ -34,7 +34,7 @@ public class CashDeskRepository implements Repository<CashDesk, Integer>, AutoCl
     @Override
     public void edit(CashDesk cashDesk) throws Exception {
         preparedStatement = connection.prepareStatement(
-                "update cash_desks set bank_id = ?, pay_type = ? where id = ?;"
+                "update cash_desks set bank_id = ?, payType = ? where id = ?"
         );
         preparedStatement.setInt(1, cashDesk.getBank().getId());
         preparedStatement.setString(2, cashDesk.getPayType().name());

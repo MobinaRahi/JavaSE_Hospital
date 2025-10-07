@@ -82,7 +82,16 @@ public class CashDeskController implements Initializable {
 
         editButton.setOnAction(event -> {
             try {
-                Bank bank = BankService.getService().findById(Integer.parseInt(bankText.getText())); // TODO: change this
+
+                List<Bank> banks = BankService.getService().findAll();
+
+                int bankId = 1; // Default
+                for (Bank b : banks) {
+                    if (b.getTitle().equalsIgnoreCase(bankText.getText())) {
+                        bankId = b.getId();
+                    }
+                }
+                Bank bank = BankService.getService().findById(bankId); // TODO: change this
                 CashDesk cashDesk = CashDesk
                         .builder()
                         .id(Integer.parseInt(idText.getText()))
