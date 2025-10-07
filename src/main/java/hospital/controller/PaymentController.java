@@ -1,10 +1,13 @@
 package hospital.controller;
 
+import hospital.model.entity.Payable;
 import hospital.model.entity.Payment;
 import hospital.model.entity.enums.PayFor;
 import hospital.model.entity.enums.PayType;
 import hospital.model.service.PaymentService;
+import hospital.model.service.PrescriptionService;
 import hospital.model.service.UserService;
+import hospital.model.service.VisitService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -59,6 +62,21 @@ public class PaymentController implements Initializable {
         }
         saveButton.setOnAction(event -> {
             try {
+                PayFor payFor = payForCombo.getSelectionModel().getSelectedItem();
+                int payId = Integer.parseInt(payIdText.getText());
+                Payable payable;
+
+                if (payFor == PayFor.Visit) {
+                    payable = VisitService.getService().findById(payId);
+                } else if (payFor == PayFor.Prescription) {
+                    payable = PrescriptionService.getService().findById(payId);
+                } else {
+                    throw new Exception("Unsupported PayFor type: " + payFor);
+                }
+
+                if (payable == null) {
+                    throw new Exception("No related entity found for payId: " + payId);
+                }
                 Payment payment =
                         Payment
                                 .builder()
@@ -66,7 +84,7 @@ public class PaymentController implements Initializable {
                                 .payDateTime(DatePicker.getValue().atTime(LocalTime.now()))
                                 .price(Float.parseFloat(priceText.getText()))
                                 .payFor(payForCombo.getSelectionModel().getSelectedItem())
-                                .payable(PaymentService.getService().findById(Integer.parseInt(payIdText.getText())).getPayable())
+                                .payable(payable)
                                 .build();
                 PaymentService.getService().save(payment);
                 log.info("payment Saved successFully");
@@ -82,6 +100,21 @@ public class PaymentController implements Initializable {
 
         editButton.setOnAction(event -> {
             try {
+                PayFor payFor = payForCombo.getSelectionModel().getSelectedItem();
+                int payId = Integer.parseInt(payIdText.getText());
+                Payable payable;
+
+                if (payFor == PayFor.Visit) {
+                    payable = VisitService.getService().findById(payId);
+                } else if (payFor == PayFor.Prescription) {
+                    payable = PrescriptionService.getService().findById(payId);
+                } else {
+                    throw new Exception("Unsupported PayFor type: " + payFor);
+                }
+
+                if (payable == null) {
+                    throw new Exception("No related entity found for payId: " + payId);
+                }
                 Payment payment =
                         Payment
                                 .builder()
@@ -90,7 +123,7 @@ public class PaymentController implements Initializable {
                                 .payDateTime(DatePicker.getValue().atTime(LocalTime.now()))
                                 .price(Float.parseFloat(priceText.getText()))
                                 .payFor(payForCombo.getSelectionModel().getSelectedItem())
-                                .payable(PaymentService.getService().findById(Integer.parseInt(payIdText.getText())).getPayable())
+                                .payable(payable)
                                 .build();
                 PaymentService.getService().edit(payment);
                 log.info("payment edited successFully");
