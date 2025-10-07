@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="588.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.BankController">
+   <children>
+      <HBox layoutX="25.0" layoutY="236.0" prefHeight="143.0" prefWidth="260.0">
+         <children>
+            <Button fx:id="saveButton" mnemonicParsing="false" text="  save ">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="editButton" mnemonicParsing="false" text=" edit ">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="deleteButton" mnemonicParsing="false" text="delete">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <GridPane layoutX="38.0" layoutY="55.0" prefHeight="181.0" prefWidth="234.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="bankId" />
+            <Label text="title" GridPane.rowIndex="1" />
+            <TextField fx:id="bankIdText" GridPane.columnIndex="1" />
+            <TextField fx:id="titleText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <TableView fx:id="bankTable" layoutX="325.0" layoutY="70.0" prefHeight="226.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="bankIdColumn" prefWidth="108.0" text="bankId" />
+          <TableColumn fx:id="titleColumn" prefWidth="90.0" text="title" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>
