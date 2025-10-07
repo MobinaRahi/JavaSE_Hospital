@@ -53,7 +53,16 @@ public class CashDeskController implements Initializable {
 
         saveButton.setOnAction(event -> {
             try {
-                Bank bank = BankService.getService().findById(Integer.parseInt(bankText.getText()));
+                List<Bank> banks = BankService.getService().findAll();
+
+                int bankId = 1; // Default
+                for (Bank b : banks) {
+                    if (b.getTitle().equalsIgnoreCase(bankText.getText())) {
+                        bankId = b.getId();
+                    }
+                }
+
+                Bank bank = BankService.getService().findById(bankId);
                 CashDesk cashDesk = CashDesk
                         .builder()
                         .bank(bank)
@@ -73,7 +82,7 @@ public class CashDeskController implements Initializable {
 
         editButton.setOnAction(event -> {
             try {
-                Bank bank = BankService.getService().findById(Integer.parseInt(bankText.getText()));
+                Bank bank = BankService.getService().findById(Integer.parseInt(bankText.getText())); // TODO: change this
                 CashDesk cashDesk = CashDesk
                         .builder()
                         .id(Integer.parseInt(idText.getText()))
@@ -136,7 +145,7 @@ public class CashDeskController implements Initializable {
             CashDesk cashDesk = cashDeskTable.getSelectionModel().getSelectedItem();
             if (cashDesk == null) return;
             idText.setText(String.valueOf(cashDesk.getId()));
-            bankText.setText(String.valueOf(cashDesk.getBank().getId()));
+            bankText.setText(String.valueOf(cashDesk.getBank().getTitle()));
             payTypeCombo.getSelectionModel().select(cashDesk.getPayType());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);

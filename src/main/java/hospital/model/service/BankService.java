@@ -49,7 +49,12 @@ public class BankService implements Service<Bank, Integer> {
         }
     }
 
-
+//    @Override
+//    public Bank findById (String title) throws Exception {
+//        try (BankRepository bankRepository = new BankRepository()) {
+//            return bankRepository.findById(id);
+//        }
+//    }
 
 }
 
