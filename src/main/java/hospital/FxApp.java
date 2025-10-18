@@ -15,7 +15,7 @@ public class FxApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
- //       FormLoader.getFormLoader().showStage(primaryStage, "/view/LoginView.fxml", "Login");
+        FormLoader.getFormLoader().showStage(primaryStage, "/view/LoginView.fxml", "Login");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/UserView.fxml", "User");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/UserView.fxml", "User");
 //      FormLoader.getFormLoader().showStage(primaryStage, "/view/DoctorView.fxml", "doctor");
@@ -24,7 +24,7 @@ public class FxApp extends Application {
 //       FormLoader.getFormLoader().showStage(primaryStage, "/view/payment.fxml", "Payment");
 //       FormLoader.getFormLoader().showStage(primaryStage, "/view/Patient.fxml", "Patient");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/Medical.fxml", "Medical");
-       FormLoader.getFormLoader().showStage(primaryStage, "/view/CashDesk.fxml", "CashDesk");
+//       FormLoader.getFormLoader().showStage(primaryStage, "/view/CashDesk.fxml", "CashDesk");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/Drug.fxml", "Drug");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/DrugStock.fxml", "DrugStock");
 //         FormLoader.getFormLoader().showStage(primaryStage, "/view/AddDrugView.fxml", "Drugs");
