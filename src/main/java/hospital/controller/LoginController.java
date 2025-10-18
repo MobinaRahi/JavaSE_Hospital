@@ -32,7 +32,7 @@ public class LoginController implements Initializable {
                         passwordTxt.getText()
                 );
                 Stage stage = new Stage();
-                FormLoader.getFormLoader().showStage(stage, "/view/UserView.fxml.", "User Information");
+                FormLoader.getFormLoader().showStage(stage, "/view/FirstView.fxml.", "Hello");
                 loginBtn.getScene().getWindow().hide();
             }catch (Exception ex){
                 Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage());
