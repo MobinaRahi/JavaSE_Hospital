@@ -21,7 +21,7 @@ public class LoginController implements Initializable {
     private PasswordField passwordTxt;
 
     @FXML
-    private Button loginBtn;
+    private Button loginBtn,signInBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -33,6 +33,17 @@ public class LoginController implements Initializable {
                 );
                 Stage stage = new Stage();
                 FormLoader.getFormLoader().showStage(stage, "/view/FirstView.fxml.", "Hello");
+                loginBtn.getScene().getWindow().hide();
+            }catch (Exception ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage());
+                alert.show();
+            }
+        });
+
+        signInBtn.setOnAction(e -> {
+            try {
+                Stage stage = new Stage();
+                FormLoader.getFormLoader().showStage(stage, "/view/SignInView.fxml.", "SignIn");
                 loginBtn.getScene().getWindow().hide();
             }catch (Exception ex){
                 Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage());

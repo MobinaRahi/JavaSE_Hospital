@@ -10,8 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane fx:controller="hospital.controller.FirstController"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.controller.FirstController">
    <children>
       <HBox layoutX="250.0" layoutY="8.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="47.0" prefWidth="350.0" />
       <Label contentDisplay="RIGHT" layoutX="217.0" layoutY="55.0" prefHeight="21.0" prefWidth="370.0" text="لطفا از طریق دکمه های زیر وارد بخش مورد نظر خود شوید " />
@@ -30,7 +29,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="userButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="31.0" prefWidth="270.0" text="User" textAlignment="CENTER" textOverrun="CLIP" />
+            <Button fx:id="userButton" alignment="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="270.0" text="User" textAlignment="CENTER" />
             <Button fx:id="doctorButton" mnemonicParsing="false" prefWidth="270.0" text="Doctor" textAlignment="CENTER" GridPane.rowIndex="1" />
             <Button fx:id="timeShiftButton" mnemonicParsing="false" prefWidth="270.0" text="TimeShift" GridPane.rowIndex="2" />
             <Button fx:id="prescriptionButton" mnemonicParsing="false" prefWidth="270.0" text="Prescription" GridPane.rowIndex="3" />
