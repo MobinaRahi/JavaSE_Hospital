@@ -4,17 +4,21 @@ import hospital.model.entity.Drug;
 import hospital.model.entity.Prescription;
 import hospital.model.service.PrescriptionService;
 import hospital.model.service.VisitService;
-import hospital.model.tools.FormLoader;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 import lombok.extern.log4j.Log4j2;
+
 
 import java.net.URL;
 import java.util.List;
@@ -187,6 +191,11 @@ public class PrescriptionController implements Initializable {
     private void selectFromTable() {
         try {
             Prescription prescription = prescriptionTable.getSelectionModel().getSelectedItem();
+            if(prescription==null){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "please select a prescription", ButtonType.OK);
+                alert.show();
+                return;
+            }
             idText.setText(String.valueOf(prescription.getId()));
             visitIdText.setText(String.valueOf(prescription.getVisit().getId()));
             priceText.setText(String.valueOf(prescription.getPrice()));
@@ -203,9 +212,13 @@ public class PrescriptionController implements Initializable {
             addDrugButton.setOnAction(e -> {
                 try{
                     Stage stage = new Stage();
-                    FormLoader.getFormLoader().showStage(stage, "/view/AddDrugView.fxml.", "Add Drugs");
-                    addDrugButton.getScene().getWindow().hide();
-
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddDrugView.fxml"));
+                    Parent root = loader.load();
+                    AddDrugController addDrugController=loader.getController() ;
+                    addDrugController.setPrescriptionId(prescription.getId());
+                    stage.setTitle("Add Drugs");
+                    stage.setScene(new Scene(root));
+                    stage.show();
                 }catch (Exception ex){
                     Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage());
                     alert.show();

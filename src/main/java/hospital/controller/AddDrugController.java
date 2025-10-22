@@ -3,6 +3,8 @@ package hospital.controller;
 import hospital.model.entity.Drug;
 import hospital.model.entity.Prescription;
 import hospital.model.service.DrugService;
+import hospital.model.service.PrescriptionService;
+import hospital.model.tools.FormLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
@@ -20,9 +24,11 @@ import java.util.ResourceBundle;
 
 
 @Log4j2
-
+@Setter
+@Getter
 public class AddDrugController implements Initializable {
 
+    private int prescriptionId;
     @FXML
     private TextField searchNameText;
 
@@ -55,6 +61,7 @@ public class AddDrugController implements Initializable {
             alert.show();
         }
 
+
         searchNameText.setOnKeyReleased((event) -> searchByName());
 
         drugTable.setOnKeyReleased((event) -> selectFromTable());
@@ -81,7 +88,14 @@ public class AddDrugController implements Initializable {
         try {
             Drug drug = drugTable.getSelectionModel().getSelectedItem();
             saveButton.setOnAction(event -> {
-
+                try {
+                    PrescriptionService.getService().addDrugToPrescription(prescriptionId,drug.getId());
+                    Stage stage = new Stage();
+                    FormLoader.getFormLoader().showStage(stage, "/view/PrescriptionView.fxml.", "Prescription");
+                    System.out.println("save prescription Successfully"+drug.getName());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             });
 
         } catch (Exception e) {
