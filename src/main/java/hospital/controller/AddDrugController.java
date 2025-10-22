@@ -4,7 +4,6 @@ import hospital.model.entity.Drug;
 import hospital.model.entity.Prescription;
 import hospital.model.service.DrugService;
 import hospital.model.service.PrescriptionService;
-import hospital.model.tools.FormLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -47,9 +45,8 @@ public class AddDrugController implements Initializable {
     @FXML
     private TableColumn<Drug, Double> priceColumn;
 
-    @Setter
     private Prescription prescriptionToken;
-
+    private PrescriptionController parentController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,7 +72,6 @@ public class AddDrugController implements Initializable {
 
     private void showDateOnTable(List<Drug> drugList) {
         ObservableList<Drug> observableList = FXCollections.observableList(drugList);
-
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -89,10 +85,9 @@ public class AddDrugController implements Initializable {
             Drug drug = drugTable.getSelectionModel().getSelectedItem();
             saveButton.setOnAction(event -> {
                 try {
-                    PrescriptionService.getService().addDrugToPrescription(prescriptionId,drug.getId());
-                    Stage stage = new Stage();
-                    FormLoader.getFormLoader().showStage(stage, "/view/PrescriptionView.fxml.", "Prescription");
-                    System.out.println("save prescription Successfully"+drug.getName());
+                    PrescriptionService.getService().addDrugToPrescription(prescriptionId, drug.getId());
+                    parentController.refreshPrescriptionData();
+                    System.out.println("save prescription Successfully" + drug.getName());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -110,7 +105,7 @@ public class AddDrugController implements Initializable {
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Searching Data !!!", ButtonType.OK);
             alert.show();
-            log.error("Error FindName" + searchNameText.getText() + " " + searchNameText.getText() + " Failed " + e.getMessage());
+
         }
     }
 }

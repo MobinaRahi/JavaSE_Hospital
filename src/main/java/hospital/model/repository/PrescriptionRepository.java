@@ -63,6 +63,11 @@ public class PrescriptionRepository implements Repository<Prescription, Integer>
     @Override
     public void delete(Integer id) throws Exception {
         preparedStatement = connection.prepareStatement(
+                "DELETE FROM prescriptions_drugs WHERE prescription_id = ?"
+        );
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
+        preparedStatement = connection.prepareStatement(
                 "delete from prescriptions where id=?"
         );
         preparedStatement.setInt(1, id);

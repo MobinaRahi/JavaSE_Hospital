@@ -22,6 +22,15 @@ public class FormLoader {
         stage.setTitle(title);
         stage.show();
     }
+    public Object showStageAndGetController(Stage stage, String fxmlPath, String title) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.show();
+        return loader.getController();
+    }
+
 }
 
 

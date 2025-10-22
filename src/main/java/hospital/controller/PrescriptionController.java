@@ -155,19 +155,32 @@ public class PrescriptionController implements Initializable {
 
         drugDeleteButton.setOnAction(event -> {
             try {
-                Prescription prescription = prescriptionTable.getSelectionModel().getSelectedItem();
-                Drug selectDrug = drugListTable.getSelectionModel().getSelectedItem();
+                Prescription selectedPrescription = prescriptionTable.getSelectionModel().getSelectedItem();
+                Drug selectedDrug = drugListTable.getSelectionModel().getSelectedItem();
 
-                prescription.getDrugList().remove(selectDrug);
+                if (selectedPrescription == null || selectedDrug == null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a prescription and a drug!", ButtonType.OK);
+                    alert.show();
+                    return;
+                }
 
-                ObservableList<Drug> updateList = FXCollections.observableArrayList(prescription.getDrugList());
-                prescription.setPrice(prescription.getPrice());
-                drugListTable.setItems(updateList);
+                PrescriptionService.getService().removeDrugFromPrescription(selectedPrescription.getId(), selectedDrug.getId());
 
-                PrescriptionService.getService().removeDrugFromPrescription(prescription.getId(), selectDrug.getId());
-                Prescription updatedPrescription = PrescriptionService.getService().findById(prescription.getId());
+                Prescription updatedPrescription = PrescriptionService.getService().findById(selectedPrescription.getId());
+
                 drugListTable.setItems(FXCollections.observableArrayList(updatedPrescription.getDrugList()));
-                showDataOnTable(PrescriptionService.getService().findAll());
+
+                Integer selectedId = selectedPrescription.getId();
+                List<Prescription> allPrescriptions = PrescriptionService.getService().findAll();
+                showDataOnTable(allPrescriptions);
+                for (Prescription p : allPrescriptions) {
+                    if (p.getId() == selectedId) {
+                        prescriptionTable.getSelectionModel().select(p);
+                        prescriptionTable.scrollTo(p);
+                        break;
+                    }
+                }
+
                 log.info("Drug removed and prescription updated successfully");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Drug removed and prescription updated!", ButtonType.OK);
                 alert.show();
@@ -234,6 +247,7 @@ public class PrescriptionController implements Initializable {
                     Parent root = loader.load();
                     AddDrugController addDrugController = loader.getController();
                     addDrugController.setPrescriptionId(prescription.getId());
+                    addDrugController.setParentController(this);
                     stage.setTitle("Add Drugs");
                     stage.setScene(new Scene(root));
                     stage.show();
@@ -244,17 +258,45 @@ public class PrescriptionController implements Initializable {
             });
 
         } catch (Exception e) {
-            log.error("Error updating prescription: " + e.getMessage());
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error updating prescription!", ButtonType.OK);
             alert.show();
         }
     }
 
     private void resetForm() throws Exception {
-
+        if (prescriptionTable.getSelectionModel().getSelectedItem() != null) {
+            prescriptionTable.getSelectionModel().select(prescriptionTable.getSelectionModel().getSelectedItem());
+        }
         visitIdText.clear();
-
-
         showDataOnTable(PrescriptionService.getService().findAll());
     }
+
+    public void refreshPrescriptionData() {
+        try {
+            Prescription selected = prescriptionTable.getSelectionModel().getSelectedItem();
+            Integer selectedId = (selected != null) ? selected.getId() : null;
+
+            List<Prescription> allPrescriptions = PrescriptionService.getService().findAll();
+            showDataOnTable(allPrescriptions);
+
+            if (selectedId != null) {
+                for (Prescription p : allPrescriptions) {
+                    if (p.getId() == (selectedId)) {
+                        prescriptionTable.getSelectionModel().select(p);
+
+                        ObservableList<Drug> drugObservableList =
+                                FXCollections.observableArrayList(p.getDrugList());
+                        drugListTable.setItems(drugObservableList);
+
+                        break;
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error refreshing prescription data!", ButtonType.OK);
+            alert.show();
+        }
+    }
+
 }
