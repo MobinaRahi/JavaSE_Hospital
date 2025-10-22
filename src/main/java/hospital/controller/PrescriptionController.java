@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 
 import lombok.extern.log4j.Log4j2;
 
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +107,7 @@ public class PrescriptionController implements Initializable {
 
             } catch (Exception e) {
 
-                log.error("prescription Save Failed " + e.getMessage());
+                log.error("prescription Save Failed {}", e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
                 alert.show();
             }
@@ -132,7 +131,7 @@ public class PrescriptionController implements Initializable {
                 alert.show();
                 resetForm();
             } catch (Exception e) {
-                log.error("Error updating prescription: " + e.getMessage());
+                log.error("prescription Save Failed {}", e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Error updating prescription!", ButtonType.OK);
                 alert.show();
             }
@@ -147,7 +146,7 @@ public class PrescriptionController implements Initializable {
                 alert.show();
                 resetForm();
             } catch (Exception e) {
-                log.error("prescription Delete Failed " + e.getMessage());
+                log.error("prescription Delete Failed {}", e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.ERROR, "prescription Delete Failed!!!", ButtonType.OK);
                 alert.show();
             }
@@ -170,7 +169,7 @@ public class PrescriptionController implements Initializable {
 
                 drugListTable.setItems(FXCollections.observableArrayList(updatedPrescription.getDrugList()));
 
-                Integer selectedId = selectedPrescription.getId();
+                int selectedId = selectedPrescription.getId();
                 List<Prescription> allPrescriptions = PrescriptionService.getService().findAll();
                 showDataOnTable(allPrescriptions);
                 for (Prescription p : allPrescriptions) {
