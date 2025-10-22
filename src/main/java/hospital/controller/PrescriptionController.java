@@ -21,16 +21,14 @@ import lombok.extern.log4j.Log4j2;
 
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 @Log4j2
 public class PrescriptionController implements Initializable {
     @FXML
-    private TextField idText, visitIdText, priceText;
-
-    @FXML
-    private Button drugEditButton;
+    private TextField visitIdText;
 
     @FXML
     private Button drugDeleteButton;
@@ -93,6 +91,27 @@ public class PrescriptionController implements Initializable {
             alert.show();
         }
         prescriptionSaveButton.setOnAction(event -> {
+            try {
+                List<Drug> drugList = new ArrayList<>();
+                Prescription prescription =
+                        Prescription
+                                .builder()
+                                .visit(VisitService.getService().findById(Integer.parseInt(visitIdText.getText())))
+                                .price(0)
+                                .drugList(drugList)
+                                .build();
+                PrescriptionService.getService().save(prescription);
+                log.info("prescription saved Successfully");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "saved Successfully\n" + prescription, ButtonType.OK);
+                alert.show();
+                resetForm();
+
+            } catch (Exception e) {
+
+                log.error("prescription Save Failed " + e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data !!!", ButtonType.OK);
+                alert.show();
+            }
         });
 
         prescriptionEditButton.setOnAction(event -> {
@@ -101,10 +120,10 @@ public class PrescriptionController implements Initializable {
                 Prescription prescription =
                         Prescription
                                 .builder()
-                                .id(Integer.parseInt(idText.getText()))
+                                .id(selectedPrescription.getId())
                                 .visit(VisitService.getService().findById(Integer.parseInt(visitIdText.getText())))
                                 .drugList(selectedPrescription.getDrugList())
-                                .price(Double.parseDouble(priceText.getText()))
+                                .price(selectedPrescription.getPrice())
                                 .build();
 
                 PrescriptionService.getService().edit(prescription);
@@ -121,9 +140,10 @@ public class PrescriptionController implements Initializable {
 
         prescriptionDeleteButton.setOnAction(event -> {
             try {
-                PrescriptionService.getService().delete(Integer.parseInt(idText.getText()));
+                Prescription selectedPrescription = prescriptionTable.getSelectionModel().getSelectedItem();
+                PrescriptionService.getService().delete(selectedPrescription.getId());
                 log.info("prescription Deleted Successfully");
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "delete Successfully\n" + idText.getText(), ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "delete Successfully\n" + selectedPrescription.getId(), ButtonType.OK);
                 alert.show();
                 resetForm();
             } catch (Exception e) {
@@ -141,14 +161,12 @@ public class PrescriptionController implements Initializable {
                 prescription.getDrugList().remove(selectDrug);
 
                 ObservableList<Drug> updateList = FXCollections.observableArrayList(prescription.getDrugList());
-                priceText.setText(String.valueOf(prescription.getPrice()));
                 prescription.setPrice(prescription.getPrice());
                 drugListTable.setItems(updateList);
 
                 PrescriptionService.getService().removeDrugFromPrescription(prescription.getId(), selectDrug.getId());
                 Prescription updatedPrescription = PrescriptionService.getService().findById(prescription.getId());
                 drugListTable.setItems(FXCollections.observableArrayList(updatedPrescription.getDrugList()));
-                priceText.setText(String.valueOf(updatedPrescription.getPrice()));
                 showDataOnTable(PrescriptionService.getService().findAll());
                 log.info("Drug removed and prescription updated successfully");
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Drug removed and prescription updated!", ButtonType.OK);
@@ -191,14 +209,14 @@ public class PrescriptionController implements Initializable {
     private void selectFromTable() {
         try {
             Prescription prescription = prescriptionTable.getSelectionModel().getSelectedItem();
-            if(prescription==null){
+            if (prescription == null) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "please select a prescription", ButtonType.OK);
                 alert.show();
                 return;
             }
-            idText.setText(String.valueOf(prescription.getId()));
+
             visitIdText.setText(String.valueOf(prescription.getVisit().getId()));
-            priceText.setText(String.valueOf(prescription.getPrice()));
+
 
             List<Drug> drugList = prescription.getDrugList();
             ObservableList<Drug> drugObservableList = FXCollections.observableArrayList(drugList);
@@ -210,16 +228,16 @@ public class PrescriptionController implements Initializable {
 
 
             addDrugButton.setOnAction(e -> {
-                try{
+                try {
                     Stage stage = new Stage();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddDrugView.fxml"));
                     Parent root = loader.load();
-                    AddDrugController addDrugController=loader.getController() ;
+                    AddDrugController addDrugController = loader.getController();
                     addDrugController.setPrescriptionId(prescription.getId());
                     stage.setTitle("Add Drugs");
                     stage.setScene(new Scene(root));
                     stage.show();
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage());
                     alert.show();
                 }
@@ -233,9 +251,9 @@ public class PrescriptionController implements Initializable {
     }
 
     private void resetForm() throws Exception {
-        idText.clear();
+
         visitIdText.clear();
-        priceText.clear();
+
 
         showDataOnTable(PrescriptionService.getService().findAll());
     }
