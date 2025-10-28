@@ -1,7 +1,9 @@
 package hospital.controller;
 
 import hospital.model.entity.Drug;
+import hospital.model.entity.Payable;
 import hospital.model.entity.Prescription;
+import hospital.model.entity.Visit;
 import hospital.model.service.PrescriptionService;
 import hospital.model.service.VisitService;
 import javafx.beans.property.SimpleObjectProperty;
@@ -43,6 +45,9 @@ public class PrescriptionController implements Initializable {
 
     @FXML
     private Button addDrugButton;
+
+    @FXML
+    private Button payButton;
 
     @FXML
     private TableView<Prescription> prescriptionTable;
@@ -237,6 +242,25 @@ public class PrescriptionController implements Initializable {
             drugPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
             drugQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             drugListTable.setItems(drugObservableList);
+
+            payButton.setOnAction(event -> {
+                try {
+                    Stage stage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PaymentView.fxml"));
+                    Parent root = loader.load();
+                    PaymentController paymentController = loader.getController();
+                    paymentController.setPayable(prescription);
+                    stage.setTitle("Payment");
+                    stage.setScene(new Scene(root));
+                    stage.show();
+                } catch (Exception ex) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage());
+                    alert.show();
+                }
+
+                ;
+
+            });
 
 
             addDrugButton.setOnAction(e -> {

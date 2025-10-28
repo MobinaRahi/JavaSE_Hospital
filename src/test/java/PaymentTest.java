@@ -44,11 +44,17 @@ public class PaymentTest {
 //
 //        PatientService.getService().save(patient);
 //        System.out.println("Service: " + PaymentService.getService());
-        System.out.println("Service by id :" + PaymentService.getService().findById(1).getPayable());
-        Payable payable = PaymentService.getService().findById(1).getPayable();
-        if (payable == null) {
-            throw new RuntimeException("Visit with this ID not found");
-        }
+        Payable payable=new Payable() {
+            @Override
+            public int getId() {
+                return 0;
+            }
+
+            @Override
+            public double getPrice() {
+                return 0;
+            }
+        };
 
         Payment payment = Payment
                 .builder()

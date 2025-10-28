@@ -30,20 +30,28 @@
       </GridPane>
       <HBox layoutX="14.0" layoutY="447.0" prefHeight="54.0" prefWidth="283.0">
          <children>
-            <Button fx:id="addDrugButton" mnemonicParsing="false" prefWidth="150.0" text="AddDrug" textFill="#87143d">
+            <Button fx:id="addDrugButton" mnemonicParsing="false" prefWidth="90.0" text="AddDrug" textFill="#87143d">
                <font>
-                  <Font name="System Italic" size="14.0" />
+                  <Font name="System Italic" size="13.0" />
                </font>
                <HBox.margin>
-                  <Insets right="20.0" top="15.0" />
+                  <Insets right="10.0" top="15.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="drugDeleteButton" layoutX="20.0" mnemonicParsing="false" prefWidth="150.0" text="DeleteDrug" textFill="#87143d">
+            <Button fx:id="drugDeleteButton" layoutX="20.0" mnemonicParsing="false" prefWidth="90.0" text="DeleteDrug" textFill="#87143d">
+               <HBox.margin>
+                  <Insets right="10.0" top="15.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="payButton" mnemonicParsing="false" prefWidth="90.0" text="Pay" textFill="#87143d">
                <HBox.margin>
                   <Insets top="15.0" />
                </HBox.margin>
                <font>
-                  <Font name="System Italic" size="14.0" />
+                  <Font name="System Italic" size="13.0" />
                </font>
             </Button>
          </children>

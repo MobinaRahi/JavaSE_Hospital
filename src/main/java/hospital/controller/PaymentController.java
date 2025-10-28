@@ -6,17 +6,16 @@ import hospital.model.entity.enums.PayFor;
 import hospital.model.entity.enums.PayType;
 import hospital.model.service.PaymentService;
 import hospital.model.service.PrescriptionService;
-import hospital.model.service.UserService;
 import hospital.model.service.VisitService;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
@@ -27,7 +26,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @Log4j2
+@Setter
+@Getter
 public class PaymentController implements Initializable {
+
+    private Payable payable;
+
     @FXML
     private TextField idText, priceText,payIdText;
     @FXML
@@ -54,7 +58,13 @@ public class PaymentController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            resetForm();
+            payTypeCombo.getItems().setAll(PayType.values());
+            payForCombo.getItems().setAll(PayFor.values());
+            payTypeCombo.getSelectionModel().selectFirst();
+            payForCombo.getSelectionModel().selectFirst();
+
+            paymentTable.setOnMouseReleased((event) -> selectFromTable());
+            paymentTable.setOnKeyReleased((event) -> selectFromTable());
 
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error Loading Data", ButtonType.OK);
@@ -157,8 +167,13 @@ public class PaymentController implements Initializable {
 
     private void resetForm() throws Exception {
         idText.clear();
-        priceText.clear();
-        payIdText.clear();
+        if (payable != null) {
+            priceText.setText(String.valueOf(payable.getPrice()));
+            payIdText.setText(String.valueOf(payable.getId()));
+        } else {
+            priceText.clear();
+            payIdText.clear();
+        }
         payTypeCombo.getItems().clear();
         payForCombo.getItems().clear();
        for (PayType payType : PayType.values()) {
@@ -211,6 +226,15 @@ public class PaymentController implements Initializable {
             alert.show();
         }
     }
+    public void setPayable(Payable payable) {
+        this.payable = payable;
+        try {
+            resetForm();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

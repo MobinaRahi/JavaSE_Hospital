@@ -15,12 +15,12 @@ public class FxApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FormLoader.getFormLoader().showStage(primaryStage, "/view/LoginView.fxml", "Login");
+//        FormLoader.getFormLoader().showStage(primaryStage, "/view/LoginView.fxml", "Login");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/UserView.fxml", "User");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/FirstView.fxml", "Hello");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/DoctorView.fxml", "doctor");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/TimeShiftView.fxml", "TimeShift");
-//        FormLoader.getFormLoader().showStage(primaryStage, "/view/PrescriptionView.fxml", "Prescription");
+        FormLoader.getFormLoader().showStage(primaryStage, "/view/PrescriptionView.fxml", "Prescription");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/paymentView.fxml", "Payment");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/Patient.fxml", "Patient");
 //        FormLoader.getFormLoader().showStage(primaryStage, "/view/Medical.fxml", "Medical");
