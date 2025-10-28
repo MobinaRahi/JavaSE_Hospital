@@ -10,21 +10,21 @@ public class BankTest {
                 Bank
                         .builder()
                         .id(2)
-                        .title("saderat")
+                        .title("Meli")
                         .build();
 
 
 
 
-        CashDesk cashDeskCash=
-                CashDesk
-                        .builder()
-                        .bank(BankService.getService().findById(2))
-                        .payType(PayType.CASH)
-                        .build();
-        CashDeskService.getService().save(cashDeskCash);
+//        CashDesk cashDeskCash=
+//                CashDesk
+//                        .builder()
+//                        .bank(BankService.getService().findById(2))
+//                        .payType(PayType.CASH)
+//                        .build();
+//        CashDeskService.getService().save(cashDeskCash);
 
-//        BankService.getService().save(bank);
+        BankService.getService().save(bank);
 //        BankService.getService().findById(1);
 //        BankService.getService().edit(bank);
 //        BankService.getService().findAll();
